@@ -5,17 +5,10 @@
  */
 package ocase7;
 
-/**
- *
- * @author PaulsBook
- */
 public class Ocase7 {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logic here
+        System.out.println(Test.getById(3));
     }
     
 }
