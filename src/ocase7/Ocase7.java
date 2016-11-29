@@ -8,7 +8,14 @@ package ocase7;
 public class Ocase7 {
 
     public static void main(String[] args) {
-        System.out.println(Test.getById(3));
+//        Test t = Test.getById(1);
+//        t.setText("Kalt heute");
+//        Test.update(t);
+        
+        for (Test t : Test.getAll()) {
+            System.out.println(t);
+        }
+        MySQLConnection.closeConnection();
     }
     
 }

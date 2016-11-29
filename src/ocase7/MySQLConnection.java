@@ -23,9 +23,8 @@ public class MySQLConnection {
         return con;
     }
 
-    
-        public static void closeConnection() {
-            try {
+    public static void closeConnection() {
+        try {
             if (con != null) {
                 con.close();
             }
@@ -34,4 +33,3 @@ public class MySQLConnection {
         }
     }
 }
- 
