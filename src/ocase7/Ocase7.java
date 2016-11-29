@@ -12,8 +12,14 @@ public class Ocase7 {
 //        t.setText("Kalt heute");
 //        Test.update(t);
         
-        for (Test t : Test.getAll()) {
-            System.out.println(t);
+        for (Question q: Question.quest()) {
+            System.out.println(q);
+            System.out.println("----------------------------------------------");
+            
+        }
+        for (Answers a : Answers.answ()) {
+            System.out.println(a);
+            System.out.println("----------------------------------------------");
         }
         MySQLConnection.closeConnection();
     }
