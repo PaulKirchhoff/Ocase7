@@ -7,21 +7,20 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-
 public class Answers {
 
     static Statement st = null;
     static PreparedStatement pst = null;
     static ResultSet rst = null;
     static Connection con = null;
-    
-    
+
     private int id;
+    private int question_id;
     private String text;
-    
+
     public Answers(int id, String text, int question_id, int isRight) {
         this.id = id;
-        
+        this.question_id = question_id;
         this.text = text;
     }
 
@@ -43,10 +42,10 @@ public class Answers {
 
     @Override
     public String toString() {
-        return "Question{" + "id=" + id + ", text=" + text + '}';
+        return "Answers{" + "id=" + id + ", text=" + text + ",question_id=" + question_id + '}';
     }
-    
-    public static ArrayList<Answers> answ(){
+
+    public static ArrayList<Answers> answ() {
         ArrayList<Answers> answ = new ArrayList<>();
         try {
             Connection con = MySQLConnection.getConnection();
@@ -56,7 +55,7 @@ public class Answers {
 
             //Abfrage allgemein,für mehrere Datensätze
             while (rst.next()) {                                                //Fragt die Datensätze nacheinander ab
-                answ.add(new Answers(rst.getInt("id"), rst.getString("text"),rst.getInt("question_id"),rst.getInt("isRight")));  //adde Pro Datensatz ein neues Testobjekt in ArrayList tests
+                answ.add(new Answers(rst.getInt("id"), rst.getString("text"), rst.getInt("question_id"), rst.getInt("isRight")));  //adde Pro Datensatz ein neues Testobjekt in ArrayList tests
 
             }
 
@@ -78,8 +77,7 @@ public class Answers {
                 System.out.println(e.getMessage());
             }
         }
-        
-        
+
         return answ;
     }
 

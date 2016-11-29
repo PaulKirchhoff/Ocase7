@@ -13,9 +13,9 @@ public class Ocase7 {
 //        Test.update(t);
         
         for (Question q: Question.quest()) {
-            System.out.println(q);
-            System.out.println("----------------------------------------------");
-            
+//            System.out.println(q);
+//            System.out.println("----------------------------------------------");
+            return quest;
         }
         for (Answers a : Answers.answ()) {
             System.out.println(a);

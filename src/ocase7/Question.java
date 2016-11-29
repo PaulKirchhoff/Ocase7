@@ -81,10 +81,7 @@ public class Question {
         return quest;
     }
 
-    private static class Questions {
-
-        public Questions() {
-        }
+   
     }
 
-}
+
