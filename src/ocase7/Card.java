@@ -25,9 +25,9 @@ public class Card {
     
     private int id;
     private Question question;
-    private ArrayList<Answers> answers;
+    private ArrayList<Answer> answers;
 
-    public Card(int id, Question question, ArrayList<Answers> answers) {
+    public Card(int id, Question question, ArrayList<Answer> answers) {
         this.id = id;
         this.question = question;
         this.answers = answers;
@@ -49,11 +49,11 @@ public class Card {
         this.question = question;
     }
 
-    public ArrayList<Answers> getAnswers() {
+    public ArrayList<Answer> getAnswers() {
         return answers;
     }
 
-    public void setAnswers(ArrayList<Answers> answers) {
+    public void setAnswers(ArrayList<Answer> answers) {
         this.answers = answers;
     }
 

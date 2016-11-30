@@ -27,6 +27,34 @@ public class Question {
     private int id;
     private String text;
     private int category_id;
+
+    public static Statement getStmt() {
+        return stmt;
+    }
+
+    public static PreparedStatement getPstmt() {
+        return pstmt;
+    }
+
+    public static ResultSet getResultSet() {
+        return resultSet;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public int getCategory_id() {
+        return category_id;
+    }
+
+    public boolean isInactive() {
+        return inactive;
+    }
     private boolean inactive;
 
     public Question(int id, String text, int category_id, int inactive) {
@@ -39,6 +67,34 @@ public class Question {
         }
     }
 
+    public static ArrayList<Question> getAll() {
+        ArrayList<Question> questions = new ArrayList<>();
+        try {
+             Connection con = MySQLConnection.getConnection();
+            String sql = "SELECT * FROM question";
+            stmt = con.createStatement();
+            resultSet = stmt.executeQuery(sql);
+            while (resultSet.next()) {
+                questions.add(new Question(resultSet.getInt("id"), resultSet.getString("text"), resultSet.getInt("category_id"), resultSet.getInt("inactive")));
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        
+        return questions;
+    }
+    
     public static ArrayList<Question> getQuestionsByCategory(Category category) {
         ArrayList<Question> questions = new ArrayList<>();
         try {
@@ -54,8 +110,8 @@ public class Question {
             System.out.println(e.getMessage());
         } finally {
             try {
-                if (stmt != null) {
-                    stmt.close();
+                if (pstmt != null) {
+                    pstmt.close();
                 }
                 if (resultSet != null) {
                     resultSet.close();

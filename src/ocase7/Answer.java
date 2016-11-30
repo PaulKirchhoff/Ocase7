@@ -16,13 +16,13 @@ import static ocase7.Question.pstmt;
  *
  * @author PaulsBook
  */
-class Answers {
-    
+class Answer {
+
     //Verbindungsvariablen 
     static Statement stmt = null;
     static PreparedStatement pstmt = null;
     static ResultSet resultSet = null;
-    
+
     private int id;
     private String text;
     private int question_id;
@@ -44,25 +44,25 @@ class Answers {
         return isRight;
     }
 
-    public Answers(int id, String text, int question_id, boolean isRight) {
-        
-        
+    public Answer(int id, String text, int question_id, int isRight) {
         this.id = id;
         this.text = text;
         this.question_id = question_id;
-        this.isRight = isRight;
+        if (isRight == 1) {
+            this.isRight = true;
+        }
     }
 
-    public static ArrayList<Question> getQuestionsByCategory(Category category) {
-        ArrayList<Question> questions = new ArrayList<>();
+    public static ArrayList<Answer> getAnswersByQuestion(Question question) {
+        ArrayList<Answer> answers = new ArrayList<>();
         try {
             Connection con = MySQLConnection.getConnection();
-            String sql = "SELECT id, text, inactive, category_id FROM question, category2question WHERE category_id = ? AND question.id = question_id";
+            String sql = "SELECT id, text, isRight, question_id FROM answer WHERE question_id = ?";
             pstmt = con.prepareStatement(sql);
-            pstmt.setInt(1, category.getId());
+            pstmt.setInt(1, question.getId());
             resultSet = pstmt.executeQuery();
             while (resultSet.next()) {
-                questions.add(new Question(resultSet.getInt("id"), resultSet.getString("text"), resultSet.getInt("category_id"), resultSet.getInt("inactive")));
+                answers.add(new Answer(resultSet.getInt("id"), resultSet.getString("text"), resultSet.getInt("question_id"), resultSet.getInt("isRight")));
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -79,14 +79,12 @@ class Answers {
             }
         }
 
-        return questions;
+        return answers;
     }
-    
-    
+
     @Override
     public String toString() {
         return "Answers{" + "id=" + id + ", text=" + text + ", question_id=" + question_id + ", isRight=" + isRight + '}';
     }
-    
-    
+
 }

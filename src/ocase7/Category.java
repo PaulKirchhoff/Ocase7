@@ -44,7 +44,6 @@ public class Category {
             Connection con = MySQLConnection.getConnection();
             String sql = "SELECT * FROM category";
             stmt = con.createStatement();
-            //pstmt = con.prepareStatement(sql);
             resultSet = stmt.executeQuery(sql);
             while (resultSet.next()) {
                 categories.add(new Category(resultSet.getInt("id"), resultSet.getString("text")));
