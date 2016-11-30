@@ -1,0 +1,97 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package ocase7;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import static ocase7.Test.stmt;
+
+/**
+ *
+ * @author PaulsBook
+ */
+public class Card {
+    
+    //Verbindungsvariablen 
+    static Statement stmt = null;
+    static PreparedStatement pstmt = null;
+    static ResultSet resultSet = null;
+    
+    private int id;
+    private Question question;
+    private ArrayList<Answers> answers;
+
+    public Card(int id, Question question, ArrayList<Answers> answers) {
+        this.id = id;
+        this.question = question;
+        this.answers = answers;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
+    }
+
+    public ArrayList<Answers> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(ArrayList<Answers> answers) {
+        this.answers = answers;
+    }
+
+    public static ArrayList<Card> getAll() {
+         ArrayList<Card> cards = new ArrayList<>();
+        try {
+            Connection con = MySQLConnection.getConnection();
+            String sql = "SELECT * FROM question";
+            stmt = con.createStatement();
+            //pstmt = con.prepareStatement(sql);
+            resultSet = stmt.executeQuery(sql);
+            while (resultSet.next()) {
+                
+                //cards.add(new Card(resultSet.getInt("id"),));
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if(stmt != null) {
+                    stmt.close();
+                }
+                if(resultSet != null) {
+                    resultSet.close();
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return cards;
+    }
+    
+    
+    
+    @Override
+    public String toString() {
+        return "Card{" + "id=" + id + ", question=" + question + ", answers=" + answers + '}';
+    }
+    
+    
+}

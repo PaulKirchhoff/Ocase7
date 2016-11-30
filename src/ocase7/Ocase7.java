@@ -27,12 +27,25 @@ public class Ocase7 {
 //        t.setText("Super Tach :(");
 //        // schreibt das veränderte Objekt wieder in die DB
 //        Test.update(t);
-//
-        ArrayList<Test> t = Test.getAll();
-        for (Test test : t) {
-            System.out.println(test);
+
+        // liest alle Kategorien aus 
+        ArrayList<Category> c = Category.getAll();
+        for (Category category : c) {
+            System.out.println(category);
         }
+
+        // liest alle Fragen aus der Datenbank aus 
+        for (int i = 0; i < c.size(); i++) {
+            ArrayList<Question> questions = Question.getQuestionsByCategory(c.get(i));
+            for (Question question : questions) {
+                System.out.println(question);
+            }    
+        }
+        
+        
+        
         MySQLConnection.closeConnection();
+        
           
     }
     
