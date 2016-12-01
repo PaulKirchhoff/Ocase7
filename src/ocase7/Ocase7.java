@@ -30,31 +30,24 @@ public class Ocase7 {
 
         // liest alle Kategorien aus 
         ArrayList<Category> c = Category.getAll();
-//        for (Category category : c) {
-//           System.out.println(category);
-//        }
-
-       
-
-        // liest alle Fragen aller Kategorien aus der Datenbank aus 
+        CardBox cardBox = new CardBox();
         for (int i = 0; i < c.size(); i++) {
             ArrayList<Question> questions = Question.getQuestionsByCategory(c.get(i));
             for (Question question : questions) {
                 Card card = new Card(question.getId(), question, Answer.getAnswersByQuestion(question));
-                System.out.println(card);
-                System.out.println("##############################");
+                cardBox = cardBox.fillCardBox(card);
             }
-            for (int j = 0; j < questions.size(); j++) {
-                ArrayList<Answer> answers = Answer.getAnswersByQuestion(questions.get(j));
-                for (Answer answer : answers) {
-                   // System.out.println(answer);
-                }
-            }
+            System.out.println(cardBox.getCards());
+            System.out.println("##############################");
+//            for (int j = 0; j < questions.size(); j++) {
+//                ArrayList<Answer> answers = Answer.getAnswersByQuestion(questions.get(j));
+////                for (Answer answer : answers) {
+////                    // System.out.println(answer);
+////                }
+//            }
 
         }
-
         MySQLConnection.closeConnection();
-
     }
 
 }

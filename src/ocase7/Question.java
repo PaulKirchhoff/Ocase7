@@ -27,7 +27,8 @@ public class Question {
     private int id;
     private String text;
     private int category_id;
-
+    private boolean inactive;
+    
     public static Statement getStmt() {
         return stmt;
     }
@@ -55,7 +56,7 @@ public class Question {
     public boolean isInactive() {
         return inactive;
     }
-    private boolean inactive;
+    
 
     public Question(int id, String text, int category_id, int inactive) {
         this.id = id;

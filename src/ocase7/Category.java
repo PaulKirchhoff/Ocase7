@@ -22,8 +22,8 @@ public class Category {
     static PreparedStatement pstmt = null;
     static ResultSet resultSet = null;
     
-    private final int id;
-    private final String text;
+    private int id;
+    private String text;
 
     public int getId() {
         return id;

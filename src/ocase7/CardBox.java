@@ -12,29 +12,41 @@ import java.util.ArrayList;
  * @author PaulsBook
  */
 public class CardBox {
-    private ArrayList<Card> card;
 
-    public ArrayList<Card> getCard() {
-        return card;
+    private ArrayList<Card> cards;
+
+    public ArrayList<Card> getCards() {
+        return cards;
     }
 
-    public void setCard(ArrayList<Card> card) {
-        this.card = card;
+    public void setCard(ArrayList<Card> cards) {
+        this.cards = cards;
     }
 
-    public CardBox(ArrayList<Card> card) {
-        this.card = card;
+    public CardBox(ArrayList<Card> cards) {
+        this.cards = cards;
+        
+    }
+
+    public CardBox() {
     }
 
     
     
-    
-    
+    public CardBox fillCardBox(Card card) {
+        if (cards == null) {
+            this.cards = new ArrayList<>();
+        }
+        if (!(cards.contains(card.getId()))) {
+            cards.add(card);
+        }
+
+        return this;
+    }
+
     @Override
     public String toString() {
-        return "CardBox{" + "card=" + card + '}';
+        return "CardBox{" + "cards=" + cards + '}';
     }
-    
-    
-    
+
 }
