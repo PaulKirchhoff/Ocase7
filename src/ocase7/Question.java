@@ -45,7 +45,7 @@ public class Question {
         return "Question{" + "id=" + id + ", text=" + text + '}';
     }
 
-    public static ArrayList<Question> quest() {
+    public static ArrayList<Question>  quest() {
         ArrayList<Question> quest = new ArrayList<>();
         try {
             Connection con = MySQLConnection.getConnection();
