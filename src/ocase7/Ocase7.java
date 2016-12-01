@@ -15,7 +15,7 @@ public class Ocase7 {
         for (Question q: Question.quest()) {
 //            System.out.println(q);
 //            System.out.println("----------------------------------------------");
-            return quest;
+            
         }
         for (Answers a : Answers.answ()) {
             System.out.println(a);
