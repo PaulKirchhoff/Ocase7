@@ -6,8 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import static ocase7.Category.pst;
 
-public class Answers {
+public class Answer {
 
     static Statement st = null;
     static PreparedStatement pst = null;
@@ -18,13 +19,13 @@ public class Answers {
     private int question_id;
     private String text;
 
-    public Answers(int id, String text, int question_id, int isRight) {
+    public Answer(int id, String text, int question_id, int isRight) {
         this.id = id;
         this.question_id = question_id;
         this.text = text;
     }
 
-    public Answers(String text) {
+    public Answer(String text) {
         this.text = text;
     }
 
@@ -45,8 +46,8 @@ public class Answers {
         return "Answers{" + "id=" + id + ", text=" + text + ",question_id=" + question_id + '}';
     }
 
-    public static ArrayList<Answers> answ() {
-        ArrayList<Answers> answ = new ArrayList<>();
+    public static ArrayList<Answer> answ() {
+        ArrayList<Answer> answ = new ArrayList<>();
         try {
             Connection con = MySQLConnection.getConnection();
             String sql = "SELECT * FROM answer";
@@ -55,7 +56,7 @@ public class Answers {
 
             //Abfrage allgemein,für mehrere Datensätze
             while (rst.next()) {                                                //Fragt die Datensätze nacheinander ab
-                answ.add(new Answers(rst.getInt("id"), rst.getString("text"), rst.getInt("question_id"), rst.getInt("isRight")));  //adde Pro Datensatz ein neues Testobjekt in ArrayList tests
+                answ.add(new Answer(rst.getInt("id"), rst.getString("text"), rst.getInt("question_id"), rst.getInt("isRight")));  //adde Pro Datensatz ein neues Testobjekt in ArrayList tests
 
             }
 
@@ -80,5 +81,43 @@ public class Answers {
 
         return answ;
     }
+     public static ArrayList<Answer> getAnswersToQuestion (Question q) {
+        ArrayList<Answer> answers = new ArrayList<>();
+        Connection con = MySQLConnection.getConnection();
+        try {
+            
+            String sql = "SELECT * FROM answer WHERE question_id = ?";
+            pst = con.prepareStatement(sql);
+            pst.setInt(1,q.getId());
+            rst = pst.executeQuery();  //Nur bei Select kommt executeQuery!
+
+            //Abfrage allgemein,für mehrere Datensätze
+            while (rst.next()) {                                                //Fragt die Datensätze nacheinander ab
+                answers.add(new Answer(rst.getInt("id"), rst.getString("text"), rst.getInt("question_id"), rst.getInt("isRight")));  //adde Pro Datensatz ein neues Testobjekt in ArrayList tests
+
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+
+        } finally {
+            try {
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rst != null) {
+                    rst.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+        return answers;
+    }
+
 
 }
