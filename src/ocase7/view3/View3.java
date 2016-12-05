@@ -38,16 +38,19 @@ public class View3 {
         HBox statusBar = createHboxForTop();
         VBox viewContentBox = new VBox();
         ScrollPane questionAndAnswerPane = new ScrollPane();
-        myCard = Card.getCardsByCategory(Category.getCategoryById(1));
+        myCard = Card.getCardsByCategory(Category.getCategoryById(4));
         Label questionLbl = new Label(myCard.getQuestion().getText());
         //System.out.println(myCard.getAnswers().get(0).getText());
         VBox answerBox = new VBox();
         for (int i = 0; i < myCard.getAnswers().size(); i++) {
             CheckBox cb = new CheckBox();
             Label answersLbl = new Label(myCard.getAnswers().get(i).getText());
-            answerBox.getChildren().addAll(answersLbl,cb);
-            
+            HBox answerWithCheckbox = new HBox(cb,answersLbl);
+            answerBox.getChildren().add(answerWithCheckbox);
+            answerBox.setSpacing(20);
         }
+        
+
         //ScrollBar answerScrollBar = new ScrollBar();
         //answerScrollBar.setOrientation(Orientation.VERTICAL);
         questionAndAnswerPane.setMinWidth(600);
