@@ -12,11 +12,9 @@ public class Ocase7 {
 //        t.setText("Kalt heute");
 //        Test.update(t);
         
-        for (Question q: Question.quest()) {
-//            System.out.println(q);
-//            System.out.println("----------------------------------------------");
+
             
-        }
+        
         for (Answer a : Answer.answ()) {
             System.out.println(a);
             System.out.println("----------------------------------------------");

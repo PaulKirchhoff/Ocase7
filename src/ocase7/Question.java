@@ -108,9 +108,7 @@ public class Question {
                 if (rst != null) {
                     rst.close();
                 }
-                if (con != null) {
-                    con.close();
-                }
+                
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             }

@@ -6,7 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import static ocase7.Category.pst;
+
+
 
 public class Answer {
 
@@ -71,9 +72,7 @@ public class Answer {
                 if (rst != null) {
                     rst.close();
                 }
-                if (con != null) {
-                    con.close();
-                }
+                
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             }
@@ -108,9 +107,7 @@ public class Answer {
                 if (rst != null) {
                     rst.close();
                 }
-                if (con != null) {
-                    con.close();
-                }
+               
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             }
