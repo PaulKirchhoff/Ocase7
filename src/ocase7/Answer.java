@@ -19,11 +19,18 @@ public class Answer {
     private int id;
     private int question_id;
     private String text;
+    private int isRight;
+
+    
 
     public Answer(int id, String text, int question_id, int isRight) {
         this.id = id;
         this.question_id = question_id;
         this.text = text;
+        this.isRight = isRight;
+    }
+    public int getIsRight() {
+        return isRight;
     }
 
     public Answer(String text) {
@@ -44,8 +51,9 @@ public class Answer {
 
     @Override
     public String toString() {
-        return "Answers{" + "id=" + id + ", text=" + text + ",question_id=" + question_id + '}';
+        return "Answer{" + "id=" + id + ", question_id=" + question_id + ", text=" + text + ", isRight=" + isRight + '}';
     }
+
 
     public static ArrayList<Answer> answ() {
         ArrayList<Answer> answ = new ArrayList<>();
@@ -115,6 +123,40 @@ public class Answer {
 
         return answers;
     }
+     
+//     public static ArrayList<Integer> answerIsRight() {
+//      ArrayList<Answer> isRight = new ArrayList<>();
+//        try {
+//            Connection con = MySQLConnection.getConnection();
+//            String sql = "SELECT * FROM answer WHERE isRight = 1";
+//            pst = con.prepareStatement(sql);
+//            rst = pst.executeQuery();  //Nur bei Select kommt executeQuery!
+//
+//            //Abfrage allgemein,für mehrere Datensätze
+//            while (rst.next()) {                                                //Fragt die Datensätze nacheinander ab
+//                isRight.add(rst.getInt("isRight"));  //adde Pro Datensatz ein neues Testobjekt in ArrayList tests
+//
+//            }
+//
+//        } catch (SQLException e) {
+//            System.out.println(e.getMessage());
+//
+//        } finally {
+//            try {
+//                if (pst != null) {
+//                    pst.close();
+//                }
+//                if (rst != null) {
+//                    rst.close();
+//                }
+//                
+//            } catch (SQLException e) {
+//                System.out.println(e.getMessage());
+//            }
+//        }
+//
+//        return isRight;
+//    }
 
 
 }
