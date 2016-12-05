@@ -5,6 +5,7 @@
  */
 package ocase7.view3;
 
+import com.sun.javafx.scene.control.skin.DatePickerContent;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -34,31 +35,33 @@ public class View3 {
     public Scene createView3() {
         Group view3Root = new Group();
         Scene view3Scene = new Scene(view3Root, Color.DEEPSKYBLUE);
-
+        
+        //Erstelle Boxen für Layout
+        myCard = Card.getCardsByCategory(Category.getCategoryById(1));
+        VBox view3ContentBox = new VBox();
         HBox statusBar = createHboxForTop();
-        VBox viewContentBox = new VBox();
-        ScrollPane questionAndAnswerPane = new ScrollPane();
-        myCard = Card.getCardsByCategory(Category.getCategoryById(4));
-        Label questionLbl = new Label(myCard.getQuestion().getText());
-        //System.out.println(myCard.getAnswers().get(0).getText());
-        VBox answerBox = new VBox();
+        ScrollPane answerAndQuestionScrollPane = new ScrollPane();
+        VBox scrollPaneContent = new VBox();
+        VBox questionBox = new VBox();
+        Label questionLabel = new Label(myCard.getQuestion().getText());
+        VBox answersBox = new VBox();
+        HBox checkboxWithAnswerBox = new HBox();
         for (int i = 0; i < myCard.getAnswers().size(); i++) {
             CheckBox cb = new CheckBox();
-            Label answersLbl = new Label(myCard.getAnswers().get(i).getText());
-            HBox answerWithCheckbox = new HBox(cb,answersLbl);
-            answerBox.getChildren().add(answerWithCheckbox);
-            answerBox.setSpacing(20);
+            Label answerLabel = new Label(myCard.getAnswers().get(i).getText());
+            checkboxWithAnswerBox = new HBox(cb,answerLabel);
+            answersBox.getChildren().add(checkboxWithAnswerBox);
+            answersBox.setSpacing(20);
         }
         
-
-        //ScrollBar answerScrollBar = new ScrollBar();
-        //answerScrollBar.setOrientation(Orientation.VERTICAL);
-        questionAndAnswerPane.setMinWidth(600);
-        questionAndAnswerPane.setMinHeight(400);
-        viewContentBox.getChildren().addAll(statusBar, questionAndAnswerPane);
-        view3Root.getChildren().addAll(viewContentBox);
-        questionAndAnswerPane.setContent(questionLbl);
-        questionAndAnswerPane.setContent(answerBox);
+        //fülle Boxen mit ihren Elementen
+        questionBox.getChildren().add(questionLabel);
+        scrollPaneContent.getChildren().addAll(questionBox, answersBox);
+        answerAndQuestionScrollPane.setContent(scrollPaneContent);
+        view3ContentBox.getChildren().addAll(statusBar, answerAndQuestionScrollPane);
+        
+        //übergebe den gesamten Inhalt an Group
+        view3Root.getChildren().add(view3ContentBox);
 
         return view3Scene;
     }
@@ -67,7 +70,8 @@ public class View3 {
         HBox statusBar = new HBox();
         statusBar.setSpacing(10);
         statusBar.setMinWidth(600);
-        statusBar.setAlignment(Pos.BASELINE_CENTER);
+        statusBar.setMinHeight(40);
+        statusBar.setAlignment(Pos.CENTER);
         statusBar.setStyle("-fx-border-style: solid;"
                 + "-fx-border-width: 1;"
                 + "-fx-border-color: grey;");
