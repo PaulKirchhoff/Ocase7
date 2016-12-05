@@ -17,12 +17,12 @@ import static ocase7.Test.stmt;
  * @author PaulsBook
  */
 public class Card {
-    
+
     //Verbindungsvariablen 
     static Statement stmt = null;
     static PreparedStatement pstmt = null;
     static ResultSet resultSet = null;
-    
+
     private int id;
     private Question question;
     private ArrayList<Answer> answers;
@@ -58,25 +58,26 @@ public class Card {
     }
 
     public static ArrayList<Card> getAll() {
-         ArrayList<Card> cards = new ArrayList<>();
+        ArrayList<Card> cards = new ArrayList<>();
         try {
             Connection con = MySQLConnection.getConnection();
             String sql = "SELECT * FROM question";
             stmt = con.createStatement();
             //pstmt = con.prepareStatement(sql);
             resultSet = stmt.executeQuery(sql);
+            Question q;
             while (resultSet.next()) {
-                
-                //cards.add(new Card(resultSet.getInt("id"),));
+                q = new Question(resultSet.getInt("id"), resultSet.getString("text"), resultSet.getInt("category_id"), resultSet.getInt("inactive"));
+                cards.add(new Card(resultSet.getInt("id"), q, Answer.getAnswersByQuestion(q)));
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         } finally {
             try {
-                if(stmt != null) {
+                if (stmt != null) {
                     stmt.close();
                 }
-                if(resultSet != null) {
+                if (resultSet != null) {
                     resultSet.close();
                 }
             } catch (Exception e) {
@@ -85,13 +86,10 @@ public class Card {
         }
         return cards;
     }
-    
-    
-    
+
     @Override
     public String toString() {
         return "Card{" + "id=" + id + ", question=" + question + ", answers=" + answers + '}';
     }
-    
-    
+
 }

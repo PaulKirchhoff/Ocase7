@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ocase7;
+package ocase7.launchView;
 
+import ocase7.launchView.ProgressBarWithTimer;
 import javafx.animation.RotateTransition;
 import javafx.animation.SequentialTransition;
 import javafx.animation.Timeline;
