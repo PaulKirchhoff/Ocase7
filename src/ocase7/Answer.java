@@ -32,7 +32,7 @@ public class Answer {
     public int getIsRight() {
         return isRight;
     }
-
+    
     public Answer(String text) {
         this.text = text;
     }
