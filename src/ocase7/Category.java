@@ -38,6 +38,10 @@ public class Category {
         this.text = text;
     }
 
+    public Category() {
+    }
+    
+
     public static ArrayList<Category> getAll() {
         ArrayList<Category> categories = new ArrayList<>();
         try {
@@ -63,6 +67,34 @@ public class Category {
             }
         }
         return categories;
+    }
+    
+    public static Category getCategoryById(int id) {
+        Category category = new Category();
+        try {
+            Connection con = MySQLConnection.getConnection();
+            String sql = "SELECT * FROM category WHERE id = ?";
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1,id);
+            resultSet = pstmt.executeQuery();
+            while (resultSet.next()) {
+               category = new Category(resultSet.getInt("id"), resultSet.getString("text"));
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return category;
     }
 
     @Override

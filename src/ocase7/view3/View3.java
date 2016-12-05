@@ -20,6 +20,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import ocase7.Card;
+import ocase7.Category;
 
 /**
  *
@@ -46,14 +47,15 @@ public class View3 {
         HBox statusBar = createHboxForTop();
         VBox viewContentBox = new VBox();
         ScrollPane questionAndAnswerPane = new ScrollPane();
-        //Label questionLbl = new Label(myCard.getQuestion().getText());
+        myCard = Card.getCardsByCategory(Category.getCategoryById(1));
+        Label questionLbl = new Label(myCard.getQuestion().getText());
         //ScrollBar answerScrollBar = new ScrollBar();
         //answerScrollBar.setOrientation(Orientation.VERTICAL);
         questionAndAnswerPane.setMinWidth(600);
         questionAndAnswerPane.setMinHeight(400);
         viewContentBox.getChildren().addAll(statusBar, questionAndAnswerPane);
         view3Root.getChildren().addAll(viewContentBox);
-        //questionAndAnswerPane.setContent(questionLbl);
+        questionAndAnswerPane.setContent(questionLbl);
 
         return view3Scene;
     }
