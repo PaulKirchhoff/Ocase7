@@ -13,16 +13,24 @@ public class Session {
     public static void main(String[] args) {
 //       fillCardBox(Category.getCategoryById(1));
 //        fillCardBox(Answer.getAnswersToQuestion(Question.getQuestionById(5)));      //ID der FRage 
-        Card c = new Card();
+
+        //Rolf´s Version
+        int zahl = 5;
+        Question q = Question.getQuestionById(zahl);                                       //Fragt die Question ab
+
+        Card c = new Card(zahl, q, Answer.getAnswersToQuestion(q));                         //Beim erstellen der neuen Card zwingt mich der Konstruktor aus Card alle angaben zu machen
+
         
-        Question q = Question.getQuestionById(5);                                       //Fragt die Question ab
-        int id = q.getId();                                                             //Fragt die Id der Question ab
-        ArrayList<Answer> answers = Answer.getAnswersToQuestion(q);                     //Holt sich die ArrayList answer mit der getAnswerToQuestion;
+        //Flo´s Version
         
-        c.setQuestion(q);                                                               //Fügt die Question zur Card (c) hinzu
-        c.setId(id);                                                                    //Fügt die id zur Card (c) hinzu
-        c.setAnswers(answers);                                                          //Fügt die Answer zur Card (c) hinzu
-        
+//        Question q = Question.getQuestionById(5);                                       //Fragt die Question ab
+//        int id = q.getId();                                                             //Fragt die Id der Question ab
+//        ArrayList<Answer> answers = Answer.getAnswersToQuestion(q);                     //Holt sich die ArrayList answer mit der getAnswerToQuestion;
+//
+//        c.setQuestion(q);                                                               //Fügt die Question zur Card (c) hinzu
+//        c.setId(id);                                                                    //Fügt die id zur Card (c) hinzu
+//        c.setAnswers(answers);                                                          //Fügt die Answer zur Card (c) hinzu
+
         System.out.println(c);
     }
 

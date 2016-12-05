@@ -5,7 +5,13 @@ import java.util.ArrayList;
 
 
 public class Card {
-    private int id = 0;
+    private int id;
+
+    public Card(int id, Question question, ArrayList<Answer> answers) {             //Konstrukter sagt mir wie ich meine Card zu bauen habe!
+        this.id = id;
+        this.question = question;
+        this.answers = answers;
+    }
     private Question question;
     private ArrayList<Answer> answers;
 
