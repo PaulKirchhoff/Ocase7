@@ -13,9 +13,10 @@ import java.sql.DriverManager;
  * @author PaulsBook
  */
 public class MySQLConnection {
-    private static final String URL = "jdbc:mysql://192.168.2.15:3306/ocase7";
-    private static final String USER = "Petra";
-    private static final String PASSWORD = "Panke";
+    //private static final String URL = "jdbc:mysql://192.168.2.15:3306/ocase7";
+    private static final String URL = "jdbc:mysql://localhost:3306/ocase7";
+    private static final String USER = "PaulK";
+    private static final String PASSWORD = "paulemann";
     
     private static Connection con = null;
     
