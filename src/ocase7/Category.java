@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package ocase7;
 
 import java.sql.Connection;
@@ -11,10 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-/**
- *
- * @author Teilnehmer
- */
+
 public class Category {
 
     private int id = 1;
@@ -22,7 +15,7 @@ public class Category {
     static Statement st = null;
     static PreparedStatement pst = null;
     static ResultSet rst = null;
-//    static Connection con = null;
+
 
     public Category(int id, String text) {
         this.id = id;

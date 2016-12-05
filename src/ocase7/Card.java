@@ -44,7 +44,7 @@ public class Card {
         return "Card{" + "id=" + id + ", question=" + question + ", answers=" + answers + '}';
     }
     
-   
+  
    
            
 }
