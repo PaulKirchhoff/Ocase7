@@ -10,6 +10,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ScrollPane;
@@ -30,16 +31,6 @@ public class View3 {
 
     ocase7.Card myCard;
 
-//    public View3(Card myCard) {
-//        this.myCard = Card.getAll().get(5);
-//
-//    }
-
-//    public View3() {
-//        //this.myCard = Card.getAll().get(5);
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-
     public Scene createView3() {
         Group view3Root = new Group();
         Scene view3Scene = new Scene(view3Root, Color.DEEPSKYBLUE);
@@ -49,6 +40,14 @@ public class View3 {
         ScrollPane questionAndAnswerPane = new ScrollPane();
         myCard = Card.getCardsByCategory(Category.getCategoryById(1));
         Label questionLbl = new Label(myCard.getQuestion().getText());
+        //System.out.println(myCard.getAnswers().get(0).getText());
+        VBox answerBox = new VBox();
+        for (int i = 0; i < myCard.getAnswers().size(); i++) {
+            CheckBox cb = new CheckBox();
+            Label answersLbl = new Label(myCard.getAnswers().get(i).getText());
+            answerBox.getChildren().addAll(answersLbl,cb);
+            
+        }
         //ScrollBar answerScrollBar = new ScrollBar();
         //answerScrollBar.setOrientation(Orientation.VERTICAL);
         questionAndAnswerPane.setMinWidth(600);
@@ -56,6 +55,7 @@ public class View3 {
         viewContentBox.getChildren().addAll(statusBar, questionAndAnswerPane);
         view3Root.getChildren().addAll(viewContentBox);
         questionAndAnswerPane.setContent(questionLbl);
+        questionAndAnswerPane.setContent(answerBox);
 
         return view3Scene;
     }

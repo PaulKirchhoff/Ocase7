@@ -16,7 +16,7 @@ import static ocase7.Question.pstmt;
  *
  * @author PaulsBook
  */
-class Answer {
+public class Answer {
 
     //Verbindungsvariablen 
     static Statement stmt = null;
