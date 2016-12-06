@@ -87,13 +87,16 @@ public class Card {
 //        }
 //        return cards;
 //    }
-    public static Card getCardsByCategory(Category c) {
-        //ArrayList<Card> cards = new ArrayList<>();
+
+    public static ArrayList<Card> getCardsByCategory(Category c) {
+        ArrayList<Card> cards = new ArrayList<>();
         ArrayList<Question> questions = Question.getQuestionsByCategory(c);
-        Question q = questions.get(0);
-        Card card = new Card(q.getId(), q, Answer.getAnswersByQuestion(q));
-        
-        return card;
+        for (Question question : questions) {
+            Card card = new Card(question.getId(), question, Answer.getAnswersByQuestion(question));
+            cards.add(card);
+
+        }
+        return cards;
     }
 
     @Override

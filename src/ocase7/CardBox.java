@@ -26,23 +26,26 @@ public class CardBox {
     public CardBox(ArrayList<Card> cards) {
         this.cards = cards;
         
+        
+        
+        
+        
+        
+        
+        
+    }
+    
+    public Card nextCard(int id) {
+        return this.cards.get(id+1);
     }
 
     public CardBox() {
+        
     }
 
     
     
-    public CardBox fillCardBox(Card card) {
-        if (cards == null) {
-            this.cards = new ArrayList<>();
-        }
-        if (!(cards.contains(card.getId()))) {
-            cards.add(card);
-        }
-
-        return this;
-    }
+   
 
     @Override
     public String toString() {

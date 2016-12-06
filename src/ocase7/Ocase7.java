@@ -6,6 +6,7 @@
 package ocase7;
 
 import java.util.ArrayList;
+import ocase7.controller.Controller;
 
 /**
  *
@@ -28,17 +29,27 @@ public class Ocase7 {
 //        // schreibt das veränderte Objekt wieder in die DB
 //        Test.update(t);
 
-        // liest alle Kategorien aus 
-        ArrayList<Category> c = Category.getAll();
-        CardBox cardBox = new CardBox();
-        for (int i = 0; i < c.size(); i++) {
-            ArrayList<Question> questions = Question.getQuestionsByCategory(c.get(i));
-            for (Question question : questions) {
-                Card card = new Card(question.getId(), question, Answer.getAnswersByQuestion(question));
-                cardBox = cardBox.fillCardBox(card);
-            }
+
+        Controller controller = new Controller();
+        ArrayList<Category> categories = Category.getAll();
+        for (int i = 0; i < categories.size(); i++) {
+            CardBox cardBox = controller.fillCardBoxByCategoryId(i);
             System.out.println(cardBox.getCards());
-            System.out.println("##############################");
+        }
+
+        // liest alle Kategorien aus 
+//        ArrayList<Category> c = Category.getAll();
+//        CardBox cardBox = new CardBox();
+//        for (int i = 0; i < c.size(); i++) {
+//            ArrayList<Question> questions = Question.getQuestionsByCategory(c.get(i));
+//            for (Question question : questions) {
+//                Card card = new Card(question.getId(), question, Answer.getAnswersByQuestion(question));
+//                controller.fillCardBoxByCategoryId(card.);
+//                //cardBox = cardBox.fillCardBox(card);
+//                
+//            }
+//            System.out.println(cardBox.getCards());
+//            System.out.println("##############################");
 //            for (int j = 0; j < questions.size(); j++) {
 //                ArrayList<Answer> answers = Answer.getAnswersByQuestion(questions.get(j));
 ////                for (Answer answer : answers) {
@@ -46,7 +57,7 @@ public class Ocase7 {
 ////                }
 //            }
 
-        }
+//        }
         MySQLConnection.closeConnection();
     }
 
