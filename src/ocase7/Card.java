@@ -22,6 +22,28 @@ public class Card {
         this.question = question;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 29 * hash + this.id;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Card other = (Card) obj;
+        return true;
+    }
+
     public void setAnswers(ArrayList<Answer> answers) {
         this.answers = answers;
     }
