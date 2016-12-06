@@ -40,7 +40,7 @@ public class Card {
 
     @Override
     public String toString() {
-        return "Card{" + "id=" + id + ", question=" + question + ", answers=" + answers + '}';
+        return "question=" + question + "answers=" + answers;
     }
 
 }

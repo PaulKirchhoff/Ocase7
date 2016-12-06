@@ -29,7 +29,7 @@ public class Answer {
     public int getIsRight() {
         return isRight;
     }
-
+    
     public Answer(String text) {
         this.text = text;
     }
@@ -48,7 +48,7 @@ public class Answer {
 
     @Override
     public String toString() {
-        return "Answer"+"\n"+ "id=" + id +"\n" + "text=" + text +"\n" + "isRight=" + isRight + "\n\n\n";
+        return "Answer"+"\n"+ "id=" + id +"\n" + "text=" + text +"\n" + "isRight=" + isRight + "\n\n";
     }
 
     public static ArrayList<Answer> answ() {
