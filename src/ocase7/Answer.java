@@ -7,8 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-
-
 public class Answer {
 
     static Statement st = null;
@@ -21,18 +19,17 @@ public class Answer {
     private String text;
     private int isRight;
 
-    
-
     public Answer(int id, String text, int question_id, int isRight) {
         this.id = id;
         this.question_id = question_id;
         this.text = text;
         this.isRight = isRight;
     }
+
     public int getIsRight() {
         return isRight;
     }
-    
+
     public Answer(String text) {
         this.text = text;
     }
@@ -51,9 +48,8 @@ public class Answer {
 
     @Override
     public String toString() {
-        return "Answer{" + "id=" + id + ", question_id=" + question_id + ", text=" + text + ", isRight=" + isRight + '}';
+        return "Answer"+"\n"+ "id=" + id +"\n" + "text=" + text +"\n" + "isRight=" + isRight + "\n\n\n";
     }
-
 
     public static ArrayList<Answer> answ() {
         ArrayList<Answer> answ = new ArrayList<>();
@@ -80,7 +76,7 @@ public class Answer {
                 if (rst != null) {
                     rst.close();
                 }
-                
+
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             }
@@ -88,14 +84,15 @@ public class Answer {
 
         return answ;
     }
-     public static ArrayList<Answer> getAnswersToQuestion (Question q) {
+
+    public static ArrayList<Answer> getAnswersToQuestion(Question q) {
         ArrayList<Answer> answers = new ArrayList<>();
         Connection con = MySQLConnection.getConnection();
         try {
-            
+
             String sql = "SELECT * FROM answer WHERE question_id = ?";
             pst = con.prepareStatement(sql);
-            pst.setInt(1,q.getId());
+            pst.setInt(1, q.getId());
             rst = pst.executeQuery();  //Nur bei Select kommt executeQuery!
 
             //Abfrage allgemein,für mehrere Datensätze
@@ -115,7 +112,7 @@ public class Answer {
                 if (rst != null) {
                     rst.close();
                 }
-               
+
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             }
@@ -123,7 +120,7 @@ public class Answer {
 
         return answers;
     }
-     
+
 //     public static ArrayList<Integer> answerIsRight() {
 //      ArrayList<Answer> isRight = new ArrayList<>();
 //        try {
@@ -157,6 +154,4 @@ public class Answer {
 //
 //        return isRight;
 //    }
-
-
 }

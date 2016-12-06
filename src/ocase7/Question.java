@@ -42,7 +42,7 @@ public class Question {
 
     @Override
     public String toString() {
-        return "Question{" + "id=" + id + ", text=" + text + '}';
+        return "Question"+"\n" + "id=" + id + "\n" +"text=" + text;
     }
 
 

@@ -30,6 +30,12 @@ public class Category {
         return id;
     }
 
+    @Override
+    public String toString() {
+        return "Category{" + "id=" + id + ", text=" + text + '}';
+    }
+    
+
     public static Category getCategoryById(int id) {
         Connection con = MySQLConnection.getConnection();
         Category c = null;
