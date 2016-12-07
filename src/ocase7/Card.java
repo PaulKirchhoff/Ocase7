@@ -22,12 +22,12 @@ public class Card {
         this.question = question;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 29 * hash + this.id;
-        return hash;
-    }
+//    @Override
+//    public int hashCode() {                                   
+//        int hash = 5;
+//        hash = 29 * hash + this.id;
+//        return hash;
+//    }
 
     
     //Er vergleicht die Primärschlüssel(ID) um sie nicht doppelt in die ArrayList(cardSelection) einzutragen
