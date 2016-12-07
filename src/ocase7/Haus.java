@@ -5,21 +5,21 @@
  */
 package ocase7;
 
- class Karte {
+ class Haus {
     
-    private String frage;
+    private String adresse;
 
-    public String getFrage() {
-        return frage;
+    public String getAdresse() {
+        return adresse;
     }
 
     @Override
     public String toString() {
-        return "Karte{" + "frage=" + frage + '}';
+        return "Haus{" + "adresse=" + adresse + '}';
     }
 
-    public Karte(String frage) {
-        this.frage = frage;
+    public Haus(String adresse) {
+        this.adresse = adresse;
     }
     
 }

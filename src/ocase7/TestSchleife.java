@@ -15,13 +15,13 @@ public class TestSchleife {
 
     public static void main(String[] args) {
 
-        ArrayList<Karte> haueser = new ArrayList<>();
+        ArrayList<Haus> haueser = new ArrayList<>();
 
-        haueser.add(new Karte("Bla"));
-        haueser.add(new Karte("Blub"));
-        haueser.add(new Karte("BlaBlub"));
+        haueser.add(new Haus("Bla"));
+        haueser.add(new Haus("Blub"));
+        haueser.add(new Haus("BlaBlub"));
 
-        for (Karte haus : haueser) {
+        for (Haus haus : haueser) {
             System.out.println(haus);
 
         }
