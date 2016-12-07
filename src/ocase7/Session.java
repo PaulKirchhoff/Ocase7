@@ -4,15 +4,17 @@ import java.util.ArrayList;
 
 public class Session {
 
-    static ArrayList<Card> cards0 = new ArrayList<>();
-    static ArrayList<Card> cards1 = new ArrayList<>();
-    static ArrayList<Card> cards2 = new ArrayList<>();
+//    static ArrayList<Card> cards0 = new ArrayList<>();
+//    static ArrayList<Card> cards1 = new ArrayList<>();
+//    static ArrayList<Card> cards2 = new ArrayList<>();
 
-    static ArrayList<Card> cards = new ArrayList<>();
     static ArrayList<ArrayList> cardSelection = new ArrayList<>();
 
     public static void main(String[] args) {
-
+        
+        
+        
+    ArrayList<Card> cards = new ArrayList<>();
         //Rolf´s Version
         int category_id1 = 1;
         ArrayList<Integer> questionIds1 = Question.getQuestionIdsByCategoryId(category_id1);
@@ -21,9 +23,10 @@ public class Session {
             cards.add(new Card(questionId1, q, Answer.getAnswersToQuestion(q)));
 
         }
-        cardSelection.add(cards);
-        cards.clear();
-
+        
+        cardSelection.add(cards);        
+        cards = new ArrayList<>();
+        
         int category_id2 = 2;
         ArrayList<Integer> questionIds2 = Question.getQuestionIdsByCategoryId(category_id2);
         for (Integer questionId2 : questionIds2) {
@@ -32,8 +35,8 @@ public class Session {
 
         }
         cardSelection.add(cards);
-        cards.clear();
-        ArrayList<Card> cards = new ArrayList<>();
+        
+        cards = new ArrayList<>();        
         int category_id3 = 3;
         ArrayList<Integer> questionIds3 = Question.getQuestionIdsByCategoryId(category_id3);
         for (Integer questionId3 : questionIds3) {
@@ -42,7 +45,6 @@ public class Session {
 
         }
         cardSelection.add(cards);
-        cards.clear();
 
         cardSelection.get(0).removeAll(cardSelection.get(1));
         cardSelection.get(0).addAll(cardSelection.get(1));
