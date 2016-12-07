@@ -47,6 +47,14 @@ public class Session {
 //        cardSelection.get(0).removeAll(cardSelection.get(2));
 //        cardSelection.get(0).addAll(cardSelection.get(2));
 //        System.out.println(cardSelection.get(0));
+
+
+
+
+
+
+
+
         for (ArrayList cardss : cardSelection) {
             for (Object car : cardss) {
                 System.out.println(car);
@@ -54,6 +62,49 @@ public class Session {
             }
         }
 
+
+
+
+
+
+
+
+
+
+//        ArrayList<Integer> zahlen1 = new ArrayList<>();
+//        
+//        zahlen1.add(1);
+//        zahlen1.add(2);
+//        zahlen1.add(3);
+//        zahlen1.add(4);
+//        zahlen1.add(5);
+//        zahlen1.add(6);
+//        zahlen1.add(13);
+//        ArrayList<Integer> zahlen2 = new ArrayList<>();
+//        
+//        zahlen2.add(2);
+//        zahlen2.add(3);
+//        zahlen2.add(4);
+//        zahlen2.add(40);
+//        zahlen2.add(6);
+//        zahlen2.add(7);
+//        zahlen2.add(8);
+//        zahlen2.add(9);
+//        
+//        zahlen1.removeAll(zahlen2);
+//        //zahlen1.addAll(zahlen2);
+//        ArrayList<Integer> cardbox = new ArrayList<>();
+//        for(Integer integer : zahlen1) {
+//            cardbox.add(integer);
+//        }
+//        System.out.println("###############");
+//        for (Integer integer : zahlen2) {
+//            cardbox.add(integer);
+//        }
+//        
+//        for (Integer integer : cardbox) {
+//            System.out.println(integer);
+//        }
     }
 
 }
