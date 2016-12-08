@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import ocase7.launchView.LaunchView;
+import ocase7.view2.View2;
 
 /**
  *
@@ -27,10 +28,13 @@ public class mainView extends Application {
 //        primaryStage.setMaxWidth(600);
         View3 view3 = new View3();
         Scene view3Scene =  view3.createView3();
+        ocase7.view2.View2 view2 = new View2();
+        Scene view2Scene = view2.createView2Scene();
         LaunchView launchView = new LaunchView();
         Scene launchViewScene = launchView.createLaunchView();
         //primaryStage.setScene(launchViewScene);
-        primaryStage.setScene(view3Scene);
+        //primaryStage.setScene(view3Scene);
+        primaryStage.setScene(view2Scene);
         //LoginView loginView = new LoginView();
         //Scene loginscene = loginView.createLoginView();
         Task<Void> sleeper = new Task<Void>() {
@@ -57,7 +61,7 @@ public class mainView extends Application {
         sleeper.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
             @Override
             public void handle(WorkerStateEvent event) {
-                primaryStage.setScene(view3Scene);
+                //primaryStage.setScene(view3Scene);
             }
         });
          new Thread(sleeper).start();
