@@ -29,9 +29,14 @@ public class Session {
 //            Question q = Question.getQuestionById(questionId);
 //            cards.add(new Card(questionId, q, Answer.getAnswersToQuestion(q)));
 //
-//        }
+//        }   
 //        cardSelection.add(cards);
 //        
+
+
+
+
+
 //        cards = new ArrayList<>();        
 //        int category_id3 = 3;
 //        ArrayList<Integer> questionIds3 = Question.getQuestionIdsByCategoryId(category_id3);

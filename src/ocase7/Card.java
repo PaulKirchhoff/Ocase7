@@ -17,7 +17,6 @@ public class Card {
     public void setId(int id) {
         this.id = id;
     }
-
     public void setQuestion(Question question) {
         this.question = question;
     }
@@ -28,8 +27,7 @@ public class Card {
         hash = 29 * hash + this.id;
         return hash;
     }
-
-    
+//qwdqwdq
     //Er vergleicht die Primärschlüssel(ID) um sie nicht doppelt in die ArrayList(cardSelection) einzutragen
     @Override
     public boolean equals(Object obj) {
