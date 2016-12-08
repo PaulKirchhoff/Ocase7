@@ -27,7 +27,7 @@ public class Card {
         hash = 29 * hash + this.id;
         return hash;
     }
-//qwdqwdq
+//qwdqwdqipugohugouhgohugvouhvouhcvouv
     //Er vergleicht die Primärschlüssel(ID) um sie nicht doppelt in die ArrayList(cardSelection) einzutragen
     @Override
     public boolean equals(Object obj) {
