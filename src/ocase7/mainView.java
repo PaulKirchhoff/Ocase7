@@ -26,11 +26,14 @@ public class mainView extends Application {
 //        primaryStage.setMaxHeight(800);
         primaryStage.setMinWidth(660);
 //        primaryStage.setMaxWidth(600);
+        // erstelle View3
         View3 view3 = new View3();
         Scene view3Scene =  view3.createView3();
-        ocase7.view2.View2 view2 = new View2();
+        // erstelle View2
+        View2 view2 = new View2();
         Scene view2Scene = view2.createView2Scene();
         LaunchView launchView = new LaunchView();
+        
         Scene launchViewScene = launchView.createLaunchView();
         //primaryStage.setScene(launchViewScene);
         //primaryStage.setScene(view3Scene);
