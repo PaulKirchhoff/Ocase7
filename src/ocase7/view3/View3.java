@@ -57,6 +57,9 @@ public class View3 {
         
         //Erstelle Boxen für Layout        
         VBox view3ContentBox = new VBox();
+        view3ContentBox.setStyle("-fx-border-style: solid;"
+                + "-fx-border-width: 3px;"
+                + "-fx-border-color: #2ECCFA;");
         view3ContentBox.setMinWidth(660);
         //view3ContentBox.
         HBox statusBar = createHboxForTop();

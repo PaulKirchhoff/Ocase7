@@ -42,7 +42,7 @@ public class View2 {
         VBox view2ContentBox = new VBox();
         view2ContentBox.setStyle("-fx-border-style: solid;"
                 + "-fx-border-width: 3px;"
-                + "-fx-border-color: lightgrey;");
+                + "-fx-border-color: #2ECCFA;");
         // erstellt Top Bar mit Überschrift
         VBox topBar = createTopBar();
         //erstellt categoryBox mit Checkboxes und Labeln
@@ -65,7 +65,7 @@ public class View2 {
         VBox categoriesBox = new VBox();
         categoriesBox.setStyle("-fx-border-style: solid;"
                 + "-fx-border-width: 2 0 2 0;"
-                + "-fx-border-color: lightgrey;");
+                + "-fx-border-color: #2ECCFA;");
         Label categoryBoxLabel = new Label("Kategorien:");
         categoryBoxLabel.setTextFill(Color.DARKSLATEGRAY);
         categoryBoxLabel.setFont(Font.font("Arial", FontWeight.BOLD, 15));
@@ -92,7 +92,7 @@ public class View2 {
         HBox learnModusBox = new HBox();
         learnModusBox.setStyle("-fx-border-style: solid;"
                 + "-fx-border-width: 2 0 2 0;"
-                + "-fx-border-color: lightgrey;");
+                + "-fx-border-color: #2ECCFA;");
         learnModusBox.setSpacing(10);
         learnModusBox.setMinWidth(700);
         learnModusBox.setAlignment(Pos.CENTER);
@@ -138,7 +138,7 @@ public class View2 {
         VBox numOfQuestions = new VBox();
         numOfQuestions.setStyle("-fx-border-style: solid;"
                 + "-fx-border-width: 0 0 0 0;"
-                + "-fx-border-color: lightgrey;");
+                + "-fx-border-color: #2ECCFA;");
         Label numOfQuestionsLabel = new Label("Fragenanzahl:");
         numOfQuestionsLabel.setPadding(new Insets(0, 0, 20, 0));
         numOfQuestionsLabel.setFont(Font.font("Arial", FontWeight.BOLD, 15));
