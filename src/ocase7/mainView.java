@@ -35,7 +35,7 @@ public class mainView extends Application {
         LaunchView launchView = new LaunchView();
         
         Scene launchViewScene = launchView.createLaunchView();
-        //primaryStage.setScene(launchViewScene);
+        primaryStage.setScene(launchViewScene);
         //primaryStage.setScene(view3Scene);
         primaryStage.setScene(view2Scene);
         //LoginView loginView = new LoginView();
