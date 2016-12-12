@@ -36,8 +36,8 @@ public class mainView extends Application {
         
         Scene launchViewScene = launchView.createLaunchView();
         primaryStage.setScene(launchViewScene);
-        //primaryStage.setScene(view3Scene);
-        primaryStage.setScene(view2Scene);
+        primaryStage.setScene(view3Scene);
+//        primaryStage.setScene(view2Scene);
         //LoginView loginView = new LoginView();
         //Scene loginscene = loginView.createLoginView();
         Task<Void> sleeper = new Task<Void>() {

@@ -23,12 +23,12 @@ public class Card {
 
     private int id;
     private Question question;
-    private ArrayList<Answer> answers;
+    private ArrayList<UserAnswer> userAnswers;
 
-    public Card(int id, Question question, ArrayList<Answer> answers) {
+    public Card(int id, Question question, ArrayList<UserAnswer> answers) {
         this.id = id;
         this.question = question;
-        this.answers = answers;
+        this.userAnswers = userAnswers;
     }
 
     public int getId() {
@@ -47,12 +47,12 @@ public class Card {
         this.question = question;
     }
 
-    public ArrayList<Answer> getAnswers() {
-        return answers;
+    public ArrayList<UserAnswer> getUserAnswers() {
+        return userAnswers;
     }
 
-    public void setAnswers(ArrayList<Answer> answers) {
-        this.answers = answers;
+    public void setUserAnswers(ArrayList<UserAnswer> userAnswers) {
+        this.userAnswers = userAnswers;
     }
 
 //    public static ArrayList<Card> getAll() {
@@ -84,18 +84,18 @@ public class Card {
 //        }
 //        return cards;
 //    }
-    public static Card getCardsByCategory(Category c) {
-        //ArrayList<Card> cards = new ArrayList<>();
-        ArrayList<Question> questions = Question.getQuestionsByCategory(c);
-        Question q = questions.get(0);
-        Card card = new Card(q.getId(), q, Answer.getAnswersByQuestion(q));
-        
-        return card;
-    }
+//    public static Card getCardsByCategory(Category c) {
+//        //ArrayList<Card> cards = new ArrayList<>();
+//        ArrayList<Question> questions = Question.getQuestionsByCategory(c);
+//        Question q = questions.get(0);
+//        Card card = new Card(q.getId(), q, Answer.getAnswersByQuestion(q));
+//        
+//        return card;
+//    }
 
     @Override
     public String toString() {
-        return "Card{" + "id=" + id + ", question=" + question + ", answers=" + answers + '}';
+        return "Card{" + "id=" + id + ", question=" + question + ", answers=" + userAnswers + '}';
     }
 
     
@@ -105,7 +105,7 @@ public class Card {
     public Card(int question_id) {
         this.id = question_id;
         this.question = Question.getQuestionById(question_id);
-        this.answers = Answer.getAnswersByQuestion(question);
+        this.userAnswers = UserAnswer.addUserAnswerToAnswerArray(question);
     }
     
     //#####################sani was here###################################
