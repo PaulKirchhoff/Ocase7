@@ -39,7 +39,7 @@ public class View2 {
     View3 view3Scene;
     Scene view;
     ArrayList<Integer> questions;
-    int computetNumberOfQuestions;
+    int computetNumberOfQuestions = 0;
     Label maxQuestionsLabel = new Label("0");
     HBox checkboxWithCategoryLabelBox;
     ArrayList<CheckBox> listOfCheckboxes = new ArrayList<>();
@@ -110,11 +110,13 @@ public class View2 {
                 public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                     if (newValue) {
                         checkbox.setSelected(true);
-                        computetNumberOfQuestions = (Question.getAllQuestionsByCategoryId(listOfCheckboxes.indexOf(checkbox)+1).size());
+                        computetNumberOfQuestions = computetNumberOfQuestions + (Question.getAllQuestionsByCategoryId(listOfCheckboxes.indexOf(checkbox)+1).size());
                         maxQuestionsLabel.setText("" + (computetNumberOfQuestions));
                         numOfQuestionsSlider.setMax(computetNumberOfQuestions);
                     } else {
-                        maxQuestionsLabel.setText("" + (computetNumberOfQuestions- computetNumberOfQuestions));
+                        computetNumberOfQuestions = computetNumberOfQuestions - (Question.getAllQuestionsByCategoryId(listOfCheckboxes.indexOf(checkbox)+1).size());
+                        maxQuestionsLabel.setText("" + (computetNumberOfQuestions));
+                        numOfQuestionsSlider.setMax(computetNumberOfQuestions);
                     }
                 }
             });
@@ -198,12 +200,11 @@ public class View2 {
         numOfQuestionsLabel.setTextFill(Color.DARKSLATEGRAY);
         HBox numOfQuestionBoxContent = new HBox();
         numOfQuestionsSlider = new Slider(0, computetNumberOfQuestions, computetNumberOfQuestions / 2);
-        numOfQuestionsSlider.setShowTickLabels(true);
+        //numOfQuestionsSlider.setShowTickLabels(true);
         numOfQuestionsSlider.setShowTickMarks(true);
-        numOfQuestionsSlider.setMajorTickUnit(10);
-        numOfQuestionsSlider.setBlockIncrement(10);
         numOfQuestionsSlider.setMinWidth(400);
         numOfQuestionsSlider.setMinorTickCount(10);
+        
         Label minQuestionsLabel = new Label("0");
         minQuestionsLabel.setTextFill(Color.DARKSLATEGRAY);
         minQuestionsLabel.setFont(Font.font("Arial", FontWeight.BOLD, 15));
