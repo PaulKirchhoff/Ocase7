@@ -21,7 +21,7 @@ public class Category {
     static Statement stmt = null;
     static PreparedStatement pstmt = null;
     static ResultSet resultSet = null;
-    
+
     private int id;
     private String text;
 
@@ -32,7 +32,7 @@ public class Category {
     public String getText() {
         return text;
     }
-    
+
     public Category(int id, String text) {
         this.id = id;
         this.text = text;
@@ -40,7 +40,6 @@ public class Category {
 
     public Category() {
     }
-    
 
     public static ArrayList<Category> getAll() {
         ArrayList<Category> categories = new ArrayList<>();
@@ -68,17 +67,17 @@ public class Category {
         }
         return categories;
     }
-    
+
     public static Category getCategoryById(int id) {
         Category category = new Category();
         try {
             Connection con = MySQLConnection.getConnection();
             String sql = "SELECT * FROM category WHERE id = ?";
             pstmt = con.prepareStatement(sql);
-            pstmt.setInt(1,id);
+            pstmt.setInt(1, id);
             resultSet = pstmt.executeQuery();
             while (resultSet.next()) {
-               category = new Category(resultSet.getInt("id"), resultSet.getString("text"));
+                category = new Category(resultSet.getInt("id"), resultSet.getString("text"));
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -101,5 +100,7 @@ public class Category {
     public String toString() {
         return "Category{" + "id=" + id + ", text=" + text + '}';
     }
+
     
+
 }
