@@ -3,18 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package javaapplication6;
+package probiereaus;
 
 /**
  *
  * @author Teilnehmer
  */
-public class App {
-
-	public static void main(String[ ] args) {
-		int i = 10;
-		int j =20;
-		int k = j += i / 5;
-		System.out.println(i +" : " + j + " : " + k);
-	}
-} 
+public interface sitzbar {
+    
+    public int getSitzplaetze();
+    
+}

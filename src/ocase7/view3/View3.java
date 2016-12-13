@@ -42,7 +42,7 @@ public class View3 {
     
     
     private void fillCategories() {
-        categories.add(Category.getCategoryById(7));  //<-------------------------------------- GIB EINE KATEGORIE EIN
+        categories.add(Category.getCategoryById(1));  //<-------------------------------------- GIB EINE KATEGORIE EIN
         cardBox = new CardBox(categories);
         //System.out.println(cardBox.getCards() + "########" + cardBox.getNumberOfCards());
 
@@ -54,6 +54,7 @@ public class View3 {
         Scene view3Scene = new Scene(view3Root, Color.DEEPSKYBLUE);
 
         myCard = cardBox.getCards().get(0);
+       
         
         //Erstelle Boxen für Layout        
         VBox view3ContentBox = new VBox();
@@ -95,12 +96,15 @@ public class View3 {
         checkboxWithAnswerBox.setAlignment(Pos.CENTER);
         for (int i = 0; i < myCard.getUserAnswers().size(); i++) {
             CheckBox cb = new CheckBox();
-//            cb.selectedProperty().addListener(new ChangeListener<Boolean>() {
-//                @Override
-//                public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-//                    
-//                }
-//            });
+            cb.selectedProperty().addListener(new ChangeListener<Boolean>() {
+                @Override
+                public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                    if(cb.isSelected()){
+                        myCard.getUserAnswers().get(i).setGiven(true);
+                    }
+                    
+                }
+            });
             answerLabel = new Label(myCard.getUserAnswers().get(i).getText());
             checkboxWithAnswerBox = new HBox(cb, answerLabel);
             answersBox.getChildren().add(checkboxWithAnswerBox);
