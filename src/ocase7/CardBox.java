@@ -44,9 +44,9 @@ public class CardBox {
     public CardBox(ArrayList<Category> categories) {
         this.cards = fillCardBox(categories);
         this.NumberOfCards=cards.size();
-//        for(Card card: cards){
-//            System.out.println(card);
-//        }
+        for(Card card: cards){
+            System.out.println(card);
+        }
     }
        
     
@@ -86,6 +86,7 @@ public class CardBox {
         }
     }
     
+    //unwartbar
     public Card prevCard(int cardBoxIndex) {
         if(cardBoxIndex > 0 ) {
             return cards.get(cardBoxIndex -1);
