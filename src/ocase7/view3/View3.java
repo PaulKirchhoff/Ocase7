@@ -179,6 +179,9 @@ public class View3 {
                 for (int i = 0; i < myCard.getUserAnswers().size(); i++) {
                     CheckBox cb = new CheckBox();
                     answerLabel = new Label(myCard.getUserAnswers().get(i).getText());
+                    if(myCard.getUserAnswers().get(i).isGiven() == true){
+                       cb.setSelected(true);
+                    }
                     checkboxWithAnswerBox = new HBox(cb, answerLabel);
                     answersBox.getChildren().add(checkboxWithAnswerBox);
                     answersBox.setSpacing(20);
@@ -214,6 +217,9 @@ public class View3 {
                 for (int i = 0; i < myCard.getUserAnswers().size(); i++) {
                     CheckBox cb = new CheckBox();
                     answerLabel = new Label(myCard.getUserAnswers().get(i).getText());
+                    if(myCard.getUserAnswers().get(i).isGiven() == true){
+                       cb.setSelected(true);
+                    }
                     checkboxWithAnswerBox = new HBox(cb, answerLabel);
                     answersBox.getChildren().add(checkboxWithAnswerBox);
                     answersBox.setSpacing(20);

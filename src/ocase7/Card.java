@@ -106,7 +106,7 @@ public class Card {
     
     public Card(int question_id) {
         this.id = question_id;
-        this.question = Question.getQuestionById(question_id);
+        this.question = Question.getQuestionById(question_id);        
         this.userAnswers = UserAnswer.addUserAnswerToAnswerArray(question);
     }
     
