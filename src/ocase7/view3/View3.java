@@ -93,15 +93,20 @@ public class View3 {
         answersBox = new VBox();
         checkboxWithAnswerBox = new HBox();
         checkboxWithAnswerBox.setAlignment(Pos.CENTER);
-        for (int i = 0; i < myCard.getAnswers().size(); i++) {
+        for (int i = 0; i < myCard.getUserAnswers().size(); i++) {
             CheckBox cb = new CheckBox();
-//            cb.selectedProperty().addListener(new ChangeListener<Boolean>() {
-//                @Override
-//                public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-//                    
-//                }
-//            });
-            answerLabel = new Label(myCard.getAnswers().get(i).getText());
+          int m= i;
+            cb.selectedProperty().addListener(new ChangeListener<Boolean>() {
+                @Override
+                public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                    if(cb.isSelected()){                    
+                        myCard.getUserAnswers().get(m).setGiven(true);
+                        System.out.println(myCard.getUserAnswers().get(m).isGiven());
+                    }
+                    
+                }
+            });
+            answerLabel = new Label(myCard.getUserAnswers().get(i).getText());
             checkboxWithAnswerBox = new HBox(cb, answerLabel);
             answersBox.getChildren().add(checkboxWithAnswerBox);
             answersBox.setSpacing(20);
@@ -171,9 +176,9 @@ public class View3 {
                 checkboxWithAnswerBox = new HBox();
                 checkboxWithAnswerBox.setAlignment(Pos.CENTER);
                
-                for (int i = 0; i < myCard.getAnswers().size(); i++) {
+                for (int i = 0; i < myCard.getUserAnswers().size(); i++) {
                     CheckBox cb = new CheckBox();
-                    answerLabel = new Label(myCard.getAnswers().get(i).getText());
+                    answerLabel = new Label(myCard.getUserAnswers().get(i).getText());
                     checkboxWithAnswerBox = new HBox(cb, answerLabel);
                     answersBox.getChildren().add(checkboxWithAnswerBox);
                     answersBox.setSpacing(20);
@@ -206,9 +211,9 @@ public class View3 {
                 checkboxWithAnswerBox = new HBox();
                 checkboxWithAnswerBox.setAlignment(Pos.CENTER);
                
-                for (int i = 0; i < myCard.getAnswers().size(); i++) {
+                for (int i = 0; i < myCard.getUserAnswers().size(); i++) {
                     CheckBox cb = new CheckBox();
-                    answerLabel = new Label(myCard.getAnswers().get(i).getText());
+                    answerLabel = new Label(myCard.getUserAnswers().get(i).getText());
                     checkboxWithAnswerBox = new HBox(cb, answerLabel);
                     answersBox.getChildren().add(checkboxWithAnswerBox);
                     answersBox.setSpacing(20);
