@@ -50,6 +50,7 @@ public class View2 extends mainView {
     HBox checkboxWithCategoryLabelBox;
     ArrayList<CheckBox> listOfCheckboxes = new ArrayList<>();
     Slider numOfQuestionsSlider;
+    Slider slider;
 
     public Scene createView2Scene() {
         Group view2Root = new Group();
@@ -117,26 +118,26 @@ public class View2 extends mainView {
                         checkbox.setSelected(true);
                         computetNumberOfQuestions = computetNumberOfQuestions + (Question.getAllQuestionsByCategoryId(listOfCheckboxes.indexOf(checkbox)+1).size());
                         maxQuestionsLabel.setText("" + (computetNumberOfQuestions));
-                        numOfQuestionsSlider.setMax(computetNumberOfQuestions);
+                        slider.setMax(computetNumberOfQuestions);
                     } else {
                         computetNumberOfQuestions = computetNumberOfQuestions - (Question.getAllQuestionsByCategoryId(listOfCheckboxes.indexOf(checkbox)+1).size());
                         maxQuestionsLabel.setText("" + (computetNumberOfQuestions));
-                        numOfQuestionsSlider.setMax(computetNumberOfQuestions);
+                        slider.setMax(computetNumberOfQuestions);
                     }
                 }
             });
         }
 
-//        listOfCheckboxes.get(1).setOnAction(new EventHandler<ActionEvent>() {
-//            @Override
-//            public void handle(ActionEvent event) {
-//                maxQuestionsLabel.setText("" + Question.getAllQuestion_IdsByCategoryId(2).size());
-////                    
-//            }
-//        });
-//        for (CheckBox checkBox : listOfCheckboxes) {
-//            System.out.println(checkBox);
-//        }
+        listOfCheckboxes.get(1).setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                maxQuestionsLabel.setText("" + Question.getAllQuestion_IdsByCategoryId(2).size());
+//                    
+            }
+        });
+        for (CheckBox checkBox : listOfCheckboxes) {
+            System.out.println(checkBox);
+        }
         categoriesBox.setAlignment(Pos.CENTER);
 
         return categoriesBox;
@@ -153,10 +154,7 @@ public class View2 extends mainView {
         learnModusBox.setAlignment(Pos.CENTER);
         learnModusBox.setPadding(new Insets(30, 0, 30, 0));
         ToggleButton learnModusButton = new ToggleButton("Lern Modus");
-//        learnModusButton.setMinWidth(80);
-//        learnModusButton.setMinHeight(80);
-//        learnModusButton.setShape(new Circle(40));
-        //learnModusButton.setMaxSize(250, 250);
+
         Label learnModusLabel = new Label("sortierter Modus");
         learnModusLabel.setFont(Font.font("Arial", FontWeight.BOLD, 15));
         learnModusLabel.setTextFill(Color.DARKSLATEGRAY);
@@ -195,7 +193,7 @@ public class View2 extends mainView {
 
     public StackPane createSlider() {
         
-        Slider slider = new Slider();
+        slider = new Slider();
         slider.setShowTickLabels(true);
         slider.setShowTickMarks(true);
         slider.setMinWidth(400);
@@ -214,72 +212,8 @@ public class View2 extends mainView {
         //HBox hb = new HBox(minQuestionsLabel,thumb,maxQuestionsLabel);
         
         return root;
-//        numOfQuestionsSlider = new Slider(0, 325, 325 / 2);
-//        StackPane sliderPane = new StackPane(numOfQuestionsSlider);
-////        numOfQuestionsSlider.setShowTickLabels(true);
-////        numOfQuestionsSlider.setShowTickMarks(true);
-////        numOfQuestionsSlider.setMinWidth(400);
-////        numOfQuestionsSlider.setMinorTickCount(5);
-//        
-//        numOfQuestionsSlider.applyCss();
-//        numOfQuestionsSlider.layout();
-//        Pane thumb = (Pane) numOfQuestionsSlider.lookup(".thumb");
-////(Pane) 
-//        //numOfQuestionsSlider.lookup(".thumb");
-//        Label sliderThumbLabel = new Label();
-//        sliderThumbLabel.textProperty().bind(numOfQuestionsSlider.valueProperty().asString("%.0f"));
-//        thumb.getChildren().addAll(sliderThumbLabel);
-//        //sliderPane.getChildren().addAll(thumb);
-//        return sliderPane;
+
     }
-    
-//    private VBox createNumberOfQuestionsBox() {
-//        VBox numOfQuestions = new VBox();
-//        numOfQuestions.setStyle("-fx-border-style: solid;"
-//                + "-fx-border-width: 0 0 0 0;"
-//                + "-fx-border-color: #2ECCFA;");
-//        Label numOfQuestionsLabel = new Label("Fragenanzahl:");
-//        numOfQuestionsLabel.setPadding(new Insets(0, 0, 20, 0));
-//        numOfQuestionsLabel.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-//        //numOfQuestionsLabel.set
-//        numOfQuestionsLabel.setTextFill(Color.DARKSLATEGRAY);
-//        HBox numOfQuestionBoxContent = new HBox();
-//        if(computetNumberOfQuestions == 0) {
-//            numOfQuestionsSlider = new Slider(0, 325, 325 / 2);
-//        } else {
-//            numOfQuestionsSlider = new Slider(0, computetNumberOfQuestions ,computetNumberOfQuestions / 2);                
-//        }
-//        numOfQuestionsSlider.setShowTickLabels(true);
-//        numOfQuestionsSlider.setShowTickMarks(true);
-//        numOfQuestionsSlider.setMinWidth(400);
-//        numOfQuestionsSlider.setMinorTickCount(5);
-//        
-//        numOfQuestionsSlider.applyCss();
-//        numOfQuestionsSlider.layout();
-//        Pane thumb = new Pane();
-//        numOfQuestionsSlider.lookup(".thumb");
-//        Label sliderThumbLabel = new Label();
-//        
-//        
-////        sliderThumbLabel.setShape(new Circle(40));
-//        numOfQuestionsSlider.setShape(new Circle(40));
-//        sliderThumbLabel.textProperty().bind(numOfQuestionsSlider.valueProperty().asString("%.0f"));
-//        thumb.getChildren().addAll(sliderThumbLabel,numOfQuestionsSlider);
-//                
-//        
-//        Label minQuestionsLabel = new Label("0");
-//        minQuestionsLabel.setTextFill(Color.DARKSLATEGRAY);
-//        minQuestionsLabel.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-//
-//        maxQuestionsLabel.setText("0");
-//        maxQuestionsLabel.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-//        maxQuestionsLabel.setTextFill(Color.DARKSLATEGRAY);
-//        numOfQuestionBoxContent.getChildren().addAll(minQuestionsLabel, thumb, maxQuestionsLabel);
-//        numOfQuestions.getChildren().addAll(numOfQuestionsLabel, numOfQuestionBoxContent);
-//        numOfQuestions.setPadding(new Insets(40, 0, 60, 130));
-//
-//        return numOfQuestions;
-//    }
 
     private HBox createButtonBox() {
         HBox resetAndStartButtonBox = new HBox();
