@@ -84,7 +84,11 @@ public class mainView extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        launch(args);
+//        launch(args);
+//        System.out.println(User.toString());
+System.out.println(Category.getAll());
+System.out.println(User.getAll());
+System.out.println(CardBox.getAll());
     }
     
 }

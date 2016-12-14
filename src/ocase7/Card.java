@@ -92,6 +92,13 @@ public class Card {
         
         return card;
     }
+    
+    public static Card getCardsById(){
+    
+        return cards;
+    }
+    
+    
 
     @Override
     public String toString() {
