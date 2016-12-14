@@ -6,6 +6,7 @@
 package ocase7.view2;
 
 import java.util.ArrayList;
+import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -20,20 +21,23 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import ocase7.Category;
 import ocase7.Question;
+import ocase7.mainView;
 import ocase7.view3.View3;
 
 /**
  *
  * @author PaulsBook
  */
-public class View2 {
+public class View2 extends mainView {
 
     ArrayList<Category> categories;
     View3 view3Scene;
@@ -48,7 +52,7 @@ public class View2 {
     public Scene createView2Scene() {
         Group view2Root = new Group();
         view = new Scene(view2Root, Color.DEEPSKYBLUE);
-
+        view.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
         VBox view2ContentBox = new VBox();
         view2ContentBox.setStyle("-fx-border-style: solid;"
                 + "-fx-border-width: 3px;"
@@ -199,11 +203,26 @@ public class View2 {
         //numOfQuestionsLabel.set
         numOfQuestionsLabel.setTextFill(Color.DARKSLATEGRAY);
         HBox numOfQuestionBoxContent = new HBox();
-        numOfQuestionsSlider = new Slider(0, computetNumberOfQuestions, computetNumberOfQuestions / 2);
-        //numOfQuestionsSlider.setShowTickLabels(true);
+        if(computetNumberOfQuestions == 0) {
+            numOfQuestionsSlider = new Slider(0, 325, 325 / 2);
+        } else {
+            numOfQuestionsSlider = new Slider(0, computetNumberOfQuestions ,computetNumberOfQuestions / 2);                
+        }
+        numOfQuestionsSlider.setShowTickLabels(true);
         numOfQuestionsSlider.setShowTickMarks(true);
         numOfQuestionsSlider.setMinWidth(400);
-        numOfQuestionsSlider.setMinorTickCount(10);
+        numOfQuestionsSlider.setMinorTickCount(5);
+        
+        numOfQuestionsSlider.applyCss();
+        numOfQuestionsSlider.layout();
+        Pane thumb = new Pane();
+        numOfQuestionsSlider.lookup(".thumb");
+        Label sliderThumbLabel = new Label();
+//        sliderThumbLabel.setShape(new Circle(40));
+        numOfQuestionsSlider.setShape(new Circle(40));
+        sliderThumbLabel.textProperty().bind(numOfQuestionsSlider.valueProperty().asString("%.0f"));
+        thumb.getChildren().addAll(sliderThumbLabel,numOfQuestionsSlider);
+                
         
         Label minQuestionsLabel = new Label("0");
         minQuestionsLabel.setTextFill(Color.DARKSLATEGRAY);
@@ -212,7 +231,7 @@ public class View2 {
         maxQuestionsLabel.setText("0");
         maxQuestionsLabel.setFont(Font.font("Arial", FontWeight.BOLD, 15));
         maxQuestionsLabel.setTextFill(Color.DARKSLATEGRAY);
-        numOfQuestionBoxContent.getChildren().addAll(minQuestionsLabel, numOfQuestionsSlider, maxQuestionsLabel);
+        numOfQuestionBoxContent.getChildren().addAll(minQuestionsLabel, thumb, maxQuestionsLabel);
         numOfQuestions.getChildren().addAll(numOfQuestionsLabel, numOfQuestionBoxContent);
         numOfQuestions.setPadding(new Insets(40, 0, 60, 130));
 
