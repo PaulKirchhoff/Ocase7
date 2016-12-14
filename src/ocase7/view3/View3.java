@@ -96,11 +96,13 @@ public class View3 {
         checkboxWithAnswerBox.setAlignment(Pos.CENTER);
         for (int i = 0; i < myCard.getUserAnswers().size(); i++) {
             CheckBox cb = new CheckBox();
+            int m= i;
             cb.selectedProperty().addListener(new ChangeListener<Boolean>() {
                 @Override
                 public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                    if(cb.isSelected()){
-                        myCard.getUserAnswers().get(i).setGiven(true);
+                    if(cb.isSelected()){                    
+                        myCard.getUserAnswers().get(m).setGiven(true);
+                        System.out.println(myCard.getUserAnswers().get(m).isGiven());
                     }
                     
                 }
