@@ -5,6 +5,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -86,7 +87,7 @@ public class View3 {
             }
         });
         //questionLabel.setPrefWidth(700); 
-        
+
         //fülle Boxen mit ihren Elementen
         questionBox.getChildren().add(questionTextArea);
         questionBox.setFillWidth(true);
@@ -144,7 +145,7 @@ public class View3 {
                 // setze den neuen Text in das Label 
                 questionTextArea.setText(myCard.getQuestion().getText());
                 // füge Neues Label wieder zur questionBox hinzu
-                questionBox.getChildren().add(questionTextArea);               
+                questionBox.getChildren().add(questionTextArea);
                 scrollPaneContent.getChildren().add(createAnswerBox());
             }
         });
@@ -161,12 +162,12 @@ public class View3 {
                 answersBox.getChildren().clear();
                 //System.out.println(cardBox.prevCard(cardBox.getCards().indexOf(myCard)));
                 myCard = cardBox.prevCard(cardBox.getCards().indexOf(myCard));
-                questionNumberLabel.setText("" + (cardBox.getCards().indexOf(myCard) +1));
+                questionNumberLabel.setText("" + (cardBox.getCards().indexOf(myCard) + 1));
 
                 // setze den neuen Text in das Label 
                 questionTextArea.setText(myCard.getQuestion().getText());
                 // füge Neues Label wieder zur questionBox hinzu
-                questionBox.getChildren().add(questionTextArea);               
+                questionBox.getChildren().add(questionTextArea);
                 scrollPaneContent.getChildren().add(createAnswerBox());
             }
         });
@@ -192,6 +193,14 @@ public class View3 {
 
         Button cheater = new Button("Cheater-Knopf");
         cheater.setMinWidth(100);
+        cheater.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {                
+              answersBox.setDisable(true);              
+              
+                
+            }
+        });
 
         Button save = new Button("Session fertig");
         save.setMinWidth(100);
@@ -202,7 +211,7 @@ public class View3 {
     }
 
     private VBox createAnswerBox() {
-        
+
         answersBox = new VBox();
         checkboxWithAnswerBox = new HBox();
         checkboxWithAnswerBox.setAlignment(Pos.CENTER);
@@ -228,6 +237,30 @@ public class View3 {
                 }
             });
             answerLabel = new Label(myCard.getUserAnswers().get(i).getText());
+            checkboxWithAnswerBox = new HBox(cb, answerLabel);
+            answersBox.getChildren().add(checkboxWithAnswerBox);
+            answersBox.setSpacing(20);
+
+        }
+        return answersBox;
+    }
+    
+    private VBox isRightAnswersBox(){
+        answersBox = new VBox();
+        checkboxWithAnswerBox = new HBox();
+        checkboxWithAnswerBox.setAlignment(Pos.CENTER);
+        for (int i = 0; i < myCard.getUserAnswers().size(); i++) {
+            CheckBox cb = new CheckBox();
+            int m = i;
+            if (myCard.getUserAnswers().get(i).isGiven() == true) {
+                cb.setSelected(true);
+            }            
+            if(myCard.getUserAnswers.get(i).isIsRight == true){
+                answerLabel = new Label(myCard.getUserAnswers().get(i).getText());
+                answerLabel.setTextFill(Color.GREEN);
+            }else{
+            answerLabel = new Label(myCard.getUserAnswers().get(i).getText());
+            }
             checkboxWithAnswerBox = new HBox(cb, answerLabel);
             answersBox.getChildren().add(checkboxWithAnswerBox);
             answersBox.setSpacing(20);
