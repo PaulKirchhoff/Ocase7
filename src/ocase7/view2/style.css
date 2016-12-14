@@ -10,7 +10,15 @@ and open the template in the editor.
 
 .thumb {
     -fx-background-color: #fff;
-    -fx-padding: 50px;
+    -fx-padding: 5px;
     -fx-font: 16px "Serif";
    
 }
+
+.sliderRoot {
+    -fx-padding: 20 0 0 160;
+    -fx-background-color: rgba(0, 100, 100, 0.0);
+    
+}
+/*
+.view*/

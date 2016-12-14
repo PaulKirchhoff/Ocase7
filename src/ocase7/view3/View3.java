@@ -44,7 +44,7 @@ public class View3 {
     private void fillCategories() {
         categories.add(Category.getCategoryById(1));  //<-------------------------------------- GIB EINE KATEGORIE EIN
         cardBox = new CardBox(categories);
-        //System.out.println(cardBox.getCards() + "########" + cardBox.getNumberOfCards());
+        //System.out.println(cardBox.getCards()  + "########" + cardBox.getNumberOfCards());
 
     }
 
@@ -57,6 +57,7 @@ public class View3 {
         
         //Erstelle Boxen für Layout        
         VBox view3ContentBox = new VBox();
+        //view3ContentBox.getStyleClass().add("view3contentbox");
         view3ContentBox.setStyle("-fx-border-style: solid;"
                 + "-fx-border-width: 3px;"
                 + "-fx-border-color: #2ECCFA;");

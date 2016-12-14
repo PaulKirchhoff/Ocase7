@@ -20,8 +20,10 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -51,8 +53,7 @@ public class View2 extends mainView {
 
     public Scene createView2Scene() {
         Group view2Root = new Group();
-        view = new Scene(view2Root, Color.DEEPSKYBLUE);
-        view.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+        
         VBox view2ContentBox = new VBox();
         view2ContentBox.setStyle("-fx-border-style: solid;"
                 + "-fx-border-width: 3px;"
@@ -64,14 +65,14 @@ public class View2 extends mainView {
         // erstellt lernModus ToggleButton mit wechselndem Label
         HBox learnModusBox = learnModus();
         // erstellt Auswahl für Fragenanzahl mit Slider
-        VBox numbersOfQuestions = createNumberOfQuestionsBox();
-
+//        VBox numbersOfQuestions = createNumberOfQuestionsBox();
+        StackPane sp = createSlider();
         HBox resetAndStartButtonBox = createButtonBox();
-
         view2ContentBox.setMaxWidth(700);
-        view2ContentBox.getChildren().addAll(topBar, categoriesBox, numbersOfQuestions, learnModusBox, resetAndStartButtonBox);
-        view2Root.getChildren().add(view2ContentBox);
-
+        view2ContentBox.getChildren().addAll(topBar, categoriesBox,sp, learnModusBox, resetAndStartButtonBox);
+        view2Root.getChildren().addAll(view2ContentBox);
+        view = new Scene(view2Root, Color.DEEPSKYBLUE);
+        view.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
         return view;
     }
 
@@ -192,51 +193,93 @@ public class View2 extends mainView {
         return topBar;
     }
 
-    private VBox createNumberOfQuestionsBox() {
-        VBox numOfQuestions = new VBox();
-        numOfQuestions.setStyle("-fx-border-style: solid;"
-                + "-fx-border-width: 0 0 0 0;"
-                + "-fx-border-color: #2ECCFA;");
-        Label numOfQuestionsLabel = new Label("Fragenanzahl:");
-        numOfQuestionsLabel.setPadding(new Insets(0, 0, 20, 0));
-        numOfQuestionsLabel.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        //numOfQuestionsLabel.set
-        numOfQuestionsLabel.setTextFill(Color.DARKSLATEGRAY);
-        HBox numOfQuestionBoxContent = new HBox();
-        if(computetNumberOfQuestions == 0) {
-            numOfQuestionsSlider = new Slider(0, 325, 325 / 2);
-        } else {
-            numOfQuestionsSlider = new Slider(0, computetNumberOfQuestions ,computetNumberOfQuestions / 2);                
-        }
-        numOfQuestionsSlider.setShowTickLabels(true);
-        numOfQuestionsSlider.setShowTickMarks(true);
-        numOfQuestionsSlider.setMinWidth(400);
-        numOfQuestionsSlider.setMinorTickCount(5);
+    public StackPane createSlider() {
         
-        numOfQuestionsSlider.applyCss();
-        numOfQuestionsSlider.layout();
-        Pane thumb = new Pane();
-        numOfQuestionsSlider.lookup(".thumb");
-        Label sliderThumbLabel = new Label();
-//        sliderThumbLabel.setShape(new Circle(40));
-        numOfQuestionsSlider.setShape(new Circle(40));
-        sliderThumbLabel.textProperty().bind(numOfQuestionsSlider.valueProperty().asString("%.0f"));
-        thumb.getChildren().addAll(sliderThumbLabel,numOfQuestionsSlider);
-                
+        Slider slider = new Slider();
+        slider.setShowTickLabels(true);
+        slider.setShowTickMarks(true);
+        slider.setMinWidth(400);
+        slider.setMinorTickCount(5);
+        StackPane root = new StackPane(slider);
+        root.setMaxWidth(400);
+        root.getStyleClass().add("sliderRoot");
+        Scene scene = new Scene(root);
+        slider.applyCss();
+        slider.layout();
+        Pane thumb = (Pane) slider.lookup(".thumb");
+        Label label = new Label();
+        label.textProperty().bind(slider.valueProperty().asString("%.0f"));
         
-        Label minQuestionsLabel = new Label("0");
-        minQuestionsLabel.setTextFill(Color.DARKSLATEGRAY);
-        minQuestionsLabel.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-
-        maxQuestionsLabel.setText("0");
-        maxQuestionsLabel.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        maxQuestionsLabel.setTextFill(Color.DARKSLATEGRAY);
-        numOfQuestionBoxContent.getChildren().addAll(minQuestionsLabel, thumb, maxQuestionsLabel);
-        numOfQuestions.getChildren().addAll(numOfQuestionsLabel, numOfQuestionBoxContent);
-        numOfQuestions.setPadding(new Insets(40, 0, 60, 130));
-
-        return numOfQuestions;
+        thumb.getChildren().addAll(label);
+        //HBox hb = new HBox(minQuestionsLabel,thumb,maxQuestionsLabel);
+        
+        return root;
+//        numOfQuestionsSlider = new Slider(0, 325, 325 / 2);
+//        StackPane sliderPane = new StackPane(numOfQuestionsSlider);
+////        numOfQuestionsSlider.setShowTickLabels(true);
+////        numOfQuestionsSlider.setShowTickMarks(true);
+////        numOfQuestionsSlider.setMinWidth(400);
+////        numOfQuestionsSlider.setMinorTickCount(5);
+//        
+//        numOfQuestionsSlider.applyCss();
+//        numOfQuestionsSlider.layout();
+//        Pane thumb = (Pane) numOfQuestionsSlider.lookup(".thumb");
+////(Pane) 
+//        //numOfQuestionsSlider.lookup(".thumb");
+//        Label sliderThumbLabel = new Label();
+//        sliderThumbLabel.textProperty().bind(numOfQuestionsSlider.valueProperty().asString("%.0f"));
+//        thumb.getChildren().addAll(sliderThumbLabel);
+//        //sliderPane.getChildren().addAll(thumb);
+//        return sliderPane;
     }
+    
+//    private VBox createNumberOfQuestionsBox() {
+//        VBox numOfQuestions = new VBox();
+//        numOfQuestions.setStyle("-fx-border-style: solid;"
+//                + "-fx-border-width: 0 0 0 0;"
+//                + "-fx-border-color: #2ECCFA;");
+//        Label numOfQuestionsLabel = new Label("Fragenanzahl:");
+//        numOfQuestionsLabel.setPadding(new Insets(0, 0, 20, 0));
+//        numOfQuestionsLabel.setFont(Font.font("Arial", FontWeight.BOLD, 15));
+//        //numOfQuestionsLabel.set
+//        numOfQuestionsLabel.setTextFill(Color.DARKSLATEGRAY);
+//        HBox numOfQuestionBoxContent = new HBox();
+//        if(computetNumberOfQuestions == 0) {
+//            numOfQuestionsSlider = new Slider(0, 325, 325 / 2);
+//        } else {
+//            numOfQuestionsSlider = new Slider(0, computetNumberOfQuestions ,computetNumberOfQuestions / 2);                
+//        }
+//        numOfQuestionsSlider.setShowTickLabels(true);
+//        numOfQuestionsSlider.setShowTickMarks(true);
+//        numOfQuestionsSlider.setMinWidth(400);
+//        numOfQuestionsSlider.setMinorTickCount(5);
+//        
+//        numOfQuestionsSlider.applyCss();
+//        numOfQuestionsSlider.layout();
+//        Pane thumb = new Pane();
+//        numOfQuestionsSlider.lookup(".thumb");
+//        Label sliderThumbLabel = new Label();
+//        
+//        
+////        sliderThumbLabel.setShape(new Circle(40));
+//        numOfQuestionsSlider.setShape(new Circle(40));
+//        sliderThumbLabel.textProperty().bind(numOfQuestionsSlider.valueProperty().asString("%.0f"));
+//        thumb.getChildren().addAll(sliderThumbLabel,numOfQuestionsSlider);
+//                
+//        
+//        Label minQuestionsLabel = new Label("0");
+//        minQuestionsLabel.setTextFill(Color.DARKSLATEGRAY);
+//        minQuestionsLabel.setFont(Font.font("Arial", FontWeight.BOLD, 15));
+//
+//        maxQuestionsLabel.setText("0");
+//        maxQuestionsLabel.setFont(Font.font("Arial", FontWeight.BOLD, 15));
+//        maxQuestionsLabel.setTextFill(Color.DARKSLATEGRAY);
+//        numOfQuestionBoxContent.getChildren().addAll(minQuestionsLabel, thumb, maxQuestionsLabel);
+//        numOfQuestions.getChildren().addAll(numOfQuestionsLabel, numOfQuestionBoxContent);
+//        numOfQuestions.setPadding(new Insets(40, 0, 60, 130));
+//
+//        return numOfQuestions;
+//    }
 
     private HBox createButtonBox() {
         HBox resetAndStartButtonBox = new HBox();
