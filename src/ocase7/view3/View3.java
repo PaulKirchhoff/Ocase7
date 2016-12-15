@@ -42,7 +42,7 @@ public class View3 {
     ScrollPane answerAndQuestionScrollPane;
 
     private void fillCategories() {
-        categories.add(Category.getCategoryById(2));  //<-------------------------------------- GIB EINE KATEGORIE EIN
+        categories.add(Category.getCategoryById(1));  //<-------------------------------------- GIB EINE KATEGORIE EIN
         cardBox = new CardBox(categories);
         //System.out.println(cardBox.getCards() + "########" + cardBox.getNumberOfCards());
 
@@ -195,9 +195,13 @@ public class View3 {
         cheater.setMinWidth(100);
         cheater.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(ActionEvent event) {           
-                         
-              scrollPaneContent.getChildren().add(isRightAnswersBox());
+            public void handle(ActionEvent event) {        
+               
+              scrollPaneContent.getChildren().remove(answersBox);
+              VBox anserbow= isRightAnswersBox();
+              anserbow.setDisable(true);
+              scrollPaneContent.getChildren().add(anserbow);
+              
                 
             }
         });
