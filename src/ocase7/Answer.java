@@ -63,7 +63,7 @@ public class Answer {
     }
 
 
-    public static ArrayList<UserAnswer> getAnswersByQuestion(Question question) {
+    public static ArrayList<Answer> getAnswersByQuestion(Question question) {
         ArrayList<Answer> answers = new ArrayList<>();
         try {
             Connection con = MySQLConnection.getConnection();

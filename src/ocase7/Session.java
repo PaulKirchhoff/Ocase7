@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 /**
  *
@@ -58,6 +59,14 @@ public class Session {
         this.id = id;
         this.user_id = user_id;
         this.sessionBox = sessionBox;
+    }
+    
+    public Session() {
+        this.id = 999;
+        this.user_id = 1;
+        ArrayList<Category> categoryList = new ArrayList<>();
+        categoryList.add(new Category());
+        this.sessionBox = new CardBox(categoryList);
     }
     
     

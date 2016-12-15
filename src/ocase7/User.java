@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import static ocase7.Category.resultSet;
+import static ocase7.Question.pstmt;
 
 /**
  *
@@ -25,15 +26,28 @@ public class User {
     private int id;
     private String name;
     private String password;
+    private Session userSession;
 
-    public User(int id, String name, String password) {
+    public Session getUserSession() {
+        return userSession;
+    }
+
+    public User(int id, String name, String password, Session userSesseion) {
         this.id = id;
         this.name = name;
         this.password = password;
+        this.userSession = userSesseion;
+    }
+
+    public User(int userId) {
+        this.id = userId;
+        this.name = "Test";
+        this.password = "password";
+        this.userSession = new Session();
     }
 
     public User() {
-
+        this(1);
     }
 
     public int getId() {
@@ -46,6 +60,45 @@ public class User {
 
     public String getPassword() {
         return password;
+    }
+// Athor LYN & Eric
+    public void insertUserAnswerIdIntoDb(User u) {
+
+        try {
+            Connection con = MySQLConnection.getConnection();
+            String sql = "INSERT INTO userAnswer (user_id, answer_id) VALUES( ?, ?)";
+            for (int i = 0; i < u.getUserSession().getSessionBox().getCards().size(); i++) {
+                for (int c = 0; c < u.getUserSession().getSessionBox().getCards().get(i).getUserAnswers().size(); c++) {
+                    pstmt = con.prepareStatement(sql);
+                    pstmt.setInt(1, u.getId());
+                    if (u.getUserSession().getSessionBox().getCards().get(i).getUserAnswers().get(i).isGiven()) {
+                        pstmt.setInt(2, u.getUserSession().getSessionBox().getCards().get(i).getUserAnswers().get(c).getId());
+                    }
+                    
+                    stmt = con.createStatement();
+                    resultSet = stmt.executeQuery(sql);
+                }
+
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+
+                }
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return;
+
     }
 
     public static ArrayList<User> getAll() {
@@ -111,6 +164,5 @@ public class User {
     public String toString() {
         return "User{" + "id=" + id + ", name=" + name + ", password=" + password + '}';
     }
-    
 
 }

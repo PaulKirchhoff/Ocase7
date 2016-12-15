@@ -27,8 +27,8 @@ public class UserAnswer extends Answer {
         super(id, text, question_id, isRight);
         this.given = false;
     }
-
-    public static ArrayList<UserAnswer> addUserAnswerToAnswerArray(Question question) {
+    
+       public static ArrayList<UserAnswer> addUserAnswerToAnswerArray(Question question) {
         ArrayList<UserAnswer> userAnswer = new ArrayList<>();
         for (Answer answer : Answer.getAnswersByQuestion(question)) {
             userAnswer.add(new UserAnswer(answer.getId(),answer.getText(),answer.getQuestion_id(),answer.isIsRight()));
