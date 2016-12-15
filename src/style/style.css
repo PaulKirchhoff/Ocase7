@@ -30,3 +30,27 @@ and open the template in the editor.
     -fx-padding: 10 0 50 190;    
 
 }
+
+.buttonBar {
+    -fx-border-style: solid;
+    -fx-border-width: 1;
+    -fx-border-color: grey;
+}
+
+.view2ContentBox {
+    -fx-border-style: solid;
+    -fx-border-width: 3px;
+    -fx-border-color: #2ECCFA;
+}
+
+.categoryBox {
+    -fx-border-style: solid;
+    -fx-border-width: 2 0 2 0;
+    -fx-border-color: #2ECCFA;
+}
+
+.learnModusBox {
+    -fx-border-style: solid;
+    -fx-border-width: 2 0 2 0;
+    -fx-border-color: #2ECCFA;
+}

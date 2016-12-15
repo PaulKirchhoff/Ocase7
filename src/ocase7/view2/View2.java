@@ -51,24 +51,27 @@ public class View2 extends mainView {
     ArrayList<CheckBox> listOfCheckboxes = new ArrayList<>();
     Slider numOfQuestionsSlider;
     Slider slider;
+    CheckBox wrongAnswerCheckBox;
 
     public Scene createView2Scene() {
         Group view2Root = new Group();
         
         VBox view2ContentBox = new VBox();
-        view2ContentBox.setStyle("-fx-border-style: solid;"
-                + "-fx-border-width: 3px;"
-                + "-fx-border-color: #2ECCFA;");
+        view2ContentBox.getStyleClass().add("view2ContentBox");
+
         // erstellt Top Bar mit Überschrift
         VBox topBar = createTopBar();
+
         //erstellt categoryBox mit Checkboxes und Labeln
         VBox categoriesBox = createCategoryBox();
+
         // erstelle 
         VBox wrongAnswerBox = createChooseWrongAnswersBox();
+
         // erstellt lernModus ToggleButton mit wechselndem Label
         HBox learnModusBox = learnModus();
+
         // erstellt Auswahl für Fragenanzahl mit Slider
-//        VBox numbersOfQuestions = createNumberOfQuestionsBox();
         StackPane sp = createSlider();
         HBox resetAndStartButtonBox = createButtonBox();
         view2ContentBox.setMaxWidth(700);
@@ -81,9 +84,7 @@ public class View2 extends mainView {
 
     private VBox createCategoryBox() {
         VBox categoriesBox = new VBox();
-        categoriesBox.setStyle("-fx-border-style: solid;"
-                + "-fx-border-width: 2 0 2 0;"
-                + "-fx-border-color: #2ECCFA;");
+        categoriesBox.getStyleClass().add("categoryBox");
         Label categoryBoxLabel = new Label("Kategorien:");
         categoryBoxLabel.setTextFill(Color.DARKSLATEGRAY);
         categoryBoxLabel.setFont(Font.font("Arial", FontWeight.BOLD, 15));
@@ -119,12 +120,14 @@ public class View2 extends mainView {
                     if (newValue) {
                         checkbox.setSelected(true);
                         computetNumberOfQuestions = computetNumberOfQuestions + (Question.getAllQuestionsByCategoryId(listOfCheckboxes.indexOf(checkbox)+1).size());
-                        maxQuestionsLabel.setText("" + (computetNumberOfQuestions));
+                        slider.setVisible(true);
                         slider.setMax(computetNumberOfQuestions);
                     } else {
                         computetNumberOfQuestions = computetNumberOfQuestions - (Question.getAllQuestionsByCategoryId(listOfCheckboxes.indexOf(checkbox)+1).size());
-                        maxQuestionsLabel.setText("" + (computetNumberOfQuestions));
                         slider.setMax(computetNumberOfQuestions);
+                        if(computetNumberOfQuestions == 0) {
+                            slider.setVisible(false);
+                        }
                     }
                 }
             });
@@ -148,9 +151,7 @@ public class View2 extends mainView {
     private HBox learnModus() {
 
         HBox learnModusBox = new HBox();
-        learnModusBox.setStyle("-fx-border-style: solid;"
-                + "-fx-border-width: 2 0 2 0;"
-                + "-fx-border-color: #2ECCFA;");
+        learnModusBox.getStyleClass().add("learnModusBox");
         learnModusBox.setSpacing(10);
         learnModusBox.setMinWidth(700);
         learnModusBox.setAlignment(Pos.CENTER);
@@ -201,6 +202,7 @@ public class View2 extends mainView {
         slider.setMajorTickUnit(10);
         slider.setMinorTickCount(5);
         slider.getStyleClass().add("slider");
+        slider.setVisible(false);
         StackPane sliderRoot = new StackPane(slider);
         //sliderRoot.setMaxWidth(400);
         sliderRoot.getStyleClass().add("sliderRoot");
@@ -221,11 +223,9 @@ public class View2 extends mainView {
     private VBox createChooseWrongAnswersBox() {
         VBox wrongAnswersBox = new VBox();
         wrongAnswersBox.getStyleClass().add("wrongAnswersBox");
-//        wrongAnswersBox.applyCss();
-//        wrongAnswersBox.layout();
         HBox checkBoxWithLabelBox = new HBox();
-        CheckBox wrongAnswerCheckBox = new CheckBox();
-        Label wrongAnswerLabel = new Label("Deine falschen Anworten der letzten zwei Sessions.");
+        wrongAnswerCheckBox = new CheckBox();
+        Label wrongAnswerLabel = new Label("Die falschen Anworten der letzten zwei Sessions.");
         checkBoxWithLabelBox.getChildren().addAll(wrongAnswerCheckBox,wrongAnswerLabel);
         wrongAnswersBox.getChildren().addAll(checkBoxWithLabelBox);
         return wrongAnswersBox;
@@ -245,6 +245,7 @@ public class View2 extends mainView {
                 for (CheckBox checkbox : listOfCheckboxes) {
                     checkbox.setSelected(false);
                 }
+                wrongAnswerCheckBox.setSelected(false);
                 
             }
         });
