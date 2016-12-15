@@ -1,5 +1,6 @@
 package ocase7.view3;
 
+import com.sun.javafx.scene.control.skin.DatePickerContent;
 import java.util.ArrayList;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -213,6 +214,8 @@ public class View3 {
 
         return buttonBar;
     }
+    
+    
 
     private VBox createAnswerBox() {
 
@@ -232,13 +235,11 @@ public class View3 {
                         if (newValue == true) {
                             myCard.getUserAnswers().get(m).setGiven(true);
                             System.out.println(myCard.getUserAnswers().get(m).isGiven());
-
                         }
                         if (oldValue == true && newValue == false) {
                             myCard.getUserAnswers().get(m).setGiven(false);
                             System.out.println(myCard.getUserAnswers().get(m).isGiven());
                         }
-
                     }
                 });
 
@@ -246,7 +247,6 @@ public class View3 {
                 checkboxWithAnswerBox = new HBox(cb, answerLabel);
                 answersBox.getChildren().add(checkboxWithAnswerBox);
                 answersBox.setSpacing(20);
-
             }
         } else {
             answersBox = isRightAnswersBox();

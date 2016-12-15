@@ -25,3 +25,8 @@ and open the template in the editor.
 .slider {
     -fx-min-width: 400;
 }
+
+.wrongAnswersBox {
+    -fx-padding: 10 0 50 190;    
+
+}

@@ -63,6 +63,8 @@ public class View2 extends mainView {
         VBox topBar = createTopBar();
         //erstellt categoryBox mit Checkboxes und Labeln
         VBox categoriesBox = createCategoryBox();
+        // erstelle 
+        VBox wrongAnswerBox = createChooseWrongAnswersBox();
         // erstellt lernModus ToggleButton mit wechselndem Label
         HBox learnModusBox = learnModus();
         // erstellt Auswahl für Fragenanzahl mit Slider
@@ -70,10 +72,10 @@ public class View2 extends mainView {
         StackPane sp = createSlider();
         HBox resetAndStartButtonBox = createButtonBox();
         view2ContentBox.setMaxWidth(700);
-        view2ContentBox.getChildren().addAll(topBar, categoriesBox,sp, learnModusBox, resetAndStartButtonBox);
+        view2ContentBox.getChildren().addAll(topBar, categoriesBox,sp,wrongAnswerBox, learnModusBox, resetAndStartButtonBox);
         view2Root.getChildren().addAll(view2ContentBox);
         view = new Scene(view2Root, Color.DEEPSKYBLUE);
-        view.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+        view.getStylesheets().add(getClass().getResource("/style/style.css").toExternalForm());
         return view;
     }
 
@@ -214,6 +216,19 @@ public class View2 extends mainView {
         
         return sliderRoot;
 
+    }
+    
+    private VBox createChooseWrongAnswersBox() {
+        VBox wrongAnswersBox = new VBox();
+        wrongAnswersBox.getStyleClass().add("wrongAnswersBox");
+//        wrongAnswersBox.applyCss();
+//        wrongAnswersBox.layout();
+        HBox checkBoxWithLabelBox = new HBox();
+        CheckBox wrongAnswerCheckBox = new CheckBox();
+        Label wrongAnswerLabel = new Label("Deine falschen Anworten der letzten zwei Sessions.");
+        checkBoxWithLabelBox.getChildren().addAll(wrongAnswerCheckBox,wrongAnswerLabel);
+        wrongAnswersBox.getChildren().addAll(checkBoxWithLabelBox);
+        return wrongAnswersBox;
     }
 
     private HBox createButtonBox() {
