@@ -10,7 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import static ocase7.Question.pstmt;
+
 
 /**
  *
@@ -18,7 +18,7 @@ import static ocase7.Question.pstmt;
  */
 public class Answer {
 
-    //Verbindungsvariablen 
+       //Verbindungsvariablen 
     static Statement stmt = null;
     static PreparedStatement pstmt = null;
     static ResultSet resultSet = null;
@@ -51,7 +51,17 @@ public class Answer {
         if (isRight == 1) {
             this.isRight = true;
         }
+
     }
+
+    public Answer(int id, String text, int question_id, boolean isRight) {
+        this.id = id;
+        this.text = text;
+        this.question_id = question_id;
+        this.isRight = isRight;
+
+    }
+
 
     public static ArrayList<Answer> getAnswersByQuestion(Question question) {
         ArrayList<Answer> answers = new ArrayList<>();

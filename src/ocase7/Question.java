@@ -11,8 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import static ocase7.Category.stmt;
-import static ocase7.Test.pstmt;
 
 /**
  *
