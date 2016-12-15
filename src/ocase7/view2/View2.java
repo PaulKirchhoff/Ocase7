@@ -224,6 +224,15 @@ public class View2 extends mainView {
         VBox startButtonBox = new VBox();
 
         Button resetBtn = new Button("zurücksetzen");
+        resetBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                for (CheckBox checkbox : listOfCheckboxes) {
+                    checkbox.setSelected(false);
+                }
+                
+            }
+        });
         Button startBtn = new Button("Session starten");
         resetButtonBox.getChildren().add(resetBtn);
         startButtonBox.getChildren().add(startBtn);
