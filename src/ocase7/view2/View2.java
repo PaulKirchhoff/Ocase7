@@ -196,12 +196,14 @@ public class View2 extends mainView {
         slider = new Slider();
         slider.setShowTickLabels(true);
         slider.setShowTickMarks(true);
-        slider.setMinWidth(400);
+        slider.setMajorTickUnit(10);
         slider.setMinorTickCount(5);
-        StackPane root = new StackPane(slider);
-        root.setMaxWidth(400);
-        root.getStyleClass().add("sliderRoot");
-        Scene scene = new Scene(root);
+        slider.getStyleClass().add("slider");
+        StackPane sliderRoot = new StackPane(slider);
+        //sliderRoot.setMaxWidth(400);
+        sliderRoot.getStyleClass().add("sliderRoot");
+        // scene ?????
+        Scene scene = new Scene(sliderRoot);
         slider.applyCss();
         slider.layout();
         Pane thumb = (Pane) slider.lookup(".thumb");
@@ -209,9 +211,8 @@ public class View2 extends mainView {
         label.textProperty().bind(slider.valueProperty().asString("%.0f"));
         
         thumb.getChildren().addAll(label);
-        //HBox hb = new HBox(minQuestionsLabel,thumb,maxQuestionsLabel);
         
-        return root;
+        return sliderRoot;
 
     }
 
