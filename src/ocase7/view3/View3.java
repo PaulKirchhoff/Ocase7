@@ -256,7 +256,7 @@ public class View3 {
             if (myCard.getUserAnswers().get(i).isGiven() == true) {
                 cb.setSelected(true);
             }            
-            if(myCard.getUserAnswers.get(i).isIsRight == true){
+            if(myCard.getUserAnswers().get(i).isIsRight() == true){
                 answerLabel = new Label(myCard.getUserAnswers().get(i).getText());
                 answerLabel.setTextFill(Color.GREEN);
             }else{
