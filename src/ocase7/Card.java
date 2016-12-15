@@ -24,13 +24,24 @@ public class Card {
     private int id;
     private Question question;
     private ArrayList<UserAnswer> userAnswers;
+    private boolean cheated;
+    private boolean followUp;
 
     public Card(int id, Question question, ArrayList<UserAnswer> answers) {
         this.id = id;
         this.question = question;
         this.userAnswers = userAnswers;
+        this.cheated = false;
+        this.followUp = false;
     }
-
+    
+    public boolean isCheated(){
+        return cheated;
+    }
+    
+    public boolean isFollowUp(){
+        return followUp;
+    }
 
      public int getId() {
         return id;
@@ -56,6 +67,12 @@ public class Card {
         this.userAnswers = userAnswers;
     }
 
+    public void setCheated(boolean cheated){
+        this.cheated = cheated;
+    }
+    public void setFollowUp(boolean followUp){
+        this.followUp= followUp;
+    }
 
 //    public static ArrayList<Card> getAll() {
 //        ArrayList<Card> cards = new ArrayList<>();

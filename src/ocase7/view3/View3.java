@@ -196,8 +196,12 @@ public class View3 {
         cheater.setMinWidth(100);
         cheater.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(ActionEvent event) {                
-              answersBox.setDisable(true);              
+            public void handle(ActionEvent event) {        
+               
+              scrollPaneContent.getChildren().remove(answersBox);
+              VBox anserbow= isRightAnswersBox();
+              anserbow.setDisable(true);
+              scrollPaneContent.getChildren().add(anserbow);
               
                 
             }
@@ -253,14 +257,14 @@ public class View3 {
         for (int i = 0; i < myCard.getUserAnswers().size(); i++) {
             CheckBox cb = new CheckBox();
             int m = i;
-            if (myCard.getUserAnswers().get(i).isGiven() == true) {
+            if (myCard.getUserAnswers().get(m).isGiven() == true) {
                 cb.setSelected(true);
             }            
-            if(myCard.getUserAnswers().get(i).isIsRight() == true){
-                answerLabel = new Label(myCard.getUserAnswers().get(i).getText());
+            if(myCard.getUserAnswers().get(m).isIsRight() == true){
+                answerLabel = new Label(myCard.getUserAnswers().get(m).getText());
                 answerLabel.setTextFill(Color.GREEN);
             }else{
-            answerLabel = new Label(myCard.getUserAnswers().get(i).getText());
+            answerLabel = new Label(myCard.getUserAnswers().get(m).getText());
             }
             checkboxWithAnswerBox = new HBox(cb, answerLabel);
             answersBox.getChildren().add(checkboxWithAnswerBox);

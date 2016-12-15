@@ -50,6 +50,8 @@ public class Answer {
         this.question_id = question_id;
         if (isRight == 1) {
             this.isRight = true;
+        }else{
+            this.isRight = false;
         }
 
     }
