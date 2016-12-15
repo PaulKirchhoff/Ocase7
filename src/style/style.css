@@ -10,7 +10,23 @@ and open the template in the editor.
 
 .thumb {
     -fx-background-color: #fff;
-    -fx-padding: 50px;
+    -fx-padding: 5px;
     -fx-font: 16px "Serif";
    
+}
+
+.sliderRoot {
+    -fx-padding: 30 0 30 160;
+    -fx-background-color: rgba(0, 100, 100, 0.0);
+    -fx-alignment: center;
+    -fx-max-width: 400;
+}
+
+.slider {
+    -fx-min-width: 400;
+}
+
+.wrongAnswersBox {
+    -fx-padding: 10 0 50 190;    
+
 }
