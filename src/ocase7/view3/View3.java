@@ -197,13 +197,12 @@ public class View3 {
         cheater.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {        
-               
+                myCard.setCheated(true);
               scrollPaneContent.getChildren().remove(answersBox);
               VBox anserbow= isRightAnswersBox();
               anserbow.setDisable(true);
               scrollPaneContent.getChildren().add(anserbow);
               
-                
             }
         });
 
@@ -220,6 +219,7 @@ public class View3 {
         answersBox = new VBox();
         checkboxWithAnswerBox = new HBox();
         checkboxWithAnswerBox.setAlignment(Pos.CENTER);
+        if (myCard.isCheated() == false) {
         for (int i = 0; i < myCard.getUserAnswers().size(); i++) {
             CheckBox cb = new CheckBox();
             int m = i;
@@ -241,12 +241,18 @@ public class View3 {
 
                 }
             });
+
             answerLabel = new Label(myCard.getUserAnswers().get(i).getText());
             checkboxWithAnswerBox = new HBox(cb, answerLabel);
             answersBox.getChildren().add(checkboxWithAnswerBox);
             answersBox.setSpacing(20);
 
         }
+        } else {
+            answersBox = isRightAnswersBox();
+            answersBox.setDisable(true);
+        }
+
         return answersBox;
     }
     
