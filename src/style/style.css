@@ -54,3 +54,8 @@ and open the template in the editor.
     -fx-border-width: 2 0 2 0;
     -fx-border-color: #2ECCFA;
 }
+
+.resetBtn:selected {
+    -fx-background-color: black;
+    
+}

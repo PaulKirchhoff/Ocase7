@@ -45,7 +45,7 @@ public class CardBox {
         this.cards = fillCardBox(categories);
         this.NumberOfCards=cards.size();
         for(Card card: cards){
-            System.out.println(card);
+            //System.out.println(card);
         }
     }
        

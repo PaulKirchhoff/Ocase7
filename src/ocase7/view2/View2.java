@@ -6,7 +6,6 @@
 package ocase7.view2;
 
 import java.util.ArrayList;
-import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -20,16 +19,16 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
+import javax.swing.plaf.synth.SynthLookAndFeel;
+import ocase7.Card;
+import ocase7.CardBox;
 import ocase7.Category;
 import ocase7.Question;
 import ocase7.mainView;
@@ -55,7 +54,7 @@ public class View2 extends mainView {
 
     public Scene createView2Scene() {
         Group view2Root = new Group();
-        
+
         VBox view2ContentBox = new VBox();
         view2ContentBox.getStyleClass().add("view2ContentBox");
 
@@ -75,7 +74,7 @@ public class View2 extends mainView {
         StackPane sp = createSlider();
         HBox resetAndStartButtonBox = createButtonBox();
         view2ContentBox.setMaxWidth(700);
-        view2ContentBox.getChildren().addAll(topBar, categoriesBox,sp,wrongAnswerBox, learnModusBox, resetAndStartButtonBox);
+        view2ContentBox.getChildren().addAll(topBar, categoriesBox, sp, wrongAnswerBox, learnModusBox, resetAndStartButtonBox);
         view2Root.getChildren().addAll(view2ContentBox);
         view = new Scene(view2Root, Color.DEEPSKYBLUE);
         view.getStylesheets().add(getClass().getResource("/style/style.css").toExternalForm());
@@ -113,19 +112,23 @@ public class View2 extends mainView {
             categoriesBox.setSpacing(10);
 
         }
-        for (CheckBox checkbox : listOfCheckboxes) {
-            checkbox.selectedProperty().addListener(new ChangeListener<Boolean>() {
+//        for (CheckBox checkbox : listOfCheckboxes) {
+        for (int i = 0; i < listOfCheckboxes.size(); i++) {
+            int j = i;
+            listOfCheckboxes.get(i).selectedProperty().addListener(new ChangeListener<Boolean>() {
                 @Override
                 public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+
                     if (newValue) {
-                        checkbox.setSelected(true);
-                        computetNumberOfQuestions = computetNumberOfQuestions + (Question.getAllQuestionsByCategoryId(listOfCheckboxes.indexOf(checkbox)+1).size());
+                        listOfCheckboxes.get(j).setSelected(true);
+                        computetNumberOfQuestions = computetNumberOfQuestions + (Question.getAllQuestionsByCategoryId(listOfCheckboxes.indexOf(listOfCheckboxes.get(j)) + 1).size());
                         slider.setVisible(true);
                         slider.setMax(computetNumberOfQuestions);
+
                     } else {
-                        computetNumberOfQuestions = computetNumberOfQuestions - (Question.getAllQuestionsByCategoryId(listOfCheckboxes.indexOf(checkbox)+1).size());
+                        computetNumberOfQuestions = computetNumberOfQuestions - (Question.getAllQuestionsByCategoryId(listOfCheckboxes.indexOf(listOfCheckboxes.get(j)) + 1).size());
                         slider.setMax(computetNumberOfQuestions);
-                        if(computetNumberOfQuestions == 0) {
+                        if (computetNumberOfQuestions == 0) {
                             slider.setVisible(false);
                         }
                     }
@@ -137,12 +140,11 @@ public class View2 extends mainView {
             @Override
             public void handle(ActionEvent event) {
                 maxQuestionsLabel.setText("" + Question.getAllQuestion_IdsByCategoryId(2).size());
-//                    
             }
         });
-        for (CheckBox checkBox : listOfCheckboxes) {
-            System.out.println(checkBox);
-        }
+//        for (CheckBox checkBox : listOfCheckboxes) {
+//            System.out.println(checkBox);
+//        }
         categoriesBox.setAlignment(Pos.CENTER);
 
         return categoriesBox;
@@ -195,7 +197,7 @@ public class View2 extends mainView {
     }
 
     public StackPane createSlider() {
-        
+
         slider = new Slider();
         slider.setShowTickLabels(true);
         slider.setShowTickMarks(true);
@@ -213,20 +215,20 @@ public class View2 extends mainView {
         Pane thumb = (Pane) slider.lookup(".thumb");
         Label label = new Label();
         label.textProperty().bind(slider.valueProperty().asString("%.0f"));
-        
+
         thumb.getChildren().addAll(label);
-        
+
         return sliderRoot;
 
     }
-    
+
     private VBox createChooseWrongAnswersBox() {
         VBox wrongAnswersBox = new VBox();
         wrongAnswersBox.getStyleClass().add("wrongAnswersBox");
         HBox checkBoxWithLabelBox = new HBox();
         wrongAnswerCheckBox = new CheckBox();
         Label wrongAnswerLabel = new Label("Die falschen Anworten der letzten zwei Sessions.");
-        checkBoxWithLabelBox.getChildren().addAll(wrongAnswerCheckBox,wrongAnswerLabel);
+        checkBoxWithLabelBox.getChildren().addAll(wrongAnswerCheckBox, wrongAnswerLabel);
         wrongAnswersBox.getChildren().addAll(checkBoxWithLabelBox);
         return wrongAnswersBox;
     }
@@ -239,6 +241,7 @@ public class View2 extends mainView {
         VBox startButtonBox = new VBox();
 
         Button resetBtn = new Button("zurücksetzen");
+        resetBtn.getStyleClass().add("resetBtn");
         resetBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -246,15 +249,37 @@ public class View2 extends mainView {
                     checkbox.setSelected(false);
                 }
                 wrongAnswerCheckBox.setSelected(false);
-                
             }
         });
         Button startBtn = new Button("Session starten");
+        startBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                int cbCounter = 0;
+                ArrayList<Category> cardBoxCategories = new ArrayList<>();
+                for (CheckBox listOfCheckboxe : listOfCheckboxes) {
+                    if (listOfCheckboxe.isSelected()) {
+                        Category category = categories.get(listOfCheckboxes.indexOf(listOfCheckboxe));
+                        cardBoxCategories.add(category);
+                    } else {
+                        cbCounter++;
+                    }
+                }
+                if(cbCounter == listOfCheckboxes.size()) {
+                    for (Category category : categories) {
+                        cardBoxCategories.add(category);
+                    }
+                }
+                CardBox cardBox = new CardBox(cardBoxCategories);
+                  for(Card card: cardBox.getCards()){
+                    System.out.println(card);
+        }
+            }
+        });
         resetButtonBox.getChildren().add(resetBtn);
         startButtonBox.getChildren().add(startBtn);
         resetAndStartButtonBox.getChildren().addAll(resetButtonBox, startButtonBox);
 
         return resetAndStartButtonBox;
     }
-
 }
