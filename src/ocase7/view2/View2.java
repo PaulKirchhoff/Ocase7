@@ -6,6 +6,7 @@
 package ocase7.view2;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -51,6 +52,9 @@ public class View2 extends mainView {
     Slider numOfQuestionsSlider;
     Slider slider;
     CheckBox wrongAnswerCheckBox;
+    Label sliderLabel;
+    ToggleButton learnModusButton;
+    boolean isRandom;
 
     public Scene createView2Scene() {
         Group view2Root = new Group();
@@ -158,7 +162,7 @@ public class View2 extends mainView {
         learnModusBox.setMinWidth(700);
         learnModusBox.setAlignment(Pos.CENTER);
         learnModusBox.setPadding(new Insets(30, 0, 30, 0));
-        ToggleButton learnModusButton = new ToggleButton("Lern Modus");
+        learnModusButton = new ToggleButton("Lern Modus");
 
         Label learnModusLabel = new Label("sortierter Modus");
         learnModusLabel.setFont(Font.font("Arial", FontWeight.BOLD, 15));
@@ -167,10 +171,13 @@ public class View2 extends mainView {
         learnModusButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                isRandom = false;
                 if (learnModusLabel.getText().equals("sortierter Modus")) {
                     learnModusLabel.setText("random Modus");
+                    isRandom = true;
                 } else {
                     learnModusLabel.setText("sortierter Modus");
+                    
                 }
             }
         });
@@ -213,10 +220,10 @@ public class View2 extends mainView {
         slider.applyCss();
         slider.layout();
         Pane thumb = (Pane) slider.lookup(".thumb");
-        Label label = new Label();
-        label.textProperty().bind(slider.valueProperty().asString("%.0f"));
+        sliderLabel = new Label();
 
-        thumb.getChildren().addAll(label);
+        sliderLabel.textProperty().bind(slider.valueProperty().asString("%.0f"));
+        thumb.getChildren().addAll(sliderLabel);
 
         return sliderRoot;
 
@@ -255,25 +262,48 @@ public class View2 extends mainView {
         startBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                CardBox cardBox;
                 int cbCounter = 0;
                 ArrayList<Category> cardBoxCategories = new ArrayList<>();
                 for (CheckBox listOfCheckboxe : listOfCheckboxes) {
+                // prüft ob checkboxes angewählt wurden
                     if (listOfCheckboxe.isSelected()) {
                         Category category = categories.get(listOfCheckboxes.indexOf(listOfCheckboxe));
                         cardBoxCategories.add(category);
+                // jede NICHT angewählte Checkbox erhöht den Counter um 1        
                     } else {
                         cbCounter++;
                     }
                 }
-                if(cbCounter == listOfCheckboxes.size()) {
+                // wenn keine Kategorien ausgewählt wurden 
+                // sollen alle Kategorien für die CardBox in eine Liste geschrieben werden 
+                if (cbCounter == listOfCheckboxes.size()) {
                     for (Category category : categories) {
                         cardBoxCategories.add(category);
                     }
                 }
-                CardBox cardBox = new CardBox(cardBoxCategories);
-                  for(Card card: cardBox.getCards()){
-                    System.out.println(card);
-        }
+                // wenn der Slider einen Wert enthält sollen die Anzahl der Fragen 
+                // zur cardBox hinzugefügt werden
+                int sliderLabelValue = Integer.parseInt(sliderLabel.getText());
+               
+                if (sliderLabelValue > 0) {
+                    cardBox = new CardBox(cardBoxCategories, sliderLabelValue);
+//                    for (Card card : cardBox.getCards()) {
+//                        System.out.println(card);
+//                    }
+                // wennn der Slider nicht verwendet wurde sollen alle Fragen 
+                // einer Kategorie zur CardBox hinzugefügt werden
+                } else {
+                    cardBox = new CardBox(cardBoxCategories);
+                    
+                }
+                 if(isRandom) {
+                    Collections.shuffle(cardBox.getCards());
+                    for (Card card : cardBox.getCards()) {
+                        System.out.println(card);
+                    }
+                } 
+
             }
         });
         resetButtonBox.getChildren().add(resetBtn);
