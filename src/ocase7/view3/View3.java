@@ -187,10 +187,7 @@ public class View3 {
         buttonBar.setMinWidth(600);
         buttonBar.setMinHeight(40);
         buttonBar.setAlignment(Pos.CENTER);
-        buttonBar.setStyle("-fx-border-style: solid;"
-                + "-fx-border-width: 1;"
-                + "-fx-border-color: grey;");
-        
+        buttonBar.getStyleClass().add("buttonBar");
         Button followUp = new Button("Wiedervorlage");
         followUp.setMinWidth(100);
         if (myCard.isFollowUp() == false) {
