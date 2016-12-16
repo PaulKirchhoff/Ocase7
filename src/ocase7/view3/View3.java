@@ -1,6 +1,5 @@
 package ocase7.view3;
 
-import com.sun.javafx.scene.control.skin.DatePickerContent;
 import java.util.ArrayList;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -46,7 +45,7 @@ public class View3 {
     private void fillCategories() {
         categories.add(Category.getCategoryById(1));  //<-------------------------------------- GIB EINE KATEGORIE EIN
         cardBox = new CardBox(categories);
-        //System.out.println(cardBox.getCards()  + "########" + cardBox.getNumberOfCards());
+        //System.out.println(cardBox.getCards() + "########" + cardBox.getNumberOfCards());
 
     }
     
@@ -61,7 +60,6 @@ public class View3 {
 
         //Erstelle Boxen für Layout        
         VBox view3ContentBox = new VBox();
-        //view3ContentBox.getStyleClass().add("view3contentbox");
         view3ContentBox.setStyle("-fx-border-style: solid;"
                 + "-fx-border-width: 3px;"
                 + "-fx-border-color: #2ECCFA;");
@@ -250,13 +248,13 @@ public class View3 {
                         if (newValue == true) {
                             myCard.getUserAnswers().get(m).setGiven(true);
                             System.out.println(myCard.getUserAnswers().get(m).isGiven());
-
+                            
                         }
                         if (oldValue == true && newValue == false) {
                             myCard.getUserAnswers().get(m).setGiven(false);
                             System.out.println(myCard.getUserAnswers().get(m).isGiven());
                         }
-
+                        
                     }
                 });
                 
@@ -264,7 +262,7 @@ public class View3 {
                 checkboxWithAnswerBox = new HBox(cb, answerLabel);
                 answersBox.getChildren().add(checkboxWithAnswerBox);
                 answersBox.setSpacing(20);
-
+                
             }
         } else {
             answersBox = isRightAnswersBox();
