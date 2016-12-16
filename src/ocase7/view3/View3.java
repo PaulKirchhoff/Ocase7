@@ -1,5 +1,6 @@
 package ocase7.view3;
 
+import ocase7.CardBox;
 import java.util.ArrayList;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -19,7 +20,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import ocase7.CardBox;
 import ocase7.Category;
 
 /**
@@ -33,7 +33,7 @@ public class View3 {
     ArrayList<Category> categories = new ArrayList<>();
     VBox questionBox;
     VBox scrollPaneContent;
-    VBox answersBox;
+    AnswerBox answersBox;
     TextArea questionTextArea;
     //Label questionLabel;
     Label answerLabel;
@@ -64,7 +64,7 @@ public class View3 {
                 + "-fx-border-color: #2ECCFA;");
         view3ContentBox.setMinWidth(660);
         //view3ContentBox.
-        HBox statusBar = createHboxForTop();
+        
         HBox buttonBar = createHBoxForDown();
         answerAndQuestionScrollPane = new ScrollPane();
         answerAndQuestionScrollPane.setMinWidth(660);
@@ -93,8 +93,11 @@ public class View3 {
         //fülle Boxen mit ihren Elementen
         questionBox.getChildren().add(questionTextArea);
         questionBox.setFillWidth(true);
-        scrollPaneContent.getChildren().addAll(questionBox, createAnswerBox());
+        answersBox = new AnswerBox(myCard);
+        
+        scrollPaneContent.getChildren().addAll(questionBox, answersBox);
         answerAndQuestionScrollPane.setContent(scrollPaneContent);
+        HBox statusBar = createHboxForTop();
         view3ContentBox.getChildren().addAll(statusBar, answerAndQuestionScrollPane, buttonBar);
 
         //übergebe den gesamten Inhalt an Group
@@ -110,71 +113,71 @@ public class View3 {
     }
 
     private HBox createHboxForTop() {
-        HBox statusBar = new HBox();
-        statusBar.setSpacing(10);
-        statusBar.setMinWidth(600);
-        statusBar.setMinHeight(40);
-        statusBar.setAlignment(Pos.CENTER);
-        statusBar.setStyle("-fx-border-style: solid;"
-                + "-fx-border-width: 1;"
-                + "-fx-border-color: grey;");
-        //questionNumber = "1";
-        questionNumberLabel = new Label("1");
-        questionNumberLabel.setFont(Font.font("Arial", 18));
-
-        Label seperateSign = new Label(" / ");
-        seperateSign.setFont(Font.font("Arial", 18));
-
-        String totalNumOfQuestions = "" + cardBox.getCards().size();
-        Label totalNumberOfQuestions = new Label(totalNumOfQuestions);
-        totalNumberOfQuestions.setFont(Font.font("Arial", 18));
-
-        Button nextQuestionBtn = new Button("Vor");
-        nextQuestionBtn.setMinWidth(60);
-
-        nextQuestionBtn.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent event) {
-                // lösche Elemente aus Boxen -> clear() löscht alle Elemente
-                // aus den Boxen, mit remove(element,element) kann man gezielt 
-                // Elemente aus den Boxen löschen
-                questionBox.getChildren().clear();
-                answersBox.getChildren().clear();
-                myCard = cardBox.nextCard(cardBox.getCards().indexOf(myCard));
-                questionNumberLabel.setText("" + (cardBox.getCards().indexOf(myCard) + 1));
-
-                // setze den neuen Text in das Label 
-                questionTextArea.setText(myCard.getQuestion().getText());
-                // füge Neues Label wieder zur questionBox hinzu
-                questionBox.getChildren().add(questionTextArea);
-                scrollPaneContent.getChildren().add(createAnswerBox());
-            }
-        });
-
-        Button prevQuestionBtn = new Button("Zurück");
-        prevQuestionBtn.setMinWidth(60);
-        prevQuestionBtn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                // lösche Elemente aus Boxen -> clear() löscht alle Elemente
-                // aus den Boxen, mit remove(element,element) kann man gezielt 
-                // Elemente aus den Boxen löschen
-                questionBox.getChildren().clear();
-                answersBox.getChildren().clear();
-                //System.out.println(cardBox.prevCard(cardBox.getCards().indexOf(myCard)));
-                myCard = cardBox.prevCard(cardBox.getCards().indexOf(myCard));
-                questionNumberLabel.setText("" + (cardBox.getCards().indexOf(myCard) + 1));
-
-                // setze den neuen Text in das Label 
-                questionTextArea.setText(myCard.getQuestion().getText());
-                // füge Neues Label wieder zur questionBox hinzu
-                questionBox.getChildren().add(questionTextArea);
-                scrollPaneContent.getChildren().add(createAnswerBox());
-            }
-        });
-
-        statusBar.getChildren().addAll(prevQuestionBtn, questionNumberLabel, seperateSign, totalNumberOfQuestions, nextQuestionBtn);
+        HBoxForTop statusBar = new HBoxForTop(cardBox, myCard, questionBox, answersBox,scrollPaneContent);
+//        statusBar.setSpacing(10);
+//        statusBar.setMinWidth(600);
+//        statusBar.setMinHeight(40);
+//        statusBar.setAlignment(Pos.CENTER);
+//        statusBar.setStyle("-fx-border-style: solid;"
+//                + "-fx-border-width: 1;"
+//                + "-fx-border-color: grey;");
+//        //questionNumber = "1";
+//        questionNumberLabel = new Label("1");
+//        questionNumberLabel.setFont(Font.font("Arial", 18));
+//
+//        Label seperateSign = new Label(" / ");
+//        seperateSign.setFont(Font.font("Arial", 18));
+//
+//        String totalNumOfQuestions = "" + cardBox.getCards().size();
+//        Label totalNumberOfQuestions = new Label(totalNumOfQuestions);
+//        totalNumberOfQuestions.setFont(Font.font("Arial", 18));
+//
+//        Button nextQuestionBtn = new Button("Vor");
+//        nextQuestionBtn.setMinWidth(60);
+//
+//        nextQuestionBtn.setOnAction(new EventHandler<ActionEvent>() {
+//
+//            @Override
+//            public void handle(ActionEvent event) {
+//                // lösche Elemente aus Boxen -> clear() löscht alle Elemente
+//                // aus den Boxen, mit remove(element,element) kann man gezielt 
+//                // Elemente aus den Boxen löschen
+//                questionBox.getChildren().clear();
+//                answersBox.getChildren().clear();
+//                myCard = cardBox.nextCard(cardBox.getCards().indexOf(myCard));
+//                questionNumberLabel.setText("" + (cardBox.getCards().indexOf(myCard) + 1));
+//
+//                // setze den neuen Text in das Label 
+//                questionTextArea.setText(myCard.getQuestion().getText());
+//                // füge Neues Label wieder zur questionBox hinzu
+//                questionBox.getChildren().add(questionTextArea);
+//                scrollPaneContent.getChildren().add(createAnswerBox());
+//            }
+//        });
+//
+//        Button prevQuestionBtn = new Button("Zurück");
+//        prevQuestionBtn.setMinWidth(60);
+//        prevQuestionBtn.setOnAction(new EventHandler<ActionEvent>() {
+//            @Override
+//            public void handle(ActionEvent event) {
+//                // lösche Elemente aus Boxen -> clear() löscht alle Elemente
+//                // aus den Boxen, mit remove(element,element) kann man gezielt 
+//                // Elemente aus den Boxen löschen
+//                questionBox.getChildren().clear();
+//                answersBox.getChildren().clear();
+//                //System.out.println(cardBox.prevCard(cardBox.getCards().indexOf(myCard)));
+//                myCard = cardBox.prevCard(cardBox.getCards().indexOf(myCard));
+//                questionNumberLabel.setText("" + (cardBox.getCards().indexOf(myCard) + 1));
+//
+//                // setze den neuen Text in das Label 
+//                questionTextArea.setText(myCard.getQuestion().getText());
+//                // füge Neues Label wieder zur questionBox hinzu
+//                questionBox.getChildren().add(questionTextArea);
+//                scrollPaneContent.getChildren().add(createAnswerBox());
+//            }
+//        });
+        
+//        statusBar.getChildren().addAll(prevQuestionBtn, questionNumberLabel, seperateSign, totalNumberOfQuestions, nextQuestionBtn);
         return statusBar;
     }
 
@@ -212,7 +215,7 @@ public class View3 {
                 public void handle(ActionEvent event) {
                     myCard.setCheated(true);
                     scrollPaneContent.getChildren().remove(answersBox);
-                    VBox anserbow = isRightAnswersBox();
+                    AnswerBox anserbow = new AnswerBox(myCard);
                     anserbow.setDisable(true);
                     scrollPaneContent.getChildren().add(anserbow);
 
@@ -230,69 +233,69 @@ public class View3 {
         return buttonBar;
     }
 
-    private VBox createAnswerBox() {
-
-        answersBox = new VBox();
-        checkboxWithAnswerBox = new HBox();
-        checkboxWithAnswerBox.setAlignment(Pos.CENTER);
-        if (myCard.isCheated() == false) {
-            for (int i = 0; i < myCard.getUserAnswers().size(); i++) {
-                CheckBox cb = new CheckBox();
-                int m = i;
-                if (myCard.getUserAnswers().get(i).isGiven() == true) {
-                    cb.setSelected(true);
-                }
-                cb.selectedProperty().addListener(new ChangeListener<Boolean>() {
-                    @Override
-                    public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                        if (newValue == true) {
-                            myCard.getUserAnswers().get(m).setGiven(true);
-                            System.out.println(myCard.getUserAnswers().get(m).isGiven());
-
-                        }
-                        if (oldValue == true && newValue == false) {
-                            myCard.getUserAnswers().get(m).setGiven(false);
-                            System.out.println(myCard.getUserAnswers().get(m).isGiven());
-                        }
-
-                    }
-                });
-
-                answerLabel = new Label(myCard.getUserAnswers().get(i).getText());
-                checkboxWithAnswerBox = new HBox(cb, answerLabel);
-                answersBox.getChildren().add(checkboxWithAnswerBox);
-                answersBox.setSpacing(20);
-
-            }
-        } else {
-            answersBox = isRightAnswersBox();
-            answersBox.setDisable(true);
-        }
-
-        return answersBox;
-    }
-
-    private VBox isRightAnswersBox() {
-        answersBox = new VBox();
-        checkboxWithAnswerBox = new HBox();
-        checkboxWithAnswerBox.setAlignment(Pos.CENTER);
-        for (int i = 0; i < myCard.getUserAnswers().size(); i++) {
-            CheckBox cb = new CheckBox();
-            int m = i;
-            if (myCard.getUserAnswers().get(m).isGiven() == true) {
-                cb.setSelected(true);
-            }
-            if (myCard.getUserAnswers().get(m).isIsRight() == true) {
-                answerLabel = new Label(myCard.getUserAnswers().get(m).getText());
-                answerLabel.setTextFill(Color.GREEN);
-            } else {
-                answerLabel = new Label(myCard.getUserAnswers().get(m).getText());
-            }
-            checkboxWithAnswerBox = new HBox(cb, answerLabel);
-            answersBox.getChildren().add(checkboxWithAnswerBox);
-            answersBox.setSpacing(20);
-
-        }
-        return answersBox;
-    }
+//    private VBox createAnswerBox() {
+//
+//        answersBox = new VBox();
+//        checkboxWithAnswerBox = new HBox();
+//        checkboxWithAnswerBox.setAlignment(Pos.CENTER);
+//        if (myCard.isCheated() == false) {
+//            for (int i = 0; i < myCard.getUserAnswers().size(); i++) {
+//                CheckBox cb = new CheckBox();
+//                int m = i;
+//                if (myCard.getUserAnswers().get(i).isGiven() == true) {
+//                    cb.setSelected(true);
+//                }
+//                cb.selectedProperty().addListener(new ChangeListener<Boolean>() {
+//                    @Override
+//                    public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+//                        if (newValue == true) {
+//                            myCard.getUserAnswers().get(m).setGiven(true);
+//                            System.out.println(myCard.getUserAnswers().get(m).isGiven());
+//
+//                        }
+//                        if (oldValue == true && newValue == false) {
+//                            myCard.getUserAnswers().get(m).setGiven(false);
+//                            System.out.println(myCard.getUserAnswers().get(m).isGiven());
+//                        }
+//
+//                    }
+//                });
+//
+//                answerLabel = new Label(myCard.getUserAnswers().get(i).getText());
+//                checkboxWithAnswerBox = new HBox(cb, answerLabel);
+//                answersBox.getChildren().add(checkboxWithAnswerBox);
+//                answersBox.setSpacing(20);
+//
+//            }
+//        } else {
+//            answersBox = isRightAnswersBox();
+//            answersBox.setDisable(true);
+//        }
+//
+//        return answersBox;
+//    }
+//
+//    private VBox isRightAnswersBox() {
+//        answersBox = new VBox();
+//        checkboxWithAnswerBox = new HBox();
+//        checkboxWithAnswerBox.setAlignment(Pos.CENTER);
+//        for (int i = 0; i < myCard.getUserAnswers().size(); i++) {
+//            CheckBox cb = new CheckBox();
+//            int m = i;
+//            if (myCard.getUserAnswers().get(m).isGiven() == true) {
+//                cb.setSelected(true);
+//            }
+//            if (myCard.getUserAnswers().get(m).isIsRight() == true) {
+//                answerLabel = new Label(myCard.getUserAnswers().get(m).getText());
+//                answerLabel.setTextFill(Color.GREEN);
+//            } else {
+//                answerLabel = new Label(myCard.getUserAnswers().get(m).getText());
+//            }
+//            checkboxWithAnswerBox = new HBox(cb, answerLabel);
+//            answersBox.getChildren().add(checkboxWithAnswerBox);
+//            answersBox.setSpacing(20);
+//
+//        }
+//        return answersBox;
+//    }
 }

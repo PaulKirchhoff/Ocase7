@@ -6,6 +6,9 @@
 package ocase7;
 
 import java.util.ArrayList;
+import ocase7.Card;
+import ocase7.Category;
+import ocase7.Question;
 
 /**
  *
@@ -82,7 +85,7 @@ public class CardBox {
         ArrayList<Card> cardsi = new ArrayList<>();
         for (Category category : categories) {
             for (Question question : Question.getAllQuestionsByCategoryId(category.getId())) {
-                if (!questions.contains(question)&& questions.size() <= numberOfQuestions) {
+                if (!questions.contains(question)&& questions.size() < numberOfQuestions) {
                     questions.add(question);
                 }
             }
