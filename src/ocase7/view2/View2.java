@@ -317,7 +317,7 @@ public class View2 extends mainView {
                 } 
                
                  
-                 stage.show();
+                 //stage.show();
             }
             
 

@@ -52,6 +52,9 @@ public class CardBox {
 //        }
     }
 
+    public CardBox() {
+    }
+
     // füllt CardBox:
     // durchläuft KategorienArray und zieht sich dabei die dazugehörigen Fragen,    
     // überprüft ob die Frage im questionsArray schon erhalten ist,

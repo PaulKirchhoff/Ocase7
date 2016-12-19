@@ -70,9 +70,9 @@ public class LoginView {
 
             @Override
             public void handle(ActionEvent e) {
-                //actiontarget.setFill(Color.FIREBRICK);
                 actiontarget.setId("actiontarget");
                 actiontarget.setText("Sign in button pressed");
+                
             }
         });
 
