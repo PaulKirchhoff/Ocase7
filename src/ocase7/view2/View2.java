@@ -27,7 +27,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javax.swing.plaf.synth.SynthLookAndFeel;
+import javafx.stage.Stage;
 import ocase7.Card;
 import ocase7.CardBox;
 import ocase7.Category;
@@ -55,6 +55,9 @@ public class View2 extends mainView {
     Label sliderLabel;
     ToggleButton learnModusButton;
     boolean isRandom;
+    CardBox cardBox;
+    boolean isLastSessions;
+    Stage stage;
 
     public Scene createView2Scene() {
         Group view2Root = new Group();
@@ -234,6 +237,15 @@ public class View2 extends mainView {
         wrongAnswersBox.getStyleClass().add("wrongAnswersBox");
         HBox checkBoxWithLabelBox = new HBox();
         wrongAnswerCheckBox = new CheckBox();
+        wrongAnswerCheckBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (newValue) {
+                    wrongAnswerCheckBox.setSelected(true);
+                    CardBox cardBoxWithWrongAnswers = new CardBox(categories);
+                }
+            }
+        });
         Label wrongAnswerLabel = new Label("Die falschen Anworten der letzten zwei Sessions.");
         checkBoxWithLabelBox.getChildren().addAll(wrongAnswerCheckBox, wrongAnswerLabel);
         wrongAnswersBox.getChildren().addAll(checkBoxWithLabelBox);
@@ -262,7 +274,7 @@ public class View2 extends mainView {
         startBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                CardBox cardBox;
+                //CardBox cardBox;
                 int cbCounter = 0;
                 ArrayList<Category> cardBoxCategories = new ArrayList<>();
                 for (CheckBox listOfCheckboxe : listOfCheckboxes) {
@@ -303,8 +315,12 @@ public class View2 extends mainView {
                         System.out.println(card);
                     }
                 } 
-
+               
+                 
+                 stage.show();
             }
+            
+
         });
         resetButtonBox.getChildren().add(resetBtn);
         startButtonBox.getChildren().add(startBtn);

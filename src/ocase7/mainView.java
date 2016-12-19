@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import ocase7.launchView.LaunchView;
+import ocase7.loginView.LoginView;
 import ocase7.view2.View2;
 
 /**
@@ -35,8 +36,10 @@ public class mainView extends Application {
         LaunchView launchView = new LaunchView();
         
         Scene launchViewScene = launchView.createLaunchView();
-        primaryStage.setScene(launchViewScene);
-        primaryStage.setScene(view3Scene);
+        LoginView lv = new LoginView();
+        Scene loginView = lv.creatLoginView();
+        primaryStage.setScene(loginView);
+        //primaryStage.setScene(view2Scene);
 //        primaryStage.setScene(view2Scene);
         //LoginView loginView = new LoginView();
         //Scene loginscene = loginView.createLoginView();

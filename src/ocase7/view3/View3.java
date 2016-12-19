@@ -43,7 +43,7 @@ public class View3 {
     ScrollPane answerAndQuestionScrollPane;
 
     private void fillCategories() {
-        categories.add(Category.getCategoryById(1));  //<-------------------------------------- GIB EINE KATEGORIE EIN
+        categories.add(Category.getCategoryById(2));  //<-------------------------------------- GIB EINE KATEGORIE EIN
         cardBox = new CardBox(categories);
         //System.out.println(cardBox.getCards() + "########" + cardBox.getNumberOfCards());
 
