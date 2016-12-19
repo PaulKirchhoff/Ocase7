@@ -34,7 +34,6 @@ public class LoginView {
         grid.setHgap(10);
         grid.setVgap(10);
         grid.setPadding(new Insets(-150, 5, 5, 5));
-        grid.setMaxWidth(30);
 
         Text scenetitle = new Text("WIllkommen beim Ocase7 Training");
         scenetitle.getStyleClass().add("sceneTitle");
