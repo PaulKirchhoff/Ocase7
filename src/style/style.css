@@ -1,0 +1,111 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 13.12.2016, 13:58:54
+    Author     : PaulsBook
+*/
+
+.thumb {
+    -fx-background-color: #fff;
+    -fx-padding: 5px;
+    -fx-font: 16px "Serif";
+   
+}
+
+.sliderRoot {
+    -fx-padding: 30 0 30 160;
+    -fx-background-color: rgba(0, 100, 100, 0.0);
+    -fx-alignment: center;
+    -fx-max-width: 400;
+}
+
+.slider {
+    -fx-min-width: 400;
+}
+
+.wrongAnswersBox {
+    -fx-padding: 10 0 50 190;    
+
+}
+
+.buttonBar {
+    -fx-border-style: solid;
+    -fx-border-width: 1;
+    -fx-border-color: grey;
+}
+
+.view2ContentBox {
+    -fx-border-style: solid;
+    -fx-border-width: 3px;
+    -fx-border-color: #2ECCFA;
+}
+
+.categoryBox {
+    -fx-border-style: solid;
+    -fx-border-width: 2 0 2 0;
+    -fx-border-color: #2ECCFA;
+}
+
+.learnModusBox {
+    -fx-border-style: solid;
+    -fx-border-width: 2 0 2 0;
+    -fx-border-color: #2ECCFA;
+}
+
+.resetBtn:selected {
+    -fx-background-color: black;
+    
+}
+
+.loginView {
+    -fx-background-color: DEEPSKYBLUE;
+    -fx-minWidth: 500;
+    -fx-maxWidth: 500;
+    -fx-minHeight: 700;
+    -fx-maxHeight: 700;
+}
+
+.sceneTitle {
+    -fx-font-size: 30;
+    -fx-padding: 0 0 50 0;
+}
+
+.pwLabel {
+    -fx-font-size: 24;
+}
+
+.userNameLabel {
+    -fx-font-size: 24;
+}
+
+
+.loginButton {
+    -fx-padding: 8 15 15 15;
+    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
+    -fx-background-radius: 8;
+    -fx-background-color: 
+        linear-gradient(from 0% 93% to 0% 100%, #FF0000 0%, #B40404 100%),
+        #FF0000,
+        #B40404,
+        radial-gradient(center 50% 50%, radius 100%, #FF0000, #B40404);
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+    -fx-font-weight: bold;
+    -fx-font-size: 1.1em;
+}
+
+.loginButton:hover {
+      -fx-background-color: 
+        linear-gradient(from 0% 93% to 0% 100%, #FF0000 0%, #B40404 100%),
+        #FF0000,
+        #B40404,
+        radial-gradient(center 50% 50%, radius 100%, #FE2E2E, #610B0B);
+
+}
+
+.loginButton:pressed {
+    -fx-padding: 10 15 13 15;
+    -fx-background-insets: 2 0 0 0,2 0 3 0, 2 0 4 0, 2 0 5 0;
+}

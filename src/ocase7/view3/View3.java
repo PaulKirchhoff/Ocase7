@@ -14,6 +14,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -42,9 +43,9 @@ public class View3 {
     ScrollPane answerAndQuestionScrollPane;
 
     private void fillCategories() {
-        categories.add(Category.getCategoryById(1));  //<-------------------------------------- GIB EINE KATEGORIE EIN
+        categories.add(Category.getCategoryById(2));  //<-------------------------------------- GIB EINE KATEGORIE EIN
         cardBox = new CardBox(categories);
-        //System.out.println(cardBox.getCards()  + "########" + cardBox.getNumberOfCards());
+        //System.out.println(cardBox.getCards() + "########" + cardBox.getNumberOfCards());
 
     }
 
@@ -52,12 +53,12 @@ public class View3 {
         fillCategories();
         Group view3Root = new Group();
         Scene view3Scene = new Scene(view3Root, Color.DEEPSKYBLUE);
+        view3Scene.getStylesheets().add(getClass().getResource("/style/style.css").toExternalForm());
 
         myCard = cardBox.getCards().get(0);
 
         //Erstelle Boxen für Layout        
         VBox view3ContentBox = new VBox();
-        //view3ContentBox.getStyleClass().add("view3contentbox");
         view3ContentBox.setStyle("-fx-border-style: solid;"
                 + "-fx-border-width: 3px;"
                 + "-fx-border-color: #2ECCFA;");
@@ -185,26 +186,41 @@ public class View3 {
         buttonBar.setMinWidth(600);
         buttonBar.setMinHeight(40);
         buttonBar.setAlignment(Pos.CENTER);
-        buttonBar.setStyle("-fx-border-style: solid;"
-                + "-fx-border-width: 1;"
-                + "-fx-border-color: grey;");
-
+        buttonBar.getStyleClass().add("buttonBar");
         Button followUp = new Button("Wiedervorlage");
         followUp.setMinWidth(100);
 
-        Button cheater = new Button("Cheater-Knopf");
-        cheater.setMinWidth(100);
-        cheater.setOnAction(new EventHandler<ActionEvent>() {
+        followUp.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(ActionEvent event) {        
-                myCard.setCheated(true);
-              scrollPaneContent.getChildren().remove(answersBox);
-              VBox anserbow= isRightAnswersBox();
-              anserbow.setDisable(true);
-              scrollPaneContent.getChildren().add(anserbow);
-              
+            public void handle(ActionEvent event) {
+                if (myCard.isFollowUp() == false) {
+                    myCard.setFollowUp(true);
+                    System.out.println(myCard.isFollowUp());
+                } else {
+                    myCard.setFollowUp(false);
+                    System.out.println(myCard.isFollowUp());
+                }
             }
         });
+
+        Button cheater = new Button("Cheater-Knopf");
+        cheater.setMinWidth(100);
+        if (myCard.isCheated() == false) {
+
+            cheater.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    myCard.setCheated(true);
+                    scrollPaneContent.getChildren().remove(answersBox);
+                    VBox anserbow = isRightAnswersBox();
+                    anserbow.setDisable(true);
+                    scrollPaneContent.getChildren().add(anserbow);
+
+                }
+            });
+        } else {
+            cheater.getStyleClass().add("cheaterbtn");
+        }
 
         Button save = new Button("Session fertig");
         save.setMinWidth(100);

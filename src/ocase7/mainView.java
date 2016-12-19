@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import ocase7.launchView.LaunchView;
+import ocase7.loginView.LoginView;
 import ocase7.view2.View2;
 
 /**
