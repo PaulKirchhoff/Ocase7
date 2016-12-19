@@ -8,8 +8,11 @@ package ocase7;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import static ocase7.Category.resultSet;
 import static ocase7.Question.pstmt;
 
@@ -74,13 +77,10 @@ public class User {
                     if (u.getUserSession().getSessionBox().getCards().get(i).getUserAnswers().get(i).isGiven()) {
                         pstmt.setInt(2, u.getUserSession().getSessionBox().getCards().get(i).getUserAnswers().get(c).getId());
                     }
-                    
                     stmt = con.createStatement();
                     resultSet = stmt.executeQuery(sql);
                 }
-
             }
-
         } catch (Exception e) {
             System.out.println(e.getMessage());
         } finally {
@@ -97,16 +97,27 @@ public class User {
                 System.out.println(e.getMessage());
             }
         }
-        return;
-
     }
 
     public static ArrayList<User> getAll() {
-        ArrayList<User> user = new ArrayList<>();
+        ArrayList<User> userList = new ArrayList<>();
+        HashMap<Integer, HashMap<String, String>> userMap = new HashMap<>();
+
         try {
             Connection con = MySQLConnection.getConnection();
             String sql = "SELECT * FROM user";
-            stmt = con.createStatement();
+            pstmt = con.prepareStatement(sql);
+            resultSet = stmt.executeQuery(sql);
+            while (resultSet.next()) {
+                HashMap userIDMap = new HashMap<>();
+                userMap.put(resultSet.getInt("id"), );
+                userMap.get(con)
+            }
+            
+            sql = "SELECT * FROM session WHERE user_id = ?";
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, id);
+            
             resultSet = stmt.executeQuery(sql);
             while (resultSet.next()) {
                 user.add(new User(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getString("password")));
@@ -117,17 +128,15 @@ public class User {
             try {
                 if (stmt != null) {
                     stmt.close();
-
                 }
                 if (resultSet != null) {
                     resultSet.close();
                 }
-
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
         }
-        return user;
+        return userList;
     }
 
     public User getUserById(int id) {
@@ -148,21 +157,16 @@ public class User {
                 }
                 if (resultSet != null) {
                     resultSet.close();
-
                 }
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
-
         }
-
         return user;
-
     }
 
     @Override
     public String toString() {
         return "User{" + "id=" + id + ", name=" + name + ", password=" + password + '}';
     }
-
 }

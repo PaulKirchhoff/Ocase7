@@ -205,6 +205,12 @@ public class View3 {
 
         Button save = new Button("Session fertig");
         save.setMinWidth(100);
+        
+        //Lyn
+        //Set on action function included
+        save.setOnAction((ActionEvent event) -> {
+            
+        });
 
         buttonBar.getChildren().addAll(followUp, cheater, save);
 
