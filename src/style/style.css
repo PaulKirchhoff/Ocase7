@@ -60,25 +60,34 @@ and open the template in the editor.
     
 }
 
+
+/* Begin style loginView */
+
 .loginView {
     -fx-background-color: DEEPSKYBLUE;
-    -fx-minWidth: 500;
-    -fx-maxWidth: 500;
+    -fx-minWidth: 660;
+    -fx-maxWidth: 660;
     -fx-minHeight: 700;
     -fx-maxHeight: 700;
 }
 
 .sceneTitle {
-    -fx-font-size: 30;
+    -fx-font-size: 26;
     -fx-padding: 0 0 50 0;
+    -fx-font-weight: bold;
 }
 
 .pwLabel {
-    -fx-font-size: 24;
+    -fx-font-size: 22;
+    
+}
+
+.pwTextfield {
+    -fx-maxWidth: 100;
 }
 
 .userNameLabel {
-    -fx-font-size: 24;
+    -fx-font-size: 22;
 }
 
 
@@ -94,6 +103,7 @@ and open the template in the editor.
     -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
     -fx-font-weight: bold;
     -fx-font-size: 1.1em;
+    -fx-text-fill: #fff;
 }
 
 .loginButton:hover {
@@ -102,7 +112,6 @@ and open the template in the editor.
         #FF0000,
         #B40404,
         radial-gradient(center 50% 50%, radius 100%, #FE2E2E, #610B0B);
-
 }
 
 .loginButton:pressed {

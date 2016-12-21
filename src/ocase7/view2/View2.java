@@ -180,7 +180,7 @@ public class View2 extends mainView {
                     isRandom = true;
                 } else {
                     learnModusLabel.setText("sortierter Modus");
-                    
+
                 }
             }
         });
@@ -278,11 +278,11 @@ public class View2 extends mainView {
                 int cbCounter = 0;
                 ArrayList<Category> cardBoxCategories = new ArrayList<>();
                 for (CheckBox listOfCheckboxe : listOfCheckboxes) {
-                // prüft ob checkboxes angewählt wurden
+                    // prüft ob checkboxes angewählt wurden
                     if (listOfCheckboxe.isSelected()) {
                         Category category = categories.get(listOfCheckboxes.indexOf(listOfCheckboxe));
                         cardBoxCategories.add(category);
-                // jede NICHT angewählte Checkbox erhöht den Counter um 1        
+                        // jede NICHT angewählte Checkbox erhöht den Counter um 1        
                     } else {
                         cbCounter++;
                     }
@@ -297,29 +297,30 @@ public class View2 extends mainView {
                 // wenn der Slider einen Wert enthält sollen die Anzahl der Fragen 
                 // zur cardBox hinzugefügt werden
                 int sliderLabelValue = Integer.parseInt(sliderLabel.getText());
-               
+
                 if (sliderLabelValue > 0) {
                     cardBox = new CardBox(cardBoxCategories, sliderLabelValue);
 //                    for (Card card : cardBox.getCards()) {
 //                        System.out.println(card);
 //                    }
-                // wennn der Slider nicht verwendet wurde sollen alle Fragen 
-                // einer Kategorie zur CardBox hinzugefügt werden
+                    // wennn der Slider nicht verwendet wurde sollen alle Fragen 
+                    // einer Kategorie zur CardBox hinzugefügt werden
                 } else {
                     cardBox = new CardBox(cardBoxCategories);
-                    
+
                 }
-                 if(isRandom) {
+                if (isRandom) {
                     Collections.shuffle(cardBox.getCards());
                     for (Card card : cardBox.getCards()) {
                         System.out.println(card);
                     }
-                } 
-               
-                 
-                 //stage.show();
+                }
+                    
+//                    View3 v3 = new View3();
+//                    Scene view3 = v3.createView3();
+//                    stage.setScene(view3);
+//                    start(stage);
             }
-            
 
         });
         resetButtonBox.getChildren().add(resetBtn);
