@@ -50,7 +50,7 @@ public class CardBox {
 //        for (Card card : cards) {
 //            System.out.println(card);
 //        }
-    }
+    }       
 
     public CardBox() {
     }
@@ -61,6 +61,26 @@ public class CardBox {
     // wenn nicht, wird es dem questionsArray hinzugefügt
     //befüllt Card über jede QuestionID die sich nun im questionsArray befindet
     //gibt CardsArray zurück
+    
+    
+     public static ArrayList<Card> fillCardBoxWrongQuestions(ArrayList<Category> categories) {
+        ArrayList<Question> questions = new ArrayList<>();
+        ArrayList<Card> cardsi = new ArrayList<>();
+        for (Category category : categories) {
+            for (Question question : Question.getAllQuestionsByCategoryId(category.getId())) {
+                if (!questions.contains(question)) {
+                    questions.add(question);
+                }
+            }
+        }
+        for (Question question : questions) {
+            cardsi.add(new Card(question.getId()));
+        }
+
+        return cardsi;
+
+    }
+    
     
     public static ArrayList<Card> fillCardBox(ArrayList<Category> categories) {
         ArrayList<Question> questions = new ArrayList<>();
