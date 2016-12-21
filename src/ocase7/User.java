@@ -105,39 +105,14 @@ public class User {
 
     public static ArrayList<User> getAll() {
         ArrayList<User> userList = new ArrayList<>();
-        ArrayList<Integer> userIDList = new ArrayList<>();
-        ArrayList<String> userNameList = new ArrayList<>();
-        ArrayList<String> userPasswordList = new ArrayList<>();
-        ArrayList<Integer> userSessionIDList = new ArrayList<>();
-
         try {
             Connection con = MySQLConnection.getConnection();
             String sql = "SELECT * FROM user";
             pstmt = con.prepareStatement(sql);
             resultSet = stmt.executeQuery(sql);
             while (resultSet.next()) {
-                userIDList.add(resultSet.getInt("id"));
-                userNameList.add(resultSet.getString("name"));
-                userPasswordList.add(resultSet.getString("password"));
+                userList.add(new User(resultSet.getInt("id")));
             }
-
-            sql = "SELECT * FROM session WHERE user_id = ? AND";
-            for (Integer userID : userIDList) {
-                for (String name : userNameList) {
-                    for (String password : userPasswordList) {
-                        pstmt = con.prepareStatement(sql);
-                        pstmt.setInt(1, userID);
-                        resultSet = stmt.executeQuery(sql);
-
-                        while (resultSet.next()) {
-                            userList.add(new User(userID));
-                            //, resultSet.getString("name"), resultSet.getString("password")
-                        }
-                    }
-                }
-
-            }
-
         } catch (Exception e) {
             System.out.println(e.getMessage());
         } finally {
