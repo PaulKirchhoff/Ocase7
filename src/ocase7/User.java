@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 import static ocase7.Category.resultSet;
 import static ocase7.Question.pstmt;
+import static ocase7.User.pstmt;
 
 /**
  *
@@ -30,6 +31,7 @@ public class User {
     private String name;
     private String password;
     private Session userSession;
+    private ArrayList<Integer> userSessionList;
 
     public Session getUserSession() {
         return userSession;
@@ -44,9 +46,10 @@ public class User {
 
     public User(int userId) {
         this.id = userId;
-        this.name = "Test";
-        this.password = "password";
+        this.name = fetchUserNameByUserID(userId);
+        this.password = fetchUserPasswordByUserID(userId);
         this.userSession = new Session();
+        this.userSessionList = fetchUserSessionsList(userId);
     }
 
     public User() {
@@ -65,6 +68,7 @@ public class User {
         return password;
     }
 // Athor LYN & Eric
+
     public void insertUserAnswerIdIntoDb(User u) {
 
         try {
@@ -101,7 +105,10 @@ public class User {
 
     public static ArrayList<User> getAll() {
         ArrayList<User> userList = new ArrayList<>();
-        HashMap<Integer, HashMap<String, String>> userMap = new HashMap<>();
+        ArrayList<Integer> userIDList = new ArrayList<>();
+        ArrayList<String> userNameList = new ArrayList<>();
+        ArrayList<String> userPasswordList = new ArrayList<>();
+        ArrayList<Integer> userSessionIDList = new ArrayList<>();
 
         try {
             Connection con = MySQLConnection.getConnection();
@@ -109,19 +116,28 @@ public class User {
             pstmt = con.prepareStatement(sql);
             resultSet = stmt.executeQuery(sql);
             while (resultSet.next()) {
-                HashMap userIDMap = new HashMap<>();
-                userMap.put(resultSet.getInt("id"), );
-                userMap.get(con)
+                userIDList.add(resultSet.getInt("id"));
+                userNameList.add(resultSet.getString("name"));
+                userPasswordList.add(resultSet.getString("password"));
             }
-            
-            sql = "SELECT * FROM session WHERE user_id = ?";
-            pstmt = con.prepareStatement(sql);
-            pstmt.setInt(1, id);
-            
-            resultSet = stmt.executeQuery(sql);
-            while (resultSet.next()) {
-                user.add(new User(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getString("password")));
+
+            sql = "SELECT * FROM session WHERE user_id = ? AND";
+            for (Integer userID : userIDList) {
+                for (String name : userNameList) {
+                    for (String password : userPasswordList) {
+                        pstmt = con.prepareStatement(sql);
+                        pstmt.setInt(1, userID);
+                        resultSet = stmt.executeQuery(sql);
+
+                        while (resultSet.next()) {
+                            userList.add(new User(userID));
+                            //, resultSet.getString("name"), resultSet.getString("password")
+                        }
+                    }
+                }
+
             }
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         } finally {
@@ -168,5 +184,56 @@ public class User {
     @Override
     public String toString() {
         return "User{" + "id=" + id + ", name=" + name + ", password=" + password + '}';
+    }
+
+    private ArrayList<Integer> fetchUserSessionsList(int userID) {
+        ArrayList<Integer> sessionsList = new ArrayList<>();
+        try {
+            Connection con = MySQLConnection.getConnection();
+            String sql = "SELECT id FROM session WHERE user_id = ?";
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, id);
+            resultSet = pstmt.executeQuery();
+            while (resultSet.next()) {
+                sessionsList.add(resultSet.getInt("id"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return sessionsList;
+    }
+
+    private String fetchUserNameByUserID(int userID) {
+        String userName = null;
+        try {
+            Connection con = MySQLConnection.getConnection();
+            String sql = "SELECT name FROM user WHERE id = ?";
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, id);
+            resultSet = pstmt.executeQuery();
+            while (resultSet.next()) {
+                userName = resultSet.getString("name");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return userName;
+    }
+
+    private String fetchUserPasswordByUserID(int userID) {
+        String userPassword = null;
+        try {
+            Connection con = MySQLConnection.getConnection();
+            String sql = "SELECT password FROM user WHERE id = ?";
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, id);
+            resultSet = pstmt.executeQuery();
+            while (resultSet.next()) {
+                userPassword = resultSet.getString("password");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return userPassword;
     }
 }
