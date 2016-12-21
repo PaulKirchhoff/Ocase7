@@ -19,6 +19,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
 import ocase7.CardBox;
 import ocase7.Category;
 
@@ -41,9 +42,19 @@ public class View3 {
     Label questionNumberLabel;
     String questionNumber;
     ScrollPane answerAndQuestionScrollPane;
+    Stage primaryStage;
+    
+    public View3(Stage primaryStage) {
+        this.primaryStage = primaryStage;
+    }
+
+    public View3(Stage primaryStage, CardBox cardBox) {
+        this.primaryStage = primaryStage;
+        this.cardBox = cardBox;
+    }
 
     private void fillCategories() {
-        categories.add(Category.getCategoryById(2));  //<-------------------------------------- GIB EINE KATEGORIE EIN
+        categories.add(Category.getCategoryById(1));  //<-------------------------------------- GIB EINE KATEGORIE EIN
         cardBox = new CardBox(categories);
         //System.out.println(cardBox.getCards() + "########" + cardBox.getNumberOfCards());
 

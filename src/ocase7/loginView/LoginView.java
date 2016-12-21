@@ -30,6 +30,15 @@ import ocase7.view2.View2;
 public class LoginView {
     
     Scene loginScene;
+    Stage primaryStage;
+    
+    public LoginView(Stage primaryStage) {
+        super();
+        this.primaryStage = primaryStage;
+    }
+
+    public LoginView() {
+    }
     
     public Scene creatLoginView() {
         GridPane grid = new GridPane();
@@ -76,10 +85,9 @@ public class LoginView {
             public void handle(ActionEvent e) {
                 actiontarget.setId("actiontarget");
                 actiontarget.setText("Sign in button pressed");
-                Stage s = new Stage();
-                View2 v2 = new View2();
-                loginScene = v2.createView2Scene();
-                s.setScene(v2.createView2Scene());
+                View2 v2 = new View2(primaryStage);
+                //loginScene = v2.createView2Scene();
+                primaryStage.setScene(v2.createView2Scene());
             }
         });
 

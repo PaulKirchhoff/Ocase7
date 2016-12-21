@@ -28,19 +28,19 @@ public class mainView extends Application {
         primaryStage.setMinWidth(660);
 //        primaryStage.setMaxWidth(600);
         // erstelle View3
-        View3 view3 = new View3();
+        View3 view3 = new View3(primaryStage);
         Scene view3Scene =  view3.createView3();
         // erstelle View2
-        View2 view2 = new View2();
+        View2 view2 = new View2(primaryStage);
         Scene view2Scene = view2.createView2Scene();
         LaunchView launchView = new LaunchView();
         
         Scene launchViewScene = launchView.createLaunchView();
-        LoginView lv = new LoginView();
+        LoginView lv = new LoginView(primaryStage);
         Scene loginView = lv.creatLoginView();
         //primaryStage.setScene(launchViewScene);
-        primaryStage.setScene(view3Scene);
-//        primaryStage.setScene(view2Scene);
+        primaryStage.setScene(launchViewScene);
+        //primaryStage.setScene(loginView);
         //LoginView loginView = new LoginView();
         //Scene loginscene = loginView.createLoginView();
         Task<Void> sleeper = new Task<Void>() {
@@ -67,7 +67,7 @@ public class mainView extends Application {
         sleeper.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
             @Override
             public void handle(WorkerStateEvent event) {
-                //primaryStage.setScene(view2Scene);
+                primaryStage.setScene(loginView);
             }
         });
          new Thread(sleeper).start();

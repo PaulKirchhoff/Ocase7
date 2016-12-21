@@ -57,7 +57,11 @@ public class View2 extends mainView {
     boolean isRandom;
     CardBox cardBox;
     boolean isLastSessions;
-    Stage stage;
+    Stage primaryStage;
+
+    public View2(Stage primaryStage) {
+        this.primaryStage = primaryStage;
+    }
 
     public Scene createView2Scene() {
         Group view2Root = new Group();
@@ -316,9 +320,9 @@ public class View2 extends mainView {
                     }
                 }
                     
-//                    View3 v3 = new View3();
+                    View3 v3 = new View3(primaryStage,cardBox);
 //                    Scene view3 = v3.createView3();
-//                    stage.setScene(view3);
+                    primaryStage.setScene(v3.createView3());
 //                    start(stage);
             }
 
