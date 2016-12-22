@@ -58,15 +58,12 @@ public class Session {
     public Session(int id, int user_id, CardBox sessionBox) {
         this.id = id;
         this.user_id = user_id;
-        this.cardBox = sessionBox;
     }
     
+    
+    
     public Session() {
-//        this.id = 999;
-//        this.user_id = 1;
-//        ArrayList<Category> categoryList = new ArrayList<>();
-//        categoryList.add(new Category());
-//        this.cardBox = new CardBox(categoryList);
+
     }
 
     public Session(int user_id) {
@@ -80,3 +77,4 @@ public class Session {
     
 
 }
+        

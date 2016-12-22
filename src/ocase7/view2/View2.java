@@ -324,7 +324,7 @@ public class View2 extends mainView {
                         System.out.println(card);
                     }
                 }
-                user.getUserSession().setSessionBox(cardBox);
+                user.getUserSession().setCardBox(cardBox);
                     
                     View3 v3 = new View3(primaryStage,user);
 //                    Scene view3 = v3.createView3();
