@@ -5,8 +5,10 @@
  */
 package ocase7;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -62,13 +64,45 @@ public class Session {
     }
     
     public Session() {
-        this.id = 999;
+        insertSessionIDByUserID(1);
+        this.id = fetchSessionIDByUserID(1);
         this.user_id = 1;
         ArrayList<Category> categoryList = new ArrayList<>();
         categoryList.add(new Category());
         this.cardbox = new CardBox(categoryList);
     }
     
-    
+    private void insertSessionIDByUserID(int userID) {
+        try {
+            Connection con = MySQLConnection.getConnection();
+            String sql = "INSERT INTO lmildner_OCP6.`session` (`begin`, user_id) \n"
+                    + "	VALUES (CURRENT_TIMESTAMP, ?)";
+            pstmt = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+            pstmt.setInt(1, userID);
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private int fetchSessionIDByUserID(int userID) {
+        int sessionID = 0;
+        try {
+            Connection con = MySQLConnection.getConnection();
+            String sql = "SELECT id FROM session WHERE user_id = ?";
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, userID);
+            resultSet = pstmt.executeQuery();
+            while (resultSet.next()) {
+                resultSet.last();
+                sessionID = resultSet.getInt("id");
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return sessionID;
+    }
 
 }

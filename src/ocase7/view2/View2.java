@@ -308,7 +308,7 @@ public class View2 extends mainView {
                 int sliderLabelValue = Integer.parseInt(sliderLabel.getText());
 
                 if (sliderLabelValue > 0) {
-                    cardBox = new CardBox(cardBoxCategories, sliderLabelValue);
+                    currentUser.getUserSession().setCardbox(new CardBox(cardBoxCategories, sliderLabelValue));
 //                    for (Card card : cardBox.getCards()) {
 //                        System.out.println(card);
 //                    }

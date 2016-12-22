@@ -11,10 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import static ocase7.Category.resultSet;
-import static ocase7.Question.pstmt;
 import static ocase7.User.pstmt;
 
 /**

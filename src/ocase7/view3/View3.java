@@ -243,6 +243,7 @@ public class View3 {
                 @Override
                 public void handle(ActionEvent event) {
                     currentUser.insertUserAnswerIdIntoDb(currentUser);
+                    System.out.println("ENDE");
 
                 }
             });

@@ -104,15 +104,15 @@ public class Card {
 //        return cards;
 //    }
 //<<<<<<< HEAD
-    public static Card getCardsByCategory(Category c) {
-        //ArrayList<Card> cards = new ArrayList<>();
-        ArrayList<Question> questions = Question.getQuestionsByCategory(c);
-        Question q = questions.get(0);
-        Card card = new Card(q.getId(), q, Answer.getAnswersByQuestion(q));
-        
-        return card;
-    }
-    
+//    public static Card getCardsByCategory(Category c) {
+//        //ArrayList<Card> cards = new ArrayList<>();
+//        ArrayList<Question> questions = Question.getQuestionsByCategory(c);
+//        Question q = questions.get(0);
+//        Card card = new Card(q.getId(), q, Answer.getAnswersByQuestion(q));
+//        
+//        return card;
+//    }
+//    
     
     
     
