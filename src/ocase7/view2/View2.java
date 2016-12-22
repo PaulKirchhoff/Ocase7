@@ -60,14 +60,14 @@ public class View2 extends mainView {
     CardBox cardBox;
     boolean isLastSessions;
     Stage primaryStage;
-    User currentUser;
+    User user;
 
     public View2(Stage primaryStage) {
         this.primaryStage = primaryStage;
     }
 
-    public Scene createView2Scene(User u) {
-        this.currentUser = u;
+    public Scene createView2Scene(User user) {
+        this.user = user;
         Group view2Root = new Group();
         
         VBox view2ContentBox = new VBox();
@@ -303,7 +303,7 @@ public class View2 extends mainView {
                         cardBoxCategories.add(category);
                     }
                 }
-                // wenn der Slider einen Wert enthält sollen die Anzahl der Fragen 
+                // wenn der Slider einen Wert enthält soll die Anzahl der Fragen 
                 // zur cardBox hinzugefügt werden
                 int sliderLabelValue = Integer.parseInt(sliderLabel.getText());
 
@@ -324,10 +324,11 @@ public class View2 extends mainView {
                         System.out.println(card);
                     }
                 }
+                user.getUserSession().setSessionBox(cardBox);
                     
-                    View3 v3 = new View3(primaryStage,cardBox);
+                    View3 v3 = new View3(primaryStage,user);
 //                    Scene view3 = v3.createView3();
-                    primaryStage.setScene(v3.createView3(currentUser));
+                    primaryStage.setScene(v3.createView3(user));
 //                    start(stage);
             }
 

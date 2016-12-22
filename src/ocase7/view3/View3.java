@@ -44,15 +44,20 @@ public class View3 {
     String questionNumber;
     ScrollPane answerAndQuestionScrollPane;
     Stage primaryStage;
-    User currentUser;
+    User user;
     
     public View3(Stage primaryStage) {
         this.primaryStage = primaryStage;
     }
 
-    public View3(Stage primaryStage, CardBox cardBox) {
+//    public View3(Stage primaryStage, CardBox cardBox) {
+//        this.primaryStage = primaryStage;
+//        this.cardBox = cardBox;
+//    }
+
+    public View3(Stage primaryStage, User user) {
         this.primaryStage = primaryStage;
-        this.cardBox = cardBox;
+        this.user = user;
     }
 
     private void fillCategories() {
@@ -62,8 +67,8 @@ public class View3 {
 
     }
 
-    public Scene createView3(User u) {
-        this.currentUser = u;
+    public Scene createView3(User user) {
+        this.user = user;
         fillCategories();
         Group view3Root = new Group();
         Scene view3Scene = new Scene(view3Root, Color.DEEPSKYBLUE);
@@ -242,7 +247,7 @@ public class View3 {
         save.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    currentUser.insertUserAnswerIdIntoDb(currentUser);
+                    user.insertUserAnswerIdIntoDb(user);
 
                 }
             });

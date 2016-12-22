@@ -31,6 +31,8 @@ public class User {
     private String name;
     private String password;
     private Session userSession;
+
+    
     private ArrayList<Integer> userSessionList;
 
     public Session getUserSession() {
@@ -52,8 +54,8 @@ public class User {
         this.userSessionList = fetchUserSessionsList(userId);
     }
 
-    public User() {
-        this(1);
+    public User(Session session) {
+        this.userSession = session;
     }
 
     public int getId() {
@@ -67,6 +69,7 @@ public class User {
     public String getPassword() {
         return password;
     }
+    
 // Athor LYN & Eric
 
     public void insertUserAnswerIdIntoDb(User u) {
@@ -131,28 +134,28 @@ public class User {
     }
 
     public User getUserById(int id) {
-        User user = new User();
-        try {
-            Connection con = MySQLConnection.getConnection();
-            String sql = "SELECT * FROM user WHERE id = ?";
-            pstmt = con.prepareStatement(sql);
-            pstmt.setInt(1, id);
-            resultSet = pstmt.executeQuery();
-
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        } finally {
-            try {
-                if (stmt != null) {
-                    stmt.close();
-                }
-                if (resultSet != null) {
-                    resultSet.close();
-                }
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        }
+        User user = new User(id);
+//        try {
+//            Connection con = MySQLConnection.getConnection();
+//            String sql = "SELECT * FROM user WHERE id = ?";
+//            pstmt = con.prepareStatement(sql);
+//            pstmt.setInt(1, id);
+//            resultSet = pstmt.executeQuery();
+//
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        } finally {
+//            try {
+//                if (stmt != null) {
+//                    stmt.close();
+//                }
+//                if (resultSet != null) {
+//                    resultSet.close();
+//                }
+//            } catch (Exception e) {
+//                System.out.println(e.getMessage());
+//            }
+//        }
         return user;
     }
 

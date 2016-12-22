@@ -21,6 +21,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import ocase7.CardBox;
+import ocase7.Session;
 import ocase7.User;
 import ocase7.view2.View2;
 
@@ -61,7 +63,7 @@ public class LoginView {
         userName.getStyleClass().add("userNameLabel");
         grid.add(userName, 0, 12);
 
-        TextField userTextField = new TextField();
+        userTextField = new TextField();
         userTextField.getStyleClass().add("userTextfield");
         grid.add(userTextField, 1, 12);
 
@@ -91,9 +93,9 @@ public class LoginView {
                 actiontarget.setId("actiontarget");
                 actiontarget.setText("Sign in button pressed");
 
-                
-                User user = new User();
-                user.getUserById(1);
+                Session session = new Session();
+                User user = new User(session).getUserByLogin(userTextField.getText(), pwTextfield.getText());
+//                user = user.getUserByLogin(user.getName(), user.getPassword());
                 if(user.getName().equals(userTextField.getText()) && user.getPassword().equals(pwTextfield.getText())) {
                     actiontarget.setText("Herzlich Willkommen " + user.getName());
                     View2 v2 = new View2(primaryStage);
