@@ -9,15 +9,15 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.InnerShadow;
+import javafx.scene.effect.Lighting;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -50,6 +50,7 @@ public class LoginView {
 
         Text scenetitle = new Text("Willkommen beim Ocase7 Training");
         scenetitle.getStyleClass().add("sceneTitle");
+        scenetitle.setEffect(new InnerShadow(0,1, 1, Color.CRIMSON));
         grid.add(scenetitle, 0, 0, 2, 1);
 
         Label userName = new Label("Username:");

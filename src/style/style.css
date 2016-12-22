@@ -75,6 +75,8 @@ and open the template in the editor.
     -fx-font-size: 26;
     -fx-padding: 0 0 50 0;
     -fx-font-weight: bold;
+    -fx-font-family: Arial Black;
+    
 }
 
 .pwLabel {

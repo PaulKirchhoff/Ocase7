@@ -5,6 +5,7 @@
  */
 package ocase7.launchView;
 
+import java.io.File;
 import ocase7.launchView.ProgressBarWithTimer;
 import javafx.animation.RotateTransition;
 import javafx.animation.SequentialTransition;
@@ -14,6 +15,9 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.effect.Reflection;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -29,7 +33,7 @@ public class LaunchView {
         launchViewRoot.setAutoSizeChildren(true);
         Scene launchViewScene = new Scene(launchViewRoot, 600, 800, Color./*GREENYELLOW*/DEEPSKYBLUE);
         
-
+   
         Text logoO = new Text("O");
         setLogoStyleAndEfx(logoO);
         LogoChar o = new LogoChar(logoO, -10, 200, 130, 300);

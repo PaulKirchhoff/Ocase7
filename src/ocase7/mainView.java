@@ -1,14 +1,20 @@
 package ocase7;
 
+import java.io.File;
 import ocase7.view3.View3;
 import javafx.application.Application;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 import ocase7.launchView.LaunchView;
 import ocase7.loginView.LoginView;
@@ -35,12 +41,27 @@ public class mainView extends Application {
         Scene view2Scene = view2.createView2Scene();
         LaunchView launchView = new LaunchView();
         
+        
+        
         Scene launchViewScene = launchView.createLaunchView();
         LoginView lv = new LoginView(primaryStage);
         Scene loginView = lv.creatLoginView();
         //primaryStage.setScene(launchViewScene);
-        primaryStage.setScene(launchViewScene);
-        //primaryStage.setScene(loginView);
+        
+        
+//        // Bindet Musik an den LaunchView, wenns stört einfach auskommentieren ;)
+//        String musicFile = "src/ocase7/launchView/Ocase7Intro.aif";  
+//        //String musicFile = "/Users/PaulsBook/NetBeansProjects/Ocase7/src/ocase7/launchView/Ocase7Intro.aif";  
+//        Media introSound = new Media(new File(musicFile).toURI().toString());
+//        MediaPlayer mediaPlayer = new MediaPlayer(introSound);
+//        mediaPlayer.setAutoPlay(true);
+//        MediaView mv = new MediaView(mediaPlayer);
+//        ((Group)launchViewScene.getRoot()).getChildren().addAll(mv);
+//        
+//        primaryStage.setScene(launchViewScene);
+        
+        
+        primaryStage.setScene(loginView);
         //LoginView loginView = new LoginView();
         //Scene loginscene = loginView.createLoginView();
         Task<Void> sleeper = new Task<Void>() {

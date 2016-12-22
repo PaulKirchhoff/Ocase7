@@ -20,6 +20,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -65,7 +66,7 @@ public class View2 extends mainView {
 
     public Scene createView2Scene() {
         Group view2Root = new Group();
-
+        
         VBox view2ContentBox = new VBox();
         view2ContentBox.getStyleClass().add("view2ContentBox");
 
@@ -227,6 +228,7 @@ public class View2 extends mainView {
         slider.applyCss();
         slider.layout();
         Pane thumb = (Pane) slider.lookup(".thumb");
+        thumb.setEffect(new DropShadow(8, 4, 4, Color.GRAY));
         sliderLabel = new Label();
 
         sliderLabel.textProperty().bind(slider.valueProperty().asString("%.0f"));
