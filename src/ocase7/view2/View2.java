@@ -33,6 +33,7 @@ import ocase7.Card;
 import ocase7.CardBox;
 import ocase7.Category;
 import ocase7.Question;
+import ocase7.User;
 import ocase7.mainView;
 import ocase7.view3.View3;
 
@@ -59,12 +60,14 @@ public class View2 extends mainView {
     CardBox cardBox;
     boolean isLastSessions;
     Stage primaryStage;
+    User currentUser;
 
     public View2(Stage primaryStage) {
         this.primaryStage = primaryStage;
     }
 
-    public Scene createView2Scene() {
+    public Scene createView2Scene(User u) {
+        this.currentUser = u;
         Group view2Root = new Group();
         
         VBox view2ContentBox = new VBox();
@@ -324,7 +327,7 @@ public class View2 extends mainView {
                     
                     View3 v3 = new View3(primaryStage,cardBox);
 //                    Scene view3 = v3.createView3();
-                    primaryStage.setScene(v3.createView3());
+                    primaryStage.setScene(v3.createView3(currentUser));
 //                    start(stage);
             }
 

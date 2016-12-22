@@ -34,6 +34,7 @@ public class LoginView {
     Stage primaryStage;
     TextField userTextField;
     PasswordField pwTextfield;
+   // User currentUser;
     
     public LoginView(Stage primaryStage) {
         super();
@@ -89,6 +90,7 @@ public class LoginView {
             public void handle(ActionEvent e) {
                 actiontarget.setId("actiontarget");
                 actiontarget.setText("Sign in button pressed");
+
                 
                 User user = new User();
                 user.getUserById(1);
@@ -96,12 +98,10 @@ public class LoginView {
                     actiontarget.setText("Herzlich Willkommen " + user.getName());
                     View2 v2 = new View2(primaryStage);
                     //loginScene = v2.createView2Scene();
-                    primaryStage.setScene(v2.createView2Scene());
+                    primaryStage.setScene(v2.createView2Scene(user));
                 } else {
                     actiontarget.setText("Bitte prüfe nochmal den Namen und das Passwort.");
                 }
-                
-                
             }
         });
 
