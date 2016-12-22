@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package ocase7;
 
 import java.sql.Connection;
@@ -212,4 +211,28 @@ public class User {
         }
         return userPassword;
     }
+
+    public User getUserByLogin(String userName, String userPw) {
+        User user = null;
+        int userId = 0;
+        try {
+            Connection con = MySQLConnection.getConnection();
+            String sql = "SELECT id FROM user WHERE name = ? AND password = ?";
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, userName);
+            pstmt.setString(2, userPw);
+            resultSet = pstmt.executeQuery();
+            while (resultSet.next()) {
+                userId = resultSet.getInt("id");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        if (userId != 0) {
+            user = getUserById(userId);
+        }
+
+        return user;
+    }
+
 }

@@ -88,7 +88,7 @@ public class mainView extends Application {
         sleeper.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
             @Override
             public void handle(WorkerStateEvent event) {
-                primaryStage.setScene(loginView);
+                //primaryStage.setScene(loginView);
             }
         });
          new Thread(sleeper).start();

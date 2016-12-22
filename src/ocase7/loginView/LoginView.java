@@ -21,6 +21,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import ocase7.User;
 import ocase7.view2.View2;
 
 /**
@@ -31,6 +32,8 @@ public class LoginView {
     
     Scene loginScene;
     Stage primaryStage;
+    TextField userTextField;
+    PasswordField pwTextfield;
     
     public LoginView(Stage primaryStage) {
         super();
@@ -65,7 +68,7 @@ public class LoginView {
         pw.getStyleClass().add("pwLabel");
         grid.add(pw, 0, 16);
 
-        PasswordField pwTextfield = new PasswordField();
+        pwTextfield = new PasswordField();
         pwTextfield.getStyleClass().add("pwTextfield");
         grid.add(pwTextfield, 1, 16);
 
@@ -77,8 +80,8 @@ public class LoginView {
         hbBtn.getChildren().add(btn);
         grid.add(hbBtn, 1, 20);
 
-        final Text actiontarget = new Text();
-        grid.add(actiontarget, 1, 20);
+        Text actiontarget = new Text();
+        grid.add(actiontarget, 0, 22);
 
         btn.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -86,9 +89,19 @@ public class LoginView {
             public void handle(ActionEvent e) {
                 actiontarget.setId("actiontarget");
                 actiontarget.setText("Sign in button pressed");
-                View2 v2 = new View2(primaryStage);
-                //loginScene = v2.createView2Scene();
-                primaryStage.setScene(v2.createView2Scene());
+                
+                User user = new User();
+                user.getUserById(1);
+                if(user.getName().equals(userTextField.getText()) && user.getPassword().equals(pwTextfield.getText())) {
+                    actiontarget.setText("Herzlich Willkommen " + user.getName());
+                    View2 v2 = new View2(primaryStage);
+                    //loginScene = v2.createView2Scene();
+                    primaryStage.setScene(v2.createView2Scene());
+                } else {
+                    actiontarget.setText("Bitte prüfe nochmal den Namen und das Passwort.");
+                }
+                
+                
             }
         });
 
