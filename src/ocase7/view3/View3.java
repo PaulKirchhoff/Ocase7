@@ -22,6 +22,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import ocase7.CardBox;
 import ocase7.Category;
+import ocase7.User;
 
 /**
  *
@@ -43,6 +44,7 @@ public class View3 {
     String questionNumber;
     ScrollPane answerAndQuestionScrollPane;
     Stage primaryStage;
+    User currentUser;
     
     public View3(Stage primaryStage) {
         this.primaryStage = primaryStage;
@@ -60,7 +62,8 @@ public class View3 {
 
     }
 
-    public Scene createView3() {
+    public Scene createView3(User u) {
+        this.currentUser = u;
         fillCategories();
         Group view3Root = new Group();
         Scene view3Scene = new Scene(view3Root, Color.DEEPSKYBLUE);
@@ -235,6 +238,14 @@ public class View3 {
 
         Button save = new Button("Session fertig");
         save.setMinWidth(100);
+        
+        save.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    currentUser.insertUserAnswerIdIntoDb(currentUser);
+
+                }
+            });
 
         buttonBar.getChildren().addAll(followUp, cheater, save);
 

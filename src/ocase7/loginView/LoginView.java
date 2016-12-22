@@ -21,6 +21,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import ocase7.User;
 import ocase7.view2.View2;
 
 /**
@@ -31,6 +32,7 @@ public class LoginView {
     
     Scene loginScene;
     Stage primaryStage;
+    User currentUser;
     
     public LoginView(Stage primaryStage) {
         super();
@@ -88,7 +90,7 @@ public class LoginView {
                 actiontarget.setText("Sign in button pressed");
                 View2 v2 = new View2(primaryStage);
                 //loginScene = v2.createView2Scene();
-                primaryStage.setScene(v2.createView2Scene());
+                primaryStage.setScene(v2.createView2Scene(currentUser));
             }
         });
 
