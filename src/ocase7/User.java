@@ -77,12 +77,12 @@ public class User {
         try {
             Connection con = MySQLConnection.getConnection();
             String sql = "INSERT INTO userAnswer (user_id, answer_id) VALUES( ?, ?)";
-            for (int i = 0; i < u.getUserSession().getCardbox().getCards().size(); i++) {
-                for (int c = 0; c < u.getUserSession().getCardbox().getCards().get(i).getUserAnswers().size(); c++) {
+            for (int i = 0; i < u.getUserSession().getCardBox().getCards().size(); i++) {
+                for (int c = 0; c < u.getUserSession().getCardBox().getCards().get(i).getUserAnswers().size(); c++) {
                     pstmt = con.prepareStatement(sql);
                     pstmt.setInt(1, u.getId());
-                    if (u.getUserSession().getCardbox().getCards().get(i).getUserAnswers().get(i).isGiven()) {
-                        pstmt.setInt(2, u.getUserSession().getCardbox().getCards().get(i).getUserAnswers().get(c).getId());
+                    if (u.getUserSession().getCardBox().getCards().get(i).getUserAnswers().get(i).isGiven()) {
+                        pstmt.setInt(2, u.getUserSession().getCardBox().getCards().get(i).getUserAnswers().get(c).getId());
                     }
                     stmt = con.createStatement();
                     resultSet = stmt.executeQuery(sql);

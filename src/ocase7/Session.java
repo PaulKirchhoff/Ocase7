@@ -25,7 +25,7 @@ public class Session {
     private int id;
     private int user_id;
     private SimpleDateFormat begin = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
-    private CardBox cardbox;
+    private CardBox cardBox;
 
     public int getId() {
         return id;
@@ -39,8 +39,8 @@ public class Session {
         return begin;
     }
 
-    public CardBox getCardbox() {
-        return cardbox;
+    public CardBox getCardBox() {
+        return cardBox;
     }
 
     public void setUser_id(int user_id) {
@@ -51,23 +51,31 @@ public class Session {
         this.begin = begin;
     }
 
-    public void setCardbox(CardBox cardbox) {
-        this.cardbox = cardbox;
+    public void setCardBox(CardBox cardBox) {
+        this.cardBox = cardBox;
     }
 
     public Session(int id, int user_id, CardBox sessionBox) {
         this.id = id;
         this.user_id = user_id;
-        this.cardbox = sessionBox;
+        this.cardBox = sessionBox;
     }
     
     public Session() {
-        this.id = 999;
-        this.user_id = 1;
-        ArrayList<Category> categoryList = new ArrayList<>();
-        categoryList.add(new Category());
-        this.cardbox = new CardBox(categoryList);
+//        this.id = 999;
+//        this.user_id = 1;
+//        ArrayList<Category> categoryList = new ArrayList<>();
+//        categoryList.add(new Category());
+//        this.cardBox = new CardBox(categoryList);
     }
+
+    public Session(int user_id) {
+        this.user_id = user_id;
+    }
+    
+    
+    
+    
     
     
 
