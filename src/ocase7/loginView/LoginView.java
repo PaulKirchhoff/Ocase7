@@ -98,9 +98,9 @@ public class LoginView {
 //                user = user.getUserByLogin(user.getName(), user.getPassword());
                 if(user.getName().equals(userTextField.getText()) && user.getPassword().equals(pwTextfield.getText())) {
                     actiontarget.setText("Herzlich Willkommen " + user.getName());
-                    View2 v2 = new View2(primaryStage);
+                    View2 v2 = new View2(primaryStage,user);
                     //loginScene = v2.createView2Scene();
-                    primaryStage.setScene(v2.createView2Scene(user));
+                    primaryStage.setScene(v2.createView2Scene());
                 } else {
                     actiontarget.setText("Bitte prüfe nochmal den Namen und das Passwort.");
                 }

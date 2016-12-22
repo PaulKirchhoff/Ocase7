@@ -62,19 +62,18 @@ public class View3 {
 
     private void fillCategories() {
         categories.add(Category.getCategoryById(1));  //<-------------------------------------- GIB EINE KATEGORIE EIN
-        cardBox = new CardBox(categories);
+        user.getUserSession().getCardBox();
         //System.out.println(cardBox.getCards() + "########" + cardBox.getNumberOfCards());
 
     }
 
-    public Scene createView3(User user) {
-        this.user = user;
+    public Scene createView3() {
         fillCategories();
         Group view3Root = new Group();
         Scene view3Scene = new Scene(view3Root, Color.DEEPSKYBLUE);
         view3Scene.getStylesheets().add(getClass().getResource("/style/style.css").toExternalForm());
 
-        myCard = cardBox.getCards().get(0);
+        myCard = user.getUserSession().getCardBox().getCards().get(0);
 
         //Erstelle Boxen für Layout        
         VBox view3ContentBox = new VBox();
@@ -144,7 +143,7 @@ public class View3 {
         Label seperateSign = new Label(" / ");
         seperateSign.setFont(Font.font("Arial", 18));
 
-        String totalNumOfQuestions = "" + cardBox.getCards().size();
+        String totalNumOfQuestions = "" + user.getUserSession().getCardBox().getCards().size();
         Label totalNumberOfQuestions = new Label(totalNumOfQuestions);
         totalNumberOfQuestions.setFont(Font.font("Arial", 18));
 
@@ -160,8 +159,8 @@ public class View3 {
                 // Elemente aus den Boxen löschen
                 questionBox.getChildren().clear();
                 answersBox.getChildren().clear();
-                myCard = cardBox.nextCard(cardBox.getCards().indexOf(myCard));
-                questionNumberLabel.setText("" + (cardBox.getCards().indexOf(myCard) + 1));
+                myCard = user.getUserSession().getCardBox().nextCard(user.getUserSession().getCardBox().getCards().indexOf(myCard));
+                questionNumberLabel.setText("" + (user.getUserSession().getCardBox().getCards().indexOf(myCard) + 1));
 
                 // setze den neuen Text in das Label 
                 questionTextArea.setText(myCard.getQuestion().getText());
@@ -182,8 +181,8 @@ public class View3 {
                 questionBox.getChildren().clear();
                 answersBox.getChildren().clear();
                 //System.out.println(cardBox.prevCard(cardBox.getCards().indexOf(myCard)));
-                myCard = cardBox.prevCard(cardBox.getCards().indexOf(myCard));
-                questionNumberLabel.setText("" + (cardBox.getCards().indexOf(myCard) + 1));
+                myCard = user.getUserSession().getCardBox().prevCard(user.getUserSession().getCardBox().getCards().indexOf(myCard));
+                questionNumberLabel.setText("" + (user.getUserSession().getCardBox().getCards().indexOf(myCard) + 1));
 
                 // setze den neuen Text in das Label 
                 questionTextArea.setText(myCard.getQuestion().getText());

@@ -66,8 +66,13 @@ public class View2 extends mainView {
         this.primaryStage = primaryStage;
     }
 
-    public Scene createView2Scene(User user) {
+    public View2(Stage primaryStage, User user) {
+        this.primaryStage = primaryStage;
         this.user = user;
+    }
+
+    public Scene createView2Scene() {
+        
         Group view2Root = new Group();
         
         VBox view2ContentBox = new VBox();
@@ -308,27 +313,28 @@ public class View2 extends mainView {
                 int sliderLabelValue = Integer.parseInt(sliderLabel.getText());
 
                 if (sliderLabelValue > 0) {
-                    cardBox = new CardBox(cardBoxCategories, sliderLabelValue);
+                    user.getUserSession().setCardBox(new CardBox(cardBoxCategories, sliderLabelValue));
 //                    for (Card card : cardBox.getCards()) {
 //                        System.out.println(card);
 //                    }
-                    // wennn der Slider nicht verwendet wurde sollen alle Fragen 
+                    // wenn der Slider nicht verwendet wurde sollen alle Fragen 
                     // einer Kategorie zur CardBox hinzugefügt werden
                 } else {
-                    cardBox = new CardBox(cardBoxCategories);
+                    user.getUserSession().setCardBox(new CardBox(cardBoxCategories));
 
                 }
                 if (isRandom) {
-                    Collections.shuffle(cardBox.getCards());
-                    for (Card card : cardBox.getCards()) {
+                    Collections.shuffle(user.getUserSession().getCardBox().getCards());
+                    for (Card card : user.getUserSession().getCardBox().getCards()) {
                         System.out.println(card);
                     }
                 }
-                user.getUserSession().setCardBox(cardBox);
+                user.getUserSession().setCardBox(user.getUserSession().getCardBox());
+               // user.getUserSession().getCardBox();
                     
                     View3 v3 = new View3(primaryStage,user);
 //                    Scene view3 = v3.createView3();
-                    primaryStage.setScene(v3.createView3(user));
+                    primaryStage.setScene(v3.createView3());
 //                    start(stage);
             }
 
