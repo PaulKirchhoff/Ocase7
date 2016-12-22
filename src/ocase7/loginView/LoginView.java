@@ -32,7 +32,9 @@ public class LoginView {
     
     Scene loginScene;
     Stage primaryStage;
-    User currentUser;
+    TextField userTextField;
+    PasswordField pwTextfield;
+   // User currentUser;
     
     public LoginView(Stage primaryStage) {
         super();
@@ -67,7 +69,7 @@ public class LoginView {
         pw.getStyleClass().add("pwLabel");
         grid.add(pw, 0, 16);
 
-        PasswordField pwTextfield = new PasswordField();
+        pwTextfield = new PasswordField();
         pwTextfield.getStyleClass().add("pwTextfield");
         grid.add(pwTextfield, 1, 16);
 
@@ -79,8 +81,8 @@ public class LoginView {
         hbBtn.getChildren().add(btn);
         grid.add(hbBtn, 1, 20);
 
-        final Text actiontarget = new Text();
-        grid.add(actiontarget, 1, 20);
+        Text actiontarget = new Text();
+        grid.add(actiontarget, 0, 22);
 
         btn.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -88,9 +90,18 @@ public class LoginView {
             public void handle(ActionEvent e) {
                 actiontarget.setId("actiontarget");
                 actiontarget.setText("Sign in button pressed");
-                View2 v2 = new View2(primaryStage);
-                //loginScene = v2.createView2Scene();
-                primaryStage.setScene(v2.createView2Scene(currentUser));
+
+                
+                User user = new User();
+                user.getUserById(1);
+                if(user.getName().equals(userTextField.getText()) && user.getPassword().equals(pwTextfield.getText())) {
+                    actiontarget.setText("Herzlich Willkommen " + user.getName());
+                    View2 v2 = new View2(primaryStage);
+                    //loginScene = v2.createView2Scene();
+                    primaryStage.setScene(v2.createView2Scene(user));
+                } else {
+                    actiontarget.setText("Bitte prüfe nochmal den Namen und das Passwort.");
+                }
             }
         });
 
