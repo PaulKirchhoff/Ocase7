@@ -14,12 +14,15 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
 import ocase7.CardBox;
 import ocase7.Category;
+import ocase7.User;
 
 /**
  *
@@ -40,24 +43,36 @@ public class View3 {
     Label questionNumberLabel;
     String questionNumber;
     ScrollPane answerAndQuestionScrollPane;
+    Stage primaryStage;
+    User currentUser;
+    
+    public View3(Stage primaryStage) {
+        this.primaryStage = primaryStage;
+    }
+
+    public View3(Stage primaryStage, CardBox cardBox) {
+        this.primaryStage = primaryStage;
+        this.cardBox = cardBox;
+    }
 
     private void fillCategories() {
-        categories.add(Category.getCategoryById(2));  //<-------------------------------------- GIB EINE KATEGORIE EIN
+        categories.add(Category.getCategoryById(1));  //<-------------------------------------- GIB EINE KATEGORIE EIN
         cardBox = new CardBox(categories);
-        //System.out.println(cardBox.getCards()  + "########" + cardBox.getNumberOfCards());
+        //System.out.println(cardBox.getCards() + "########" + cardBox.getNumberOfCards());
 
     }
 
-    public Scene createView3() {
+    public Scene createView3(User u) {
+        this.currentUser = u;
         fillCategories();
         Group view3Root = new Group();
         Scene view3Scene = new Scene(view3Root, Color.DEEPSKYBLUE);
+        view3Scene.getStylesheets().add(getClass().getResource("/style/style.css").toExternalForm());
 
         myCard = cardBox.getCards().get(0);
 
         //Erstelle Boxen für Layout        
         VBox view3ContentBox = new VBox();
-        //view3ContentBox.getStyleClass().add("view3contentbox");
         view3ContentBox.setStyle("-fx-border-style: solid;"
                 + "-fx-border-width: 3px;"
                 + "-fx-border-color: #2ECCFA;");
@@ -185,32 +200,52 @@ public class View3 {
         buttonBar.setMinWidth(600);
         buttonBar.setMinHeight(40);
         buttonBar.setAlignment(Pos.CENTER);
-        buttonBar.setStyle("-fx-border-style: solid;"
-                + "-fx-border-width: 1;"
-                + "-fx-border-color: grey;");
-
+        buttonBar.getStyleClass().add("buttonBar");
         Button followUp = new Button("Wiedervorlage");
         followUp.setMinWidth(100);
 
-        Button cheater = new Button("Cheater-Knopf");
-        cheater.setMinWidth(100);
-        cheater.setOnAction(new EventHandler<ActionEvent>() {
+        followUp.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(ActionEvent event) {                
-              answersBox.setDisable(true);              
-              
-                
+            public void handle(ActionEvent event) {
+                if (myCard.isFollowUp() == false) {
+                    myCard.setFollowUp(true);
+                    System.out.println(myCard.isFollowUp());
+                } else {
+                    myCard.setFollowUp(false);
+                    System.out.println(myCard.isFollowUp());
+                }
             }
         });
+
+        Button cheater = new Button("Cheater-Knopf");
+        cheater.setMinWidth(100);
+        if (myCard.isCheated() == false) {
+
+            cheater.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    myCard.setCheated(true);
+                    scrollPaneContent.getChildren().remove(answersBox);
+                    VBox anserbow = isRightAnswersBox();
+                    anserbow.setDisable(true);
+                    scrollPaneContent.getChildren().add(anserbow);
+
+                }
+            });
+        } else {
+            cheater.getStyleClass().add("cheaterbtn");
+        }
 
         Button save = new Button("Session fertig");
         save.setMinWidth(100);
         
-        //Lyn
-        //Set on action function included
-        save.setOnAction((ActionEvent event) -> {
-            
-        });
+        save.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    currentUser.insertUserAnswerIdIntoDb(currentUser);
+
+                }
+            });
 
         buttonBar.getChildren().addAll(followUp, cheater, save);
 
@@ -222,51 +257,58 @@ public class View3 {
         answersBox = new VBox();
         checkboxWithAnswerBox = new HBox();
         checkboxWithAnswerBox.setAlignment(Pos.CENTER);
-        for (int i = 0; i < myCard.getUserAnswers().size(); i++) {
-            CheckBox cb = new CheckBox();
-            int m = i;
-            if (myCard.getUserAnswers().get(i).isGiven() == true) {
-                cb.setSelected(true);
-            }
-            cb.selectedProperty().addListener(new ChangeListener<Boolean>() {
-                @Override
-                public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                    if (newValue == true) {
-                        myCard.getUserAnswers().get(m).setGiven(true);
-                        System.out.println(myCard.getUserAnswers().get(m).isGiven());
-
-                    }
-                    if (oldValue == true && newValue == false) {
-                        myCard.getUserAnswers().get(m).setGiven(false);
-                        System.out.println(myCard.getUserAnswers().get(m).isGiven());
-                    }
-
+        if (myCard.isCheated() == false) {
+            for (int i = 0; i < myCard.getUserAnswers().size(); i++) {
+                CheckBox cb = new CheckBox();
+                int m = i;
+                if (myCard.getUserAnswers().get(i).isGiven() == true) {
+                    cb.setSelected(true);
                 }
-            });
-            answerLabel = new Label(myCard.getUserAnswers().get(i).getText());
-            checkboxWithAnswerBox = new HBox(cb, answerLabel);
-            answersBox.getChildren().add(checkboxWithAnswerBox);
-            answersBox.setSpacing(20);
+                cb.selectedProperty().addListener(new ChangeListener<Boolean>() {
+                    @Override
+                    public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                        if (newValue == true) {
+                            myCard.getUserAnswers().get(m).setGiven(true);
+                            System.out.println(myCard.getUserAnswers().get(m).isGiven());
 
+                        }
+                        if (oldValue == true && newValue == false) {
+                            myCard.getUserAnswers().get(m).setGiven(false);
+                            System.out.println(myCard.getUserAnswers().get(m).isGiven());
+                        }
+
+                    }
+                });
+
+                answerLabel = new Label(myCard.getUserAnswers().get(i).getText());
+                checkboxWithAnswerBox = new HBox(cb, answerLabel);
+                answersBox.getChildren().add(checkboxWithAnswerBox);
+                answersBox.setSpacing(20);
+
+            }
+        } else {
+            answersBox = isRightAnswersBox();
+            answersBox.setDisable(true);
         }
+
         return answersBox;
     }
-    
-    private VBox isRightAnswersBox(){
+
+    private VBox isRightAnswersBox() {
         answersBox = new VBox();
         checkboxWithAnswerBox = new HBox();
         checkboxWithAnswerBox.setAlignment(Pos.CENTER);
         for (int i = 0; i < myCard.getUserAnswers().size(); i++) {
             CheckBox cb = new CheckBox();
             int m = i;
-            if (myCard.getUserAnswers().get(i).isGiven() == true) {
+            if (myCard.getUserAnswers().get(m).isGiven() == true) {
                 cb.setSelected(true);
-            }            
-            if(myCard.getUserAnswers().get(i).isIsRight() == true){
-                answerLabel = new Label(myCard.getUserAnswers().get(i).getText());
+            }
+            if (myCard.getUserAnswers().get(m).isIsRight() == true) {
+                answerLabel = new Label(myCard.getUserAnswers().get(m).getText());
                 answerLabel.setTextFill(Color.GREEN);
-            }else{
-            answerLabel = new Label(myCard.getUserAnswers().get(i).getText());
+            } else {
+                answerLabel = new Label(myCard.getUserAnswers().get(m).getText());
             }
             checkboxWithAnswerBox = new HBox(cb, answerLabel);
             answersBox.getChildren().add(checkboxWithAnswerBox);

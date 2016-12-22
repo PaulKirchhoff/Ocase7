@@ -37,11 +37,11 @@ public class User {
         return userSession;
     }
 
-    public User(int id, String name, String password, Session userSesseion) {
+    public User(int id, String name, String password, Session userSession) {
         this.id = id;
         this.name = name;
         this.password = password;
-        this.userSession = userSesseion;
+        this.userSession = userSession;
     }
 
     public User(int userId) {
@@ -74,12 +74,12 @@ public class User {
         try {
             Connection con = MySQLConnection.getConnection();
             String sql = "INSERT INTO userAnswer (user_id, answer_id) VALUES( ?, ?)";
-            for (int i = 0; i < u.getUserSession().getSessionBox().getCards().size(); i++) {
-                for (int c = 0; c < u.getUserSession().getSessionBox().getCards().get(i).getUserAnswers().size(); c++) {
+            for (int i = 0; i < u.getUserSession().getCardbox().getCards().size(); i++) {
+                for (int c = 0; c < u.getUserSession().getCardbox().getCards().get(i).getUserAnswers().size(); c++) {
                     pstmt = con.prepareStatement(sql);
                     pstmt.setInt(1, u.getId());
-                    if (u.getUserSession().getSessionBox().getCards().get(i).getUserAnswers().get(i).isGiven()) {
-                        pstmt.setInt(2, u.getUserSession().getSessionBox().getCards().get(i).getUserAnswers().get(c).getId());
+                    if (u.getUserSession().getCardbox().getCards().get(i).getUserAnswers().get(i).isGiven()) {
+                        pstmt.setInt(2, u.getUserSession().getCardbox().getCards().get(i).getUserAnswers().get(c).getId());
                     }
                     stmt = con.createStatement();
                     resultSet = stmt.executeQuery(sql);
@@ -211,4 +211,28 @@ public class User {
         }
         return userPassword;
     }
+
+    public User getUserByLogin(String userName, String userPw) {
+        User user = null;
+        int userId = 0;
+        try {
+            Connection con = MySQLConnection.getConnection();
+            String sql = "SELECT id FROM user WHERE name = ? AND password = ?";
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, userName);
+            pstmt.setString(2, userPw);
+            resultSet = pstmt.executeQuery();
+            while (resultSet.next()) {
+                userId = resultSet.getInt("id");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        if (userId != 0) {
+            user = getUserById(userId);
+        }
+
+        return user;
+    }
+
 }
