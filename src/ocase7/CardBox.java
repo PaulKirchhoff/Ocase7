@@ -14,10 +14,15 @@ import java.util.ArrayList;
 public class CardBox {
 
     private ArrayList<Card> cards;
-    private int NumberOfCards;
+    private int numberOfCards;
+    private boolean wrongQuestionCheckBoxSelected = false;
+
+    public boolean isWrongQuestionCheckBoxSelected() {
+        return wrongQuestionCheckBoxSelected;
+    }
 
     public int getNumberOfCards() {
-        return NumberOfCards;
+        return numberOfCards;
     }
 
     public ArrayList<Card> getCards() {
@@ -28,6 +33,10 @@ public class CardBox {
         this.cards = cards;
     }
 
+    public void setWrongQuestionCheckBoxSelected(boolean isSelected) {
+        this.wrongQuestionCheckBoxSelected = isSelected;
+    }
+
 //    public CardBox(ArrayList<Card> cards) {
 //        this.cards = cards;
 //        this.NumberOfCards = cards.size();
@@ -36,23 +45,20 @@ public class CardBox {
     //###############sani was here###############################
     // neue CardBox wird direkt mit Karten erstellt
     // setzt Gesamtanzahl der Karten
-    public CardBox(ArrayList<Category> categories) {
+    public CardBox(ArrayList<Category> categories, boolean isSelected) {
+        this.wrongQuestionCheckBoxSelected = isSelected;
         this.cards = fillCardBox(categories);
-        this.NumberOfCards=cards.size();
-        for(Card card: cards){
-            //System.out.println(card);
-        }
+        this.NumberOfCards = cards.size();
+
     }
 
-    public CardBox(ArrayList<Category> categories, int numberOfQuestions) {
+    public CardBox(ArrayList<Category> categories, int numberOfQuestions, boolean isSelected) {
+        this.wrongQuestionCheckBoxSelected = isSelected;
         this.cards = fillCardBox(categories, numberOfQuestions);
         this.NumberOfCards = cards.size();
 //        for (Card card : cards) {
 //            System.out.println(card);
 //        }
-    }       
-
-    public CardBox() {
     }
 
     // füllt CardBox:
@@ -61,63 +67,87 @@ public class CardBox {
     // wenn nicht, wird es dem questionsArray hinzugefügt
     //befüllt Card über jede QuestionID die sich nun im questionsArray befindet
     //gibt CardsArray zurück
-    
-    
-     public static ArrayList<Card> fillCardBoxWrongQuestions(ArrayList<Category> categories) {
-        ArrayList<Question> questions = new ArrayList<>();
-        ArrayList<Card> cardsi = new ArrayList<>();
-        for (Category category : categories) {
-            for (Question question : Question.getAllQuestionsByCategoryId(category.getId())) {
-                if (!questions.contains(question)) {
-                    questions.add(question);
-                }
-            }
-        }
-        for (Question question : questions) {
-            cardsi.add(new Card(question.getId()));
-        }
 
-        return cardsi;
-
-    }
-    
-    
     public static ArrayList<Card> fillCardBox(ArrayList<Category> categories) {
         ArrayList<Question> questions = new ArrayList<>();
         ArrayList<Card> cardsi = new ArrayList<>();
-        for (Category category : categories) {
-            for (Question question : Question.getAllQuestionsByCategoryId(category.getId())) {
-                if (!questions.contains(question)) {
-                    questions.add(question);
+        if (!this.wrongQuestionCheckBoxSelected == true) {
+            ArrayList<Integer> wrongQuestions_Ids = getAllWrongQuestion_Ids();
+
+            for (Category category : categories) {
+                for (Question question : Question.getAllQuestionsByCategoryId(category.getId())) {
+                    if (wrongQuestions_Ids.contains(question.getId())) {
+                        if (!questions.contains(question)) {
+                            questions.add(question);
+                        }
+                    }
+                }
+                for (Question question : questions) {
+                    cardsi.add(new Card(question.getId()));
+                }
+
+                return cardsi;
+
+            }
+        } else {
+
+            for (Category category : categories) {
+                for (Question question : Question.getAllQuestionsByCategoryId(category.getId())) {
+                    if (!questions.contains(question)) {
+                        questions.add(question);
+                    }
                 }
             }
-        }
-        for (Question question : questions) {
-            cardsi.add(new Card(question.getId()));
-        }
+            for (Question question : questions) {
+                cardsi.add(new Card(question.getId()));
+            }
 
+            return cardsi;
+
+        }
         return cardsi;
-
     }
 
     public static ArrayList<Card> fillCardBox(ArrayList<Category> categories, int numberOfQuestions) {
         ArrayList<Question> questions = new ArrayList<>();
         ArrayList<Card> cardsi = new ArrayList<>();
-        for (Category category : categories) {
-            for (Question question : Question.getAllQuestionsByCategoryId(category.getId())) {
-                if (!questions.contains(question)&& questions.size() < numberOfQuestions) {
-                    questions.add(question);
+        if (this.wrongQuestionCheckBoxSelected == true) {
+            ArrayList<Integer> wrongQuestions_Ids = getAllWrongQuestion_Ids();
+
+            for (Category category : categories) {
+                for (Question question : Question.getAllQuestionsByCategoryId(category.getId())) {
+                    if (wrongQuestions_Ids.contains(question.getId())) {
+                        if (!questions.contains(question) && questions.size() < numberOfQuestions) {
+                            questions.add(question);
+                        }
+                    }
                 }
+                for (Question question : questions) {
+                    cardsi.add(new Card(question.getId()));
+                }
+
+                return cardsi;
+
             }
-        }
-        for (Question question : questions) {
-            cardsi.add(new Card(question.getId()));
-        }
-
+//        } else {
+//
+//            for (Category category : categories) {
+//                for (Question question : Question.getAllQuestionsByCategoryId(category.getId())) {
+//                    if (!questions.contains(question) && questions.size() < numberOfQuestions) {
+//                        questions.add(question);
+//                    }
+//                }
+//            }
+//            for (Question question : questions) {
+//                cardsi.add(new Card(question.getId()));
+//            }
+//
+//            return cardsi;
+//
+//        }
         return cardsi;
-
     }
-//######################sani was here, paul 2#####################################################
+        //######################sani was here, paul 2#####################################################
 
     public Card nextCard(int cardBoxIndex) {
         if (cardBoxIndex < cards.size() - 1) {

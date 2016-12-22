@@ -76,7 +76,7 @@ public class Category {
                 Connection con = MySQLConnection.getConnection();
                 String sql = "SELECT * FROM category WHERE id = ?";
                 pstmt = con.prepareStatement(sql);
-                pstmt.setInt(1, id);
+                pstmt.setInt(1, c);
                 resultSet = pstmt.executeQuery();
                 while (resultSet.next()) {
                     category = new Category(resultSet.getInt("id"), resultSet.getString("text"));

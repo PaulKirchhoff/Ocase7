@@ -20,12 +20,25 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import ocase7.view2.View2;
 
 /**
  *
  * @author PaulsBook
  */
 public class LoginView {
+    
+    Scene loginScene;
+    Stage primaryStage;
+    
+    public LoginView(Stage primaryStage) {
+        super();
+        this.primaryStage = primaryStage;
+    }
+
+    public LoginView() {
+    }
     
     public Scene creatLoginView() {
         GridPane grid = new GridPane();
@@ -35,9 +48,8 @@ public class LoginView {
         grid.setVgap(10);
         grid.setPadding(new Insets(-150, 5, 5, 5));
 
-        Text scenetitle = new Text("WIllkommen beim Ocase7 Training");
+        Text scenetitle = new Text("Willkommen beim Ocase7 Training");
         scenetitle.getStyleClass().add("sceneTitle");
-        scenetitle.setId("welcome-text");
         grid.add(scenetitle, 0, 0, 2, 1);
 
         Label userName = new Label("Username:");
@@ -58,6 +70,7 @@ public class LoginView {
 
         Button btn = new Button("Sign in");
         btn.getStyleClass().add("loginButton");
+
         HBox hbBtn = new HBox(10);
         hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
         hbBtn.getChildren().add(btn);
@@ -72,11 +85,13 @@ public class LoginView {
             public void handle(ActionEvent e) {
                 actiontarget.setId("actiontarget");
                 actiontarget.setText("Sign in button pressed");
-                
+                View2 v2 = new View2(primaryStage);
+                //loginScene = v2.createView2Scene();
+                primaryStage.setScene(v2.createView2Scene());
             }
         });
 
-        Scene loginScene = new Scene(grid,Color.DEEPSKYBLUE);
+        loginScene = new Scene(grid,Color.DEEPSKYBLUE);
         loginScene.getStylesheets().add
         (LoginView.class.getResource("/style/style.css").toExternalForm());
         
