@@ -25,15 +25,6 @@ public class WrongAnswersBox extends VBox {
     private HBox checkBoxWithLabelBox;
     private CheckBox wrongAnswerCheckBox;
     private Label wrongAnserLabel; 
-    private ArrayList<Category> categories;
-
-    public ArrayList<Category> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(ArrayList<Category> categories) {
-        this.categories = categories;
-    }
     
     public VBox getWrongAnswersBox() {
         return wrongAnswersBox;
@@ -65,11 +56,6 @@ public class WrongAnswersBox extends VBox {
 
     public void setWrongAnserLabel(Label wrongAnserLabel) {
         this.wrongAnserLabel = wrongAnserLabel;
-    }
-
-    public WrongAnswersBox(CheckBox wrongAnswerCheckBox, ArrayList<Category> categories) {
-        this.wrongAnswerCheckBox = wrongAnswerCheckBox;
-        this.categories = categories;
     }
 
     public VBox createChooseWrongAnswersBox() {

@@ -36,12 +36,12 @@ public class CategoryBox {
     private CheckBox cb;
     
     //alte globale Variablen 
-    private ArrayList<Category> categories;
-    private ArrayList<CheckBox> listOfCheckboxes = new ArrayList<>();
+    private ArrayList<Category> categories = new ArrayList<>();
+    private final ArrayList<CheckBox> listOfCheckboxes = new ArrayList<>();
     private HBox checkboxWithCategoryLabelBox;
     private int computetNumberOfQuestions = 0;
-    private QuestionSlider slider;
-    private Label maxQuestionsLabel = new Label("0");
+    private final QuestionSlider slider;
+    private final Label maxQuestionsLabel = new Label("0");
     private ArrayList<Integer> questions;
 
     public ArrayList<Integer> getQuestions() {
