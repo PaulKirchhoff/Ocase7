@@ -148,12 +148,15 @@ public class CategoryBox {
             });
         }
 
-        listOfCheckboxes.get(1).setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                maxQuestionsLabel.setText("" + Question.getAllQuestion_IdsByCategoryId(2).size());
-            }
-        });
+        // NICHT SICHER OB WIR DIESEN TEIL WIRKLICH BENÖTIGEN 
+//        listOfCheckboxes.get(1).setOnAction(new EventHandler<ActionEvent>() {
+//            @Override
+//            public void handle(ActionEvent event) {
+//                //maxQuestionsLabel.setText("" + Question.getAllQuestion_IdsByCategoryId(2).size());
+//            }
+//        });
+        //################## ENDE ############################
+
 //        for (CheckBox checkBox : listOfCheckboxes) {
 //            System.out.println(checkBox);
 //        }
