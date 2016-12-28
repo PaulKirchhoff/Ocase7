@@ -49,16 +49,16 @@ public class mainView extends Application {
         //primaryStage.setScene(launchViewScene);
         
         
-        // Bindet Musik an den LaunchView, wenns stört einfach auskommentieren ;)
-        String musicFile = "src/ocase7/launchView/Ocase7Intro.aif";  
-        //String musicFile = "/Users/PaulsBook/NetBeansProjects/Ocase7/src/ocase7/launchView/Ocase7Intro.aif";  
-        Media introSound = new Media(new File(musicFile).toURI().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(introSound);
-        mediaPlayer.setAutoPlay(true);
-        MediaView mv = new MediaView(mediaPlayer);
-        ((Group)launchViewScene.getRoot()).getChildren().addAll(mv);
+//        // Bindet Musik an den LaunchView, wenns stört einfach auskommentieren ;)
+//        String musicFile = "src/ocase7/launchView/Ocase7Intro.aif";  
+//        //String musicFile = "/Users/PaulsBook/NetBeansProjects/Ocase7/src/ocase7/launchView/Ocase7Intro.aif";  
+//        Media introSound = new Media(new File(musicFile).toURI().toString());
+//        MediaPlayer mediaPlayer = new MediaPlayer(introSound);
+//        mediaPlayer.setAutoPlay(true);
+//        MediaView mv = new MediaView(mediaPlayer);
+//        ((Group)launchViewScene.getRoot()).getChildren().addAll(mv);
         
-        primaryStage.setScene(launchViewScene);
+        primaryStage.setScene(loginView);
         
         
         //primaryStage.setScene(loginView);
@@ -88,7 +88,7 @@ public class mainView extends Application {
         sleeper.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
             @Override
             public void handle(WorkerStateEvent event) {
-                primaryStage.setScene(loginView);
+                //primaryStage.setScene(loginView);
             }
         });
          new Thread(sleeper).start();
