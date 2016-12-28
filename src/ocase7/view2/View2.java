@@ -50,16 +50,21 @@ public class View2 extends mainView {
     View3 view3Scene;
     Scene view;
     ArrayList<Integer> questions;
-    int computetNumberOfQuestions = 0;
-    Label maxQuestionsLabel = new Label("0");
-    HBox checkboxWithCategoryLabelBox;
-    ArrayList<CheckBox> listOfCheckboxes = new ArrayList<>();
-    Slider numOfQuestionsSlider;
+    //int computetNumberOfQuestions = 0;
+    //Label maxQuestionsLabel = new Label("0");
+    //HBox checkboxWithCategoryLabelBox;
+    //ArrayList<CheckBox> listOfCheckboxes = new ArrayList<>();
+    //Slider numOfQuestionsSlider;
+    CategoryBox categoryBox;
+    
     QuestionSlider slider;
     CheckBox wrongAnswerCheckBox;
     Label sliderLabel;
-    ToggleButton learnModusButton;
-    boolean isRandom;
+    
+    ////ToggleButton learnModusButton;
+    ////boolean isRandom;
+    LearnModus learnModus;
+    
     CardBox cardBox;
     boolean isLastSessions;
     Stage primaryStage;
@@ -96,14 +101,14 @@ public class View2 extends mainView {
         
         // erstellt lernModus ToggleButton mit wechselndem Label
         //HBox learnModusBox = learnModus();
-        LearnModus learnModus = new LearnModus(learnModusButton, isRandom);
+        learnModus = new LearnModus();
         HBox learnModusBox = learnModus.createLearnModusBox();
 
         // erstellt Auswahl für Fragenanzahl mit Slider
         slider = new QuestionSlider();
         StackPane sp = slider.createSlider(slider);
         
-        CategoryBox categoryBox = new CategoryBox(categories, listOfCheckboxes, checkboxWithCategoryLabelBox, computetNumberOfQuestions, slider, maxQuestionsLabel);
+        categoryBox = new CategoryBox(slider);
         VBox categoriesBox = categoryBox.createCategoryBox();
         HBox resetAndStartButtonBox = createButtonBox(categoryBox);
 
@@ -308,7 +313,7 @@ public class View2 extends mainView {
                 for (CheckBox listOfCheckboxe : categoryBox.getListOfCheckboxes()) {
                     // prüft ob checkboxes angewählt wurden
                     if (listOfCheckboxe.isSelected()) {
-                        Category category = categories.get(categoryBox.getListOfCheckboxes().indexOf(listOfCheckboxe));
+                        Category category = categoryBox.getCategories().get(categoryBox.getListOfCheckboxes().indexOf(listOfCheckboxe));
                         cardBoxCategories.add(category);
                         // jede NICHT angewählte Checkbox erhöht den Counter um 1        
                     } else {
@@ -318,7 +323,7 @@ public class View2 extends mainView {
                 // wenn keine Kategorien ausgewählt wurden 
                 // sollen alle Kategorien für die CardBox in eine Liste geschrieben werden 
                 if (cbCounter == categoryBox.getListOfCheckboxes().size()) {
-                    for (Category category : categories) {
+                    for (Category category : categoryBox.getCategories()) {
                         cardBoxCategories.add(category);
                     }
                 }
@@ -337,7 +342,7 @@ public class View2 extends mainView {
                     user.getUserSession().setCardBox(new CardBox(cardBoxCategories));
 
                 }
-                if (isRandom) {
+                if (learnModus.isIsRandom()) {
                     Collections.shuffle(user.getUserSession().getCardBox().getCards());
                     for (Card card : user.getUserSession().getCardBox().getCards()) {
                         System.out.println(card);

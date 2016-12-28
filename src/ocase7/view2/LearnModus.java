@@ -59,9 +59,7 @@ public class LearnModus extends HBox {
         this.learnModusButton = learnModusButton;
     }
 
-    public LearnModus(ToggleButton learnModusButton, boolean isRandom) {
-        this.learnModusButton = learnModusButton;
-        this.isRandom = isRandom;
+    public LearnModus() {
     }
 
     

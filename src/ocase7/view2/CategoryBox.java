@@ -37,11 +37,11 @@ public class CategoryBox {
     
     //alte globale Variablen 
     private ArrayList<Category> categories;
-    private ArrayList<CheckBox> listOfCheckboxes;
+    private ArrayList<CheckBox> listOfCheckboxes = new ArrayList<>();
     private HBox checkboxWithCategoryLabelBox;
-    private int computetNumberOfQuestions;
+    private int computetNumberOfQuestions = 0;
     private QuestionSlider slider;
-    private Label maxQuestionsLabel;
+    private Label maxQuestionsLabel = new Label("0");
     private ArrayList<Integer> questions;
 
     public ArrayList<Integer> getQuestions() {
@@ -89,13 +89,8 @@ public class CategoryBox {
         return maxQuestionsLabel;
     }
 
-    public CategoryBox(ArrayList<Category> categories, ArrayList<CheckBox> listOfCheckboxes, HBox checkboxWithCategoryLabelBox, int computetNumberOfQuestions, QuestionSlider slider, Label maxQuestionsLabel) {
-        this.categories = categories;
-        this.listOfCheckboxes = listOfCheckboxes;
-        this.checkboxWithCategoryLabelBox = checkboxWithCategoryLabelBox;
-        this.computetNumberOfQuestions = computetNumberOfQuestions;
+    public CategoryBox(QuestionSlider slider) {
         this.slider = slider;
-        this.maxQuestionsLabel = maxQuestionsLabel;
     }
     
     public VBox createCategoryBox() {
