@@ -23,17 +23,8 @@ import ocase7.mainView;
  */
 public class View2 extends mainView {
     
-    private VBox view2ContentBox;
     private Scene view;
     //private ArrayList<Integer> questions;
-    private CategoryBox categoryBox;
-    private QuestionSlider slider;
-    private WrongAnswersBox wrongAnswersBox;
-    private LearnModus learnModus;
-    private CardBox cardBox;
-    private TopBar topBar;
-    private ButtonBox buttonBox;
-    private boolean isLastSessions;
     private final Stage primaryStage;
     private User user;
 
@@ -50,26 +41,26 @@ public class View2 extends mainView {
         
         Group view2Root = new Group();
         
-        view2ContentBox = new VBox();
+        VBox view2ContentBox = new VBox();
         view2ContentBox.getStyleClass().add("view2ContentBox");
 
-        topBar = new TopBar();
+        TopBar topBar = new TopBar();
         VBox topBarBox = topBar.createTopBar();
         
-        wrongAnswersBox = new WrongAnswersBox();
+        WrongAnswersBox wrongAnswersBox = new WrongAnswersBox();
         VBox chooseWrongAnswerBox = wrongAnswersBox.createChooseWrongAnswersBox();
         
-        learnModus = new LearnModus();
+        LearnModus learnModus = new LearnModus();
         HBox learnModusBox = learnModus.createLearnModusBox();
 
-        slider = new QuestionSlider();
+        QuestionSlider slider = new QuestionSlider();
         StackPane sp = slider.createSlider(slider);
         
-        categoryBox = new CategoryBox(slider);
+        CategoryBox categoryBox = new CategoryBox(slider);
         VBox categoriesBox = categoryBox.createCategoryBox();
         
         //HBox resetAndStartButtonBox = createButtonBox(categoryBox);
-        buttonBox = new ButtonBox(wrongAnswersBox, user, primaryStage, learnModus, slider);
+        ButtonBox buttonBox = new ButtonBox(wrongAnswersBox, user, primaryStage, learnModus, slider);
         HBox resetAndStartButtonBox = buttonBox.createButtonBox(categoryBox);
 
         view2ContentBox.setMaxWidth(700);
