@@ -59,7 +59,6 @@ public class View2 extends mainView {
         CategoryBox categoryBox = new CategoryBox(slider);
         VBox categoriesBox = categoryBox.createCategoryBox();
         
-        //HBox resetAndStartButtonBox = createButtonBox(categoryBox);
         ButtonBox buttonBox = new ButtonBox(wrongAnswersBox, user, primaryStage, learnModus, slider);
         HBox resetAndStartButtonBox = buttonBox.createButtonBox(categoryBox);
 
