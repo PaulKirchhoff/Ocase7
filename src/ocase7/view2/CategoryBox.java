@@ -36,7 +36,7 @@ public class CategoryBox {
     private CheckBox cb;
     
     //alte globale Variablen 
-    private ArrayList<Category> categories = new ArrayList<>();
+    private ArrayList<Category> categories;
     private final ArrayList<CheckBox> listOfCheckboxes = new ArrayList<>();
     private HBox checkboxWithCategoryLabelBox;
     private int computetNumberOfQuestions = 0;
