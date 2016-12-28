@@ -31,8 +31,6 @@ public class User {
     private String name;
     private String password;
     private Session userSession;
-
-    
     private ArrayList<Integer> userSessionList;
 
     public Session getUserSession() {

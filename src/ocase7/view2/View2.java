@@ -5,8 +5,11 @@
  */
 package ocase7.view2;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
+import java.util.Locale;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -330,8 +333,11 @@ public class View2 extends mainView {
                     }
                 }
                 user.getUserSession().setCardBox(user.getUserSession().getCardBox());
-               // user.getUserSession().getCardBox();
-                    
+                SimpleDateFormat begin = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+                String date = begin.format(new Date());
+                System.out.println(date);
+                user.getUserSession().setBegin(begin);
+                System.out.println(user.getUserSession().getBegin().format(new Date()));
                     View3 v3 = new View3(primaryStage,user);
 //                    Scene view3 = v3.createView3();
                     primaryStage.setScene(v3.createView3());

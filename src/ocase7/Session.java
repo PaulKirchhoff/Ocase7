@@ -60,8 +60,6 @@ public class Session {
         this.user_id = user_id;
     }
     
-    
-    
     public Session() {
 
     }
@@ -70,11 +68,5 @@ public class Session {
         this.user_id = user_id;
     }
     
-    
-    
-    
-    
-    
-
 }
         
