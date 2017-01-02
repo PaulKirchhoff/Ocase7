@@ -19,8 +19,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
 import ocase7.CardBox;
 import ocase7.Category;
+import ocase7.User;
 
 /**
  *
@@ -41,10 +43,26 @@ public class View3 {
     Label questionNumberLabel;
     String questionNumber;
     ScrollPane answerAndQuestionScrollPane;
+    Stage primaryStage;
+    User user;
+    
+    public View3(Stage primaryStage) {
+        this.primaryStage = primaryStage;
+    }
+
+//    public View3(Stage primaryStage, CardBox cardBox) {
+//        this.primaryStage = primaryStage;
+//        this.cardBox = cardBox;
+//    }
+
+    public View3(Stage primaryStage, User user) {
+        this.primaryStage = primaryStage;
+        this.user = user;
+    }
 
     private void fillCategories() {
-        categories.add(Category.getCategoryById(2));  //<-------------------------------------- GIB EINE KATEGORIE EIN
-        cardBox = new CardBox(categories);
+        categories.add(Category.getCategoryById(1));  //<-------------------------------------- GIB EINE KATEGORIE EIN
+        user.getUserSession().getCardBox();
         //System.out.println(cardBox.getCards() + "########" + cardBox.getNumberOfCards());
 
     }
@@ -55,7 +73,7 @@ public class View3 {
         Scene view3Scene = new Scene(view3Root, Color.DEEPSKYBLUE);
         view3Scene.getStylesheets().add(getClass().getResource("/style/style.css").toExternalForm());
 
-        myCard = cardBox.getCards().get(0);
+        myCard = user.getUserSession().getCardBox().getCards().get(0);
 
         //Erstelle Boxen für Layout        
         VBox view3ContentBox = new VBox();
@@ -125,7 +143,7 @@ public class View3 {
         Label seperateSign = new Label(" / ");
         seperateSign.setFont(Font.font("Arial", 18));
 
-        String totalNumOfQuestions = "" + cardBox.getCards().size();
+        String totalNumOfQuestions = "" + user.getUserSession().getCardBox().getCards().size();
         Label totalNumberOfQuestions = new Label(totalNumOfQuestions);
         totalNumberOfQuestions.setFont(Font.font("Arial", 18));
 
@@ -141,8 +159,8 @@ public class View3 {
                 // Elemente aus den Boxen löschen
                 questionBox.getChildren().clear();
                 answersBox.getChildren().clear();
-                myCard = cardBox.nextCard(cardBox.getCards().indexOf(myCard));
-                questionNumberLabel.setText("" + (cardBox.getCards().indexOf(myCard) + 1));
+                myCard = user.getUserSession().getCardBox().nextCard(user.getUserSession().getCardBox().getCards().indexOf(myCard));
+                questionNumberLabel.setText("" + (user.getUserSession().getCardBox().getCards().indexOf(myCard) + 1));
 
                 // setze den neuen Text in das Label 
                 questionTextArea.setText(myCard.getQuestion().getText());
@@ -163,8 +181,8 @@ public class View3 {
                 questionBox.getChildren().clear();
                 answersBox.getChildren().clear();
                 //System.out.println(cardBox.prevCard(cardBox.getCards().indexOf(myCard)));
-                myCard = cardBox.prevCard(cardBox.getCards().indexOf(myCard));
-                questionNumberLabel.setText("" + (cardBox.getCards().indexOf(myCard) + 1));
+                myCard = user.getUserSession().getCardBox().prevCard(user.getUserSession().getCardBox().getCards().indexOf(myCard));
+                questionNumberLabel.setText("" + (user.getUserSession().getCardBox().getCards().indexOf(myCard) + 1));
 
                 // setze den neuen Text in das Label 
                 questionTextArea.setText(myCard.getQuestion().getText());
@@ -224,6 +242,14 @@ public class View3 {
 
         Button save = new Button("Session fertig");
         save.setMinWidth(100);
+        
+        save.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    user.insertUserAnswerIdIntoDb(user);
+
+                }
+            });
 
         buttonBar.getChildren().addAll(followUp, cheater, save);
 
