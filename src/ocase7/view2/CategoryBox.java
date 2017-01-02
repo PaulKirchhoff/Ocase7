@@ -25,13 +25,13 @@ import ocase7.Question;
  * @author PaulsBook
  */
 public class CategoryBox {
-    
+
     // alte lokale Variablen
     private Label categoryBoxLabel;
     private Label categoryLabel;
     private VBox categoriesBox;
     private CheckBox cb;
-    
+
     //alte globale Variablen 
     private ArrayList<Category> categories;
     private final ArrayList<CheckBox> listOfCheckboxes = new ArrayList<>();
@@ -73,7 +73,6 @@ public class CategoryBox {
         return checkboxWithCategoryLabelBox;
     }
 
-
     public int getComputetNumberOfQuestions() {
         return computetNumberOfQuestions;
     }
@@ -89,7 +88,7 @@ public class CategoryBox {
     public CategoryBox(QuestionSlider slider) {
         this.slider = slider;
     }
-    
+
     public VBox createCategoryBox() {
         categoriesBox = new VBox();
         categoriesBox.getStyleClass().add("categoryBox");
@@ -104,23 +103,7 @@ public class CategoryBox {
         categoryLabel = new Label("0");
         categories = Category.getAll();
         //cb = new CheckBox();
-
-        for (Category category : categories) {
-            cb = new CheckBox();
-            listOfCheckboxes.add(cb);
-            questions = Question.getAllQuestion_IdsByCategoryId(category.getId());
-//            for (Integer question : questions) {
-//                System.out.println("cat" + category.getId() + " " + question);
-//            }
-//            System.out.println("##########################");
-//            System.out.println("##########################");
-//            System.out.println("##########################");
-            categoryLabel = new Label(category.getText());
-            checkboxWithCategoryLabelBox = new HBox(cb, categoryLabel);
-            categoriesBox.getChildren().add(checkboxWithCategoryLabelBox);
-            categoriesBox.setSpacing(10);
-
-        }
+        addCategories();
 //        for (CheckBox checkbox : listOfCheckboxes) {
         for (int i = 0; i < listOfCheckboxes.size(); i++) {
             int j = i;
@@ -153,7 +136,6 @@ public class CategoryBox {
 //            }
 //        });
         //################## ENDE ############################
-
 //        for (CheckBox checkBox : listOfCheckboxes) {
 //            System.out.println(checkBox);
 //        }
@@ -161,9 +143,24 @@ public class CategoryBox {
 
         return categoriesBox;
     }
-    
-    
-    
-    
-    
+
+    private void addCategories() {
+        for (Category category : categories) {
+            cb = new CheckBox();
+            listOfCheckboxes.add(cb);
+            questions = Question.getAllQuestion_IdsByCategoryId(category.getId());
+//            for (Integer question : questions) {
+//                System.out.println("cat" + category.getId() + " " + question);
+//            }
+//            System.out.println("##########################");
+//            System.out.println("##########################");
+//            System.out.println("##########################");
+            categoryLabel = new Label(category.getText());
+            checkboxWithCategoryLabelBox = new HBox(cb, categoryLabel);
+            categoriesBox.getChildren().add(checkboxWithCategoryLabelBox);
+            categoriesBox.setSpacing(10);
+
+        }
+    }
+
 }

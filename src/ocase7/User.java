@@ -87,7 +87,7 @@ public class User {
                 }
             }
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println(e.getMessage() + " Das Klappt leider noch nicht.");
         } finally {
             try {
                 if (stmt != null) {
