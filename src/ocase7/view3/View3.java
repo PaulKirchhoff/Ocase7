@@ -6,6 +6,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -23,6 +24,7 @@ import javafx.stage.Stage;
 import ocase7.CardBox;
 import ocase7.Category;
 import ocase7.User;
+import ocase7.view2.View2;
 
 /**
  *
@@ -95,9 +97,8 @@ public class View3 {
 
         // setze Mindestbreite und den Border für die Fragenbox
         setMinWidthAndStyleOnQuestionBox();
-
         questionTextArea = new TextArea(myCard.getQuestion().getText());
-        questionTextArea.setMinHeight(500);
+        fitQuestionBoxToContent();
 
         questionTextArea.focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
@@ -164,6 +165,8 @@ public class View3 {
 
                 // setze den neuen Text in das Label 
                 questionTextArea.setText(myCard.getQuestion().getText());
+                questionTextArea = new TextArea(myCard.getQuestion().getText());
+                fitQuestionBoxToContent();
                 // füge Neues Label wieder zur questionBox hinzu
                 questionBox.getChildren().add(questionTextArea);
                 scrollPaneContent.getChildren().add(createAnswerBox());
@@ -186,13 +189,28 @@ public class View3 {
 
                 // setze den neuen Text in das Label 
                 questionTextArea.setText(myCard.getQuestion().getText());
+                 questionTextArea = new TextArea(myCard.getQuestion().getText());
+                fitQuestionBoxToContent();
                 // füge Neues Label wieder zur questionBox hinzu
                 questionBox.getChildren().add(questionTextArea);
                 scrollPaneContent.getChildren().add(createAnswerBox());
             }
+
+            
+        });
+        
+        Button menuButton = new Button("Menü");
+        menuButton.getStyleClass().add("menuButton");
+        menuButton.setMinWidth(60);
+        menuButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                View2 view2 = new View2(primaryStage,user);
+                primaryStage.setScene(view2.createView2Scene());
+            }
         });
 
-        statusBar.getChildren().addAll(prevQuestionBtn, questionNumberLabel, seperateSign, totalNumberOfQuestions, nextQuestionBtn);
+        statusBar.getChildren().addAll(menuButton,prevQuestionBtn, questionNumberLabel, seperateSign, totalNumberOfQuestions, nextQuestionBtn);
         return statusBar;
     }
 
@@ -262,34 +280,34 @@ public class View3 {
         checkboxWithAnswerBox = new HBox();
         checkboxWithAnswerBox.setAlignment(Pos.CENTER);
         if (myCard.isCheated() == false) {
-            for (int i = 0; i < myCard.getUserAnswers().size(); i++) {
-                CheckBox cb = new CheckBox();
-                int m = i;
-                if (myCard.getUserAnswers().get(i).isGiven() == true) {
-                    cb.setSelected(true);
-                }
-                cb.selectedProperty().addListener(new ChangeListener<Boolean>() {
-                    @Override
-                    public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                        if (newValue == true) {
-                            myCard.getUserAnswers().get(m).setGiven(true);
-                            System.out.println(myCard.getUserAnswers().get(m).isGiven());
-
-                        }
-                        if (oldValue == true && newValue == false) {
-                            myCard.getUserAnswers().get(m).setGiven(false);
-                            System.out.println(myCard.getUserAnswers().get(m).isGiven());
-                        }
+        for (int i = 0; i < myCard.getUserAnswers().size(); i++) {
+            CheckBox cb = new CheckBox();
+            int m = i;
+            if (myCard.getUserAnswers().get(i).isGiven() == true) {
+                cb.setSelected(true);
+            }
+            cb.selectedProperty().addListener(new ChangeListener<Boolean>() {
+                @Override
+                public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                    if (newValue == true) {
+                        myCard.getUserAnswers().get(m).setGiven(true);
+                        System.out.println(myCard.getUserAnswers().get(m).isGiven());
 
                     }
-                });
+                    if (oldValue == true && newValue == false) {
+                        myCard.getUserAnswers().get(m).setGiven(false);
+                        System.out.println(myCard.getUserAnswers().get(m).isGiven());
+                    }
 
-                answerLabel = new Label(myCard.getUserAnswers().get(i).getText());
-                checkboxWithAnswerBox = new HBox(cb, answerLabel);
-                answersBox.getChildren().add(checkboxWithAnswerBox);
-                answersBox.setSpacing(20);
+                }
+            });
 
-            }
+            answerLabel = new Label(myCard.getUserAnswers().get(i).getText());
+            checkboxWithAnswerBox = new HBox(cb, answerLabel);
+            answersBox.getChildren().add(checkboxWithAnswerBox);
+            answersBox.setSpacing(20);
+
+        }
         } else {
             answersBox = isRightAnswersBox();
             answersBox.setDisable(true);
@@ -297,7 +315,7 @@ public class View3 {
 
         return answersBox;
     }
-
+    
     private VBox isRightAnswersBox() {
         answersBox = new VBox();
         checkboxWithAnswerBox = new HBox();
@@ -307,12 +325,12 @@ public class View3 {
             int m = i;
             if (myCard.getUserAnswers().get(m).isGiven() == true) {
                 cb.setSelected(true);
-            }
-            if (myCard.getUserAnswers().get(m).isIsRight() == true) {
+            }            
+            if(myCard.getUserAnswers().get(m).isIsRight() == true){
                 answerLabel = new Label(myCard.getUserAnswers().get(m).getText());
                 answerLabel.setTextFill(Color.GREEN);
-            } else {
-                answerLabel = new Label(myCard.getUserAnswers().get(m).getText());
+            }else{
+            answerLabel = new Label(myCard.getUserAnswers().get(m).getText());
             }
             checkboxWithAnswerBox = new HBox(cb, answerLabel);
             answersBox.getChildren().add(checkboxWithAnswerBox);
@@ -321,4 +339,15 @@ public class View3 {
         }
         return answersBox;
     }
+    
+    private void fitQuestionBoxToContent() {
+                double count = 2.0;
+                char rowBreak = '\n';
+                for(int i = 0; i < myCard.getQuestion().getText().length(); i++) {
+                    if (rowBreak == myCard.getQuestion().getText().charAt(i)) {
+                        count++;
+                    }
+                }
+                questionTextArea.setMinHeight(count * 17);
+            }
 }
