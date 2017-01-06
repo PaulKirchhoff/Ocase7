@@ -150,6 +150,9 @@ public class ButtonBox extends HBox {
                         System.out.println(card);
                     }
                 }
+//                for (Card card : user.getUserSession().getCardBox().getCards()) {
+//                        System.out.println(card);
+//                    }
                 user.getUserSession().setCardBox(user.getUserSession().getCardBox());
                 SimpleDateFormat begin = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
                 String date = begin.format(new Date());
