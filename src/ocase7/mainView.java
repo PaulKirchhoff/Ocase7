@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 import ocase7.launchView.LaunchView;
 import ocase7.loginView.LoginView;
 import ocase7.view2.View2;
+import ocase7.view4.View4;
 
 /**
  *
@@ -48,6 +49,9 @@ public class mainView extends Application {
         Scene loginView = lv.creatLoginView();
         //primaryStage.setScene(launchViewScene);
         
+        View4 view4 = new View4();
+        Scene view4Scene = view4.createView4();
+                
         
 //        // Bindet Musik an den LaunchView, wenns stört einfach auskommentieren ;)
 //        String musicFile = "src/ocase7/launchView/Ocase7Intro.aif";  
@@ -58,7 +62,7 @@ public class mainView extends Application {
 //        MediaView mv = new MediaView(mediaPlayer);
 //        ((Group)launchViewScene.getRoot()).getChildren().addAll(mv);
         
-        primaryStage.setScene(loginView);
+        primaryStage.setScene(view4Scene);
         
         
         //primaryStage.setScene(loginView);

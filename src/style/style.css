@@ -126,3 +126,11 @@ and open the template in the editor.
 .menuButton {
     -fx-alignment: CENTER_LEFT; 
 }
+
+/*Begin view 4 Style*/
+
+.view4ContentBox {
+    -fx-border-style: solid;
+    -fx-border-width: 3px;
+    -fx-border-color: #2ECCFA;
+}

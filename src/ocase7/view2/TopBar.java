@@ -38,9 +38,9 @@ public class TopBar extends VBox {
         this.view2Label = view2Label;
     }
     
-    public VBox createTopBar() {
+    public VBox createTopBar(String topBarText) {
         topBar = new VBox();
-        view2Label = new Label("Wähle deine Optionen");
+        view2Label = new Label(topBarText);
         view2Label.setTextFill(Color.DARKSLATEGRAY);
         view2Label.setMinHeight(60);
         view2Label.setPadding(new Insets(5, 0, 5, 0));

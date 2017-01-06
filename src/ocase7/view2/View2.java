@@ -45,7 +45,7 @@ public class View2 extends mainView {
         view2ContentBox.getStyleClass().add("view2ContentBox");
 
         TopBar topBar = new TopBar();
-        VBox topBarBox = topBar.createTopBar();
+        VBox topBarBox = topBar.createTopBar("Wähle deine Optionen");
         
         WrongAnswersBox wrongAnswersBox = new WrongAnswersBox();
         VBox chooseWrongAnswerBox = wrongAnswersBox.createChooseWrongAnswersBox();
