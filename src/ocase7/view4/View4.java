@@ -26,6 +26,15 @@ public class View4 {
     User user;
     Session session;
 
+    public View4(Stage primaryStage, User user) {
+        this.primaryStage = primaryStage;
+        this.user = user;
+    }
+
+    public View4() {
+
+    }
+
     public Scene getView4() {
         return view4;
     }

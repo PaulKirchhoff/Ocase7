@@ -62,7 +62,7 @@ public class mainView extends Application {
 //        MediaView mv = new MediaView(mediaPlayer);
 //        ((Group)launchViewScene.getRoot()).getChildren().addAll(mv);
         
-        primaryStage.setScene(view4Scene);
+        primaryStage.setScene(loginView);
         
         
         //primaryStage.setScene(loginView);

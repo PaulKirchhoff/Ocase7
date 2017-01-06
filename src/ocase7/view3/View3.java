@@ -25,6 +25,7 @@ import ocase7.CardBox;
 import ocase7.Category;
 import ocase7.User;
 import ocase7.view2.View2;
+import ocase7.view4.View4;
 
 /**
  *
@@ -265,6 +266,8 @@ public class View3 {
                 @Override
                 public void handle(ActionEvent event) {
                     user.insertUserAnswerIdIntoDb(user);
+                    View4 view4 = new View4(primaryStage, user);
+                    primaryStage.setScene(view4.createView4());
 
                 }
             });
