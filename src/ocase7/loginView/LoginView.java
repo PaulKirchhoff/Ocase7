@@ -90,9 +90,13 @@ public class LoginView {
             @Override
             public void handle(ActionEvent e) {
                 try {
+                    // todo: erst user erstellen, wenn user authentifiziert ist
                     Session session = new Session();
                     User user = new User(session).getUserByLogin(userTextField.getText(), pwTextfield.getText());
+                    session.setUser_id(user.getId());
                     user.getUserSession().setUser_id(user.getId());
+                    int session_id = Session.insert(session);
+                    user.getUserSession().setId(session_id);
 //                System.out.println(user.getUserSession().getBegin());
 //                System.out.println(user.getUserSession().getId());
 //                System.out.println(user.getUserSession().getUser_id());
