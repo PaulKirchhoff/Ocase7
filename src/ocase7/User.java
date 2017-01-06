@@ -67,18 +67,35 @@ public class User {
     public String getPassword() {
         return password;
     }
-    
-// Athor LYN & Eric
 
+// Athor LYN & Eric
     public void insertUserAnswerIdIntoDb(User u) {
         // userAntwortenPerSession speichern
-        
+        for (Card c : u.getUserSession().getCardBox().getCards()) {
+            for (UserAnswer a : c.getUserAnswers()) {
+                // nur gegebene Antworten speichern
+                if (a.isGiven()) {
+                    Session2Useranswer.insert(new Session2Useranswer(u.getUserSession().getId(), a.getId()));
+                }              
+            }
+        }
         // FragenZurSession speichern
-        
-        // gecheateteAntworten speichern
-        
-        // Wiedervorlagen speichern
-        
+        for (Card c : u.getUserSession().getCardBox().getCards()) {
+            Session2Question.insert(new Session2Question(u.getUserSession().getId(), c.getId()));
+        }
+
+        for (Card c : u.getUserSession().getCardBox().getCards()) {
+            // gecheateteAntworten speichern    
+            if (c.isCheated()) {
+                // c für cheated
+                Again.insert(new Again("c", u.getUserSession().getId(), c.getId()));
+            } // Wiedervorlagen speichern
+            else if (c.isFollowUp()) {
+                // a für again
+                Again.insert(new Again("a", u.getUserSession().getId(), c.getId()));
+            }
+        }
+
 //        try {
 //            Connection con = MySQLConnection.getConnection();
 //            String sql = "INSERT INTO userAnswer (user_id, answer_id) VALUES( ?, ?)";

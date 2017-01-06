@@ -26,7 +26,7 @@ public class Session {
 
     private int id;
     private int user_id;
-    private SimpleDateFormat begin = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+    private SimpleDateFormat begin = new SimpleDateFormat("yyyy-MM-dddd hh:mm:ss");
     private String startTime;
     private CardBox cardBox;
 
@@ -50,8 +50,10 @@ public class Session {
         this.user_id = user_id;
     }
 
+    // hier wird das Format als Attribut gespeeichert
     public void setBegin(SimpleDateFormat begin) {
         this.begin = begin;
+        
     }
 
     public void setCardBox(CardBox cardBox) {

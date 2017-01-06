@@ -151,7 +151,7 @@ public class ButtonBox extends HBox {
                     }
                 }
                 user.getUserSession().setCardBox(user.getUserSession().getCardBox());
-                SimpleDateFormat begin = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+                SimpleDateFormat begin = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
                 String date = begin.format(new Date());
                 System.out.println(date);
                 user.getUserSession().setBegin(begin);
