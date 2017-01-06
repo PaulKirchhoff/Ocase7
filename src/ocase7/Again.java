@@ -50,7 +50,7 @@ public class Again {
     public static void insert(Again a) {
         try {
             Connection con = MySQLConnection.getConnection();
-            String sql = "INSERT INTO again(checkedOrAgain, session_id, question_id) VALUES(?, ?, ?)";
+            String sql = "INSERT INTO again(cheatedOrAgain, session_id, question_id) VALUES(?, ?, ?)";
             pstmt = con.prepareStatement(sql);
             pstmt.setString(1, a.getCheatedOrAgain());
             pstmt.setInt(2, a.getSession_id());
