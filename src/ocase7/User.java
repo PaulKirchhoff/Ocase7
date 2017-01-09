@@ -30,30 +30,30 @@ public class User {
     private int id;
     private String name;
     private String password;
-    private Session userSession;
+    private Session session;
     private ArrayList<Integer> userSessionList;
 
-    public Session getUserSession() {
-        return userSession;
+    public Session getSession() {
+        return session;
     }
 
-    public User(int id, String name, String password, Session userSession) {
+    public User(int id, String name, String password, Session session) {
         this.id = id;
         this.name = name;
         this.password = password;
-        this.userSession = userSession;
+        this.session = session;
     }
 
     public User(int userId) {
         this.id = userId;
         this.name = fetchUserNameByUserID(userId);
         this.password = fetchUserPasswordByUserID(userId);
-        this.userSession = new Session();
+        this.session = new Session();
         this.userSessionList = fetchUserSessionsList(userId);
     }
 
     public User(Session session) {
-        this.userSession = session;
+        this.session = session;
     }
 
     public int getId() {
@@ -67,7 +67,14 @@ public class User {
     public String getPassword() {
         return password;
     }
-    
+
+    public User(String name, String password) {
+
+        this.name = name;
+        this.password = password;
+        id = getUserByLogin(name, password).getId();
+        session = Session.getSession(this);
+    }
 // Athor LYN & Eric
 
     public void insertUserAnswerIdIntoDb(User u) {
@@ -75,12 +82,12 @@ public class User {
         try {
             Connection con = MySQLConnection.getConnection();
             String sql = "INSERT INTO userAnswer (user_id, answer_id) VALUES( ?, ?)";
-            for (int i = 0; i < u.getUserSession().getCardBox().getCards().size(); i++) {
-                for (int c = 0; c < u.getUserSession().getCardBox().getCards().get(i).getUserAnswers().size(); c++) {
+            for (int i = 0; i < u.getSession().getCardBox().getCards().size(); i++) {
+                for (int c = 0; c < u.getSession().getCardBox().getCards().get(i).getUserAnswers().size(); c++) {
                     pstmt = con.prepareStatement(sql);
                     pstmt.setInt(1, u.getId());
-                    if (u.getUserSession().getCardBox().getCards().get(i).getUserAnswers().get(i).isGiven()) {
-                        pstmt.setInt(2, u.getUserSession().getCardBox().getCards().get(i).getUserAnswers().get(c).getId());
+                    if (u.getSession().getCardBox().getCards().get(i).getUserAnswers().get(i).isGiven()) {
+                        pstmt.setInt(2, u.getSession().getCardBox().getCards().get(i).getUserAnswers().get(c).getId());
                     }
                     stmt = con.createStatement();
                     resultSet = stmt.executeQuery(sql);

@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -90,9 +90,9 @@ public class LoginView {
             @Override
             public void handle(ActionEvent e) {
                 try {
-                    Session session = new Session();
-                    User user = new User(session).getUserByLogin(userTextField.getText(), pwTextfield.getText());
-                    user.getUserSession().setUser_id(user.getId());
+//                    Session session = new Session();
+                    User user = new User(userTextField.getText(), pwTextfield.getText());
+                    user.getSession().setUser_id(user.getId());
 //                System.out.println(user.getUserSession().getBegin());
 //                System.out.println(user.getUserSession().getId());
 //                System.out.println(user.getUserSession().getUser_id());
