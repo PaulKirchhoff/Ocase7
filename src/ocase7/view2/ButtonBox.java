@@ -134,31 +134,31 @@ public class ButtonBox extends HBox {
                 int sliderLabelValue = Integer.parseInt(slider.getSliderLabel().getText());
 
                 if (sliderLabelValue > 0) {
-                    user.getUserSession().setCardBox(new CardBox(cardBoxCategories, sliderLabelValue));
+                    user.getSession().setCardBox(new CardBox(cardBoxCategories, sliderLabelValue));
 //                    for (Card card : cardBox.getCards()) {
 //                        System.out.println(card);
 //                    }
                     // wenn der Slider nicht verwendet wurde sollen alle Fragen 
                     // einer Kategorie zur CardBox hinzugefügt werden
                 } else {
-                    user.getUserSession().setCardBox(new CardBox(cardBoxCategories));
+                    user.getSession().setCardBox(new CardBox(cardBoxCategories));
 
                 }
                 if (learnModus.isIsRandom()) {
-                    Collections.shuffle(user.getUserSession().getCardBox().getCards());
-                    for (Card card : user.getUserSession().getCardBox().getCards()) {
+                    Collections.shuffle(user.getSession().getCardBox().getCards());
+                    for (Card card : user.getSession().getCardBox().getCards()) {
                         System.out.println(card);
                     }
                 }
 //                for (Card card : user.getUserSession().getCardBox().getCards()) {
 //                        System.out.println(card);
 //                    }
-                user.getUserSession().setCardBox(user.getUserSession().getCardBox());
-                SimpleDateFormat begin = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
-                String date = begin.format(new Date());
-                System.out.println(date);
-                user.getUserSession().setBegin(begin);
-                System.out.println(user.getUserSession().getBegin().format(new Date()));
+                user.getSession().setCardBox(user.getSession().getCardBox());
+//                SimpleDateFormat begin = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+//                String date = begin.format(new Date());
+//                System.out.println(date);
+//                user.getSession().setBegin(begin);
+//                System.out.println(user.getSession().getBegin().format(new Date()));
                     View3 v3 = new View3(primaryStage,user);
 //                    Scene view3 = v3.createView3();
                     primaryStage.setScene(v3.createView3());
