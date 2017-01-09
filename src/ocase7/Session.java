@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -50,26 +51,26 @@ public class Session {
         this.user_id = user_id;
     }
 
-    // hier wird das Format als Attribut gespeeichert
+    // todo: bei begin wird das Format als Attribut gespeichert
     public void setBegin(SimpleDateFormat begin) {
         this.begin = begin;
-        
+        startTime = begin.format(new Date());
     }
 
     public void setCardBox(CardBox cardBox) {
         this.cardBox = cardBox;
     }
 
-    public Session(int id, int user_id, CardBox sessionBox) { System.out.println("3 param");
+    public Session(int id, int user_id, CardBox sessionBox) { 
         this.id = id;
         this.user_id = user_id;
     }
     
-    public Session() { System.out.println("kein param");
+    public Session() { 
         
     }
 
-    public Session(int user_id) { System.out.println("1 param");
+    public Session(int user_id) { 
         this.user_id = user_id;
     }
     
