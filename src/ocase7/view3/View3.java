@@ -6,6 +6,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -23,6 +24,7 @@ import javafx.stage.Stage;
 import ocase7.CardBox;
 import ocase7.Category;
 import ocase7.User;
+import ocase7.view2.View2;
 
 /**
  *
@@ -95,9 +97,8 @@ public class View3 {
 
         // setze Mindestbreite und den Border für die Fragenbox
         setMinWidthAndStyleOnQuestionBox();
-
         questionTextArea = new TextArea(myCard.getQuestion().getText());
-        questionTextArea.setMinHeight(500);
+        fitQuestionBoxToContent();
 
         questionTextArea.focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
@@ -164,6 +165,8 @@ public class View3 {
 
                 // setze den neuen Text in das Label 
                 questionTextArea.setText(myCard.getQuestion().getText());
+                questionTextArea = new TextArea(myCard.getQuestion().getText());
+                fitQuestionBoxToContent();
                 // füge Neues Label wieder zur questionBox hinzu
                 questionBox.getChildren().add(questionTextArea);
                 scrollPaneContent.getChildren().add(createAnswerBox());
@@ -186,13 +189,28 @@ public class View3 {
 
                 // setze den neuen Text in das Label 
                 questionTextArea.setText(myCard.getQuestion().getText());
+                 questionTextArea = new TextArea(myCard.getQuestion().getText());
+                fitQuestionBoxToContent();
                 // füge Neues Label wieder zur questionBox hinzu
                 questionBox.getChildren().add(questionTextArea);
                 scrollPaneContent.getChildren().add(createAnswerBox());
             }
+
+            
+        });
+        
+        Button menuButton = new Button("Menü");
+        menuButton.getStyleClass().add("menuButton");
+        menuButton.setMinWidth(60);
+        menuButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                View2 view2 = new View2(primaryStage,user);
+                primaryStage.setScene(view2.createView2Scene());
+            }
         });
 
-        statusBar.getChildren().addAll(prevQuestionBtn, questionNumberLabel, seperateSign, totalNumberOfQuestions, nextQuestionBtn);
+        statusBar.getChildren().addAll(menuButton,prevQuestionBtn, questionNumberLabel, seperateSign, totalNumberOfQuestions, nextQuestionBtn);
         return statusBar;
     }
 
@@ -321,4 +339,15 @@ public class View3 {
         }
         return answersBox;
     }
+    
+    public void fitQuestionBoxToContent() {
+                double count = 2.0;
+                char rowBreak = '\n';
+                for(int i = 0; i < myCard.getQuestion().getText().length(); i++) {
+                    if (rowBreak == myCard.getQuestion().getText().charAt(i)) {
+                        count++;
+                    }
+                }
+                questionTextArea.setMinHeight(count * 17);
+            }
 }
