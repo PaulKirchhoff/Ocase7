@@ -15,7 +15,7 @@ import java.sql.Statement;
  *
  * @author Admin
  */
-class Session2Question {
+public class Session2Question {
     
     //Verbindungsvariablen 
     static Statement stmt = null;

@@ -14,7 +14,7 @@ import java.sql.Statement;
  *
  * @author Admin
  */
-class Again {
+public class Again {
 
     //Verbindungsvariablen 
     static Statement stmt = null;
@@ -25,7 +25,7 @@ class Again {
     // "c" oder "a"
     private String cheatedOrAgain;
 
-    static void insert(Again again) {
+    public static void insert(Again again) {
         try {
             Connection con = MySQLConnection.getConnection();
             String sql = "INSERT INTO again(session_id, question_id, cheatedOrAgain)"

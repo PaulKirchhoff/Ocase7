@@ -18,7 +18,7 @@ import static ocase7.Session.pstmt;
  *
  * @author Admin
  */
-class Session2UserAnswer {
+public class Session2UserAnswer {
     
            //Verbindungsvariablen 
     static Statement stmt = null;
