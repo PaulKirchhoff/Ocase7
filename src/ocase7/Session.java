@@ -24,7 +24,7 @@ import static ocase7.Question.stmt;
 public class Session {
 
     /*Verbindungsvariablen 
-    **/
+    */
     
     static Statement stmt = null;
     static PreparedStatement pstmt = null;
@@ -91,14 +91,14 @@ public class Session {
             resultSet = pstmt.getGeneratedKeys();
 
             /* Brauche Primary Key für Session 
-            **/
+            */
             
             if (resultSet.next()) {
                 id = resultSet.getInt(1);
             }
 
             /* brauche Uhrzeit und Datum aus DB
-            **/
+            */
             
             String selectSql = "SELECT begin FROM session WHERE id=?";
             pstmt = con.prepareStatement(selectSql);

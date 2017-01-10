@@ -75,40 +75,87 @@ public class User {
         id = getUserByLogin(name, password).getId();
         session = Session.getSession(this);
     }
-// Athor LYN & Eric
 
-    public void insertUserAnswerIdIntoDb(User u) {
+    public void insertUserAnswerIdIntoDb(User user) {
+        final ArrayList<Card> cards = user.getSession().getCardBox().getCards();
+        // User Antworten per Session speichern
+        for (Card card : cards) {
+            for (UserAnswer userAnswer : card.getUserAnswers()) {
+                //nur gegebene Antworten speichern
+                if (userAnswer.isGiven()) {
+                    Session2UserAnswer.insert(
+                            new Session2UserAnswer(user.getSession().getId(), userAnswer.getId()));
 
-        try {
-            Connection con = MySQLConnection.getConnection();
-            String sql = "INSERT INTO userAnswer (user_id, answer_id) VALUES( ?, ?)";
-            for (int i = 0; i < u.getSession().getCardBox().getCards().size(); i++) {
-                for (int c = 0; c < u.getSession().getCardBox().getCards().get(i).getUserAnswers().size(); c++) {
-                    pstmt = con.prepareStatement(sql);
-                    pstmt.setInt(1, u.getId());
-                    if (u.getSession().getCardBox().getCards().get(i).getUserAnswers().get(i).isGiven()) {
-                        pstmt.setInt(2, u.getSession().getCardBox().getCards().get(i).getUserAnswers().get(c).getId());
-                    }
-                    stmt = con.createStatement();
-                    resultSet = stmt.executeQuery(sql);
                 }
             }
-        } catch (Exception e) {
-            System.out.println(e.getMessage() + " Das Klappt leider noch nicht.");
-        } finally {
-            try {
-                if (stmt != null) {
-                    stmt.close();
 
-                }
-                if (resultSet != null) {
-                    resultSet.close();
-                }
-
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
         }
+
+        // Frage zur rSession speichern
+        for (Card card : cards) {
+            Session2Question.insert(new Session2Question(user.getSession().getId(), card.getId()));
+
+        }
+
+        //Frage ZurWiedervorlage/Gecheated speichern
+        for (Card card : cards) {
+            //gecheatete Antwort speichern
+
+            if (card.isCheated()) {
+                //c für cheated
+                Again.insert(new Again("c", user.getSession().getId(), card.getId()));
+            } else if (card.isFollowUp()) {
+                // a für again
+                Again.insert(new Again("a", user.getSession().getId(), card.getId()));
+
+            }
+
+        }
+
+//    public void insertUserAnswerIdIntoDb(User user) {
+//        /* User Antworten per Session speichern**/
+//        for (Card card : user.getSession().getCardBox().getCards()) {
+//            for (UserAnswer userAnswer : card.getUserAnswers()) {
+//                /*nur gegebene Antworten speichern**/
+//                if (userAnswer.isGiven()) {
+//                    Session2UserAnswer session2UserAnswer
+//                            = new Session2UserAnswer(user.getSession().getId(), userAnswer.getId());
+//                    Session2UserAnswer.insert(session2UserAnswer);
+//
+//                }
+//            }
+//
+//        }
+//        try {
+//            Connection con = MySQLConnection.getConnection();
+//            String sql = "INSERT INTO userAnswer (user_id, answer_id) VALUES( ?, ?)";
+//            for (int i = 0; i < user.getSession().getCardBox().getCards().size(); i++) {
+//                for (int c = 0; c < user.getSession().getCardBox().getCards().get(i).getUserAnswers().size(); c++) {
+//                    pstmt = con.prepareStatement(sql);
+//                    pstmt.setInt(1, user.getId());
+//                    if (user.getSession().getCardBox().getCards().get(i).getUserAnswers().get(i).isGiven()) {
+//                        pstmt.setInt(2, user.getSession().getCardBox().getCards().get(i).getUserAnswers().get(c).getId());
+//                    }
+//                    stmt = con.createStatement();
+//                    resultSet = stmt.executeQuery(sql);
+//                }
+//            }
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage() + " Das Klappt leider noch nicht.");
+//        } finally {
+//            try {
+//                if (stmt != null) {
+//                    stmt.close();
+//
+//                }
+//                if (resultSet != null) {
+//                    resultSet.close();
+//                }
+//
+//            } catch (Exception e) {
+//                System.out.println(e.getMessage());
+//            }
+//        }
     }
 
     public static ArrayList<User> getAll() {
