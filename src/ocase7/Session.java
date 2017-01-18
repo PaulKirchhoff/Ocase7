@@ -31,6 +31,7 @@ public class Session {
     private int user_id;
     private String begin;
     private CardBox cardBox;
+    private ArrayList<Card> cards = new ArrayList<>();
 
     public int getId() {
         return id;
