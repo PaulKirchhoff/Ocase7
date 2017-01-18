@@ -38,8 +38,8 @@ public class CardBox {
     // setzt Gesamtanzahl der Karten
     public CardBox(ArrayList<Category> categories) {
         this.cards = fillCardBox(categories);
-        this.NumberOfCards=cards.size();
-        for(Card card: cards){
+        this.NumberOfCards = cards.size();
+        for (Card card : cards) {
             //System.out.println(card);
         }
     }
@@ -61,7 +61,6 @@ public class CardBox {
     // wenn nicht, wird es dem questionsArray hinzugefügt
     //befüllt Card über jede QuestionID die sich nun im questionsArray befindet
     //gibt CardsArray zurück
-    
     public static ArrayList<Card> fillCardBox(ArrayList<Category> categories) {
         ArrayList<Question> questions = new ArrayList<>();
         ArrayList<Card> cardsi = new ArrayList<>();
@@ -80,12 +79,20 @@ public class CardBox {
 
     }
 
+    public static ArrayList<Category> fillCardBoxByCategories() {
+        ArrayList<Category> categories = Category.getAll();
+        for (Category category : categories) {
+            category.fillCards();
+        }
+         return categories;
+    }
+
     public static ArrayList<Card> fillCardBox(ArrayList<Category> categories, int numberOfQuestions) {
         ArrayList<Question> questions = new ArrayList<>();
         ArrayList<Card> cardsi = new ArrayList<>();
         for (Category category : categories) {
             for (Question question : Question.getAllQuestionsByCategoryId(category.getId())) {
-                if (!questions.contains(question)&& questions.size() < numberOfQuestions) {
+                if (!questions.contains(question) && questions.size() < numberOfQuestions) {
                     questions.add(question);
                 }
             }

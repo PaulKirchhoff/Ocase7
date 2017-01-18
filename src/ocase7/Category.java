@@ -24,6 +24,7 @@ public class Category {
     
     private int id;
     private String text;
+    private ArrayList<Card> cards = new ArrayList<>();
 
     public int getId() {
         return id;
@@ -41,7 +42,12 @@ public class Category {
     public Category() {
     }
     
-
+    public void fillCards(){
+        for (Question question : Question.getAllQuestionsByCategoryId(getId())){
+            cards.add(new Card(question.getId()));
+        }
+    }
+    
     public static ArrayList<Category> getAll() {
         ArrayList<Category> categories = new ArrayList<>();
         try {
