@@ -54,7 +54,7 @@ public class Session {
     public void setUser_id(int user_id) {
         this.user_id = user_id;
         // wenn session erstellt wird, sollen gleich alle cards geladen werden
-        fillCards();
+        fillCardsByCategories();
     }
 
     public void setBegin(String begin) {
@@ -65,7 +65,7 @@ public class Session {
         this.cardBox = cardBox;
     }
 
-    public void fillCards(){
+    public void fillCardsByCategories(){
         cardsByCategories = CardBox.fillCardBoxByCategories();
     }
     public Session(int id, int user_id, CardBox sessionBox) {
