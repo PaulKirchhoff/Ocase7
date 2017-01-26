@@ -48,6 +48,7 @@ public class Category {
         }
     }
     
+    
     public static ArrayList<Category> getAll() {
         ArrayList<Category> categories = new ArrayList<>();
         try {
@@ -106,6 +107,10 @@ public class Category {
     @Override
     public String toString() {
         return "Category{" + "id=" + id + ", text=" + text + '}';
+    }
+
+    public ArrayList<Card> getCards() {
+        return cards;
     }
     
 }

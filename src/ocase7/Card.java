@@ -118,6 +118,46 @@ public class Card {
     }
 
     
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Card other = (Card) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        return true;
+    }
+
+    
+    /**
+     * this.id = PK
+     * @param obj
+     * @return 
+     */
+    
+//    @Override
+//    public boolean equals(Object obj) {
+//        if (obj == null) {
+//            return false;
+//        }
+//        if (getClass() != obj.getClass()) {
+//            return false;
+//        }
+//        final Card other = (Card) obj;
+//        if (this.id != other.id) {
+//            return false;
+//        }
+//        return true;
+//    }
+
+    
+    
     //##################sani was here#####################################
     // erstellt Card mit Frage und dazugehörigen Antworten
     

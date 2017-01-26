@@ -17,6 +17,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import ocase7.Card;
+import ocase7.CardBox;
 import ocase7.Category;
 import ocase7.Question;
 
@@ -144,6 +146,15 @@ public class CategoryBox {
         return categoriesBox;
     }
 
+//    public static CardBox buildTemporaryCardBox(ArrayList<Category> categories){
+//        ArrayList<Card> cards = new ArrayList<>();
+//        for (Category category : categories) {
+//            category.getCards().removeAll(cards);
+//        }
+//        
+//        return cards;
+//    }
+    
     private void addCategories() {
         for (Category category : categories) {
             cb = new CheckBox();

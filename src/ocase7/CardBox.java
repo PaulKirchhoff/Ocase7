@@ -55,29 +55,19 @@ public class CardBox {
     public CardBox() {
     }
 
-    // füllt CardBox:
-    // durchläuft KategorienArray und zieht sich dabei die dazugehörigen Fragen,    
-    // überprüft ob die Frage im questionsArray schon erhalten ist,
-    // wenn nicht, wird es dem questionsArray hinzugefügt
-    //befüllt Card über jede QuestionID die sich nun im questionsArray befindet
-    //gibt CardsArray zurück
+    // füllt cardBox
+    // Fragen, die in mehreren categories vorkommen (id ist gleich)
+    // werden nur einmal in die cardBox gefüllt 
     public static ArrayList<Card> fillCardBox(ArrayList<Category> categories) {
-//        ArrayList<Question> questions = new ArrayList<>();
-        ArrayList<Card> cardsi = new ArrayList<>();
+        ArrayList<Card> cards = new ArrayList<>();
+        // keine card soll doppelt vorkommen
         for (Category category : categories) {
-            category.getId();
-            for (Question question : Question.getAllQuestionsByCategoryId(category.getId())) {
-//                if (!questions.contains(question)) {
-//                    questions.add(question);
-//                }
-            }
+            // doppelt vorkommende cards in (cards und category.getCards()) entfernen
+            cards.removeAll(category.getCards());
+            //  Vereinigungsmenge
+            cards.addAll(category.getCards());
         }
-//        for (Question question : questions) {
-//            cardsi.add(new Card(question.getId()));
-//        }
-
-        return cardsi;
-
+        return cards;
     }
 
     public static ArrayList<Category> fillCardBoxByCategories() {
